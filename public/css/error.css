@@ -1,0 +1,16 @@
+body {
+  /* position: relative; */
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  font-size: xx-large;
+  color: red;
+  border: 3px solid red;
+  padding: 10rem;
+  border-radius: 3rem;
+  box-shadow: 0 2px 4px 3px rgb(0 0 0 / 30%);
+}
