@@ -152,10 +152,13 @@ router.post(
       const payload = ticket.getPayload();
       const userid = payload["sub"];
       console.log(payload);
-      const newUser = await User.create({
-        email: payload.email,
-        token,
-      });
+      const user = await User.findOne({ email: payload.email });
+      if (!user) {
+        const newUser = await User.create({
+          email: payload.email,
+          token,
+        });
+      }
     }
     verify()
       .then(() => {
