@@ -7,6 +7,7 @@ const ExpressError = require("./utils/ExpressError");
 const dotenv = require("dotenv");
 const catchAsync = require("./utils/catchAsync");
 const cookieParser = require("cookie-parser");
+const user = require("./controllers/user");
 
 dotenv.config();
 
@@ -31,12 +32,7 @@ app.use(express.static(path.join(__dirname, "./public")));
 
 app.use("/", userRouter);
 
-app.get(
-  "/",
-  catchAsync(async (req, res) => {
-    res.render("home");
-  })
-);
+app.route("/").get(catchAsync(user.home));
 
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));

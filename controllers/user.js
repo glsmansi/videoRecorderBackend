@@ -17,6 +17,10 @@ const CLIENT_ID =
   "198561696099-flasriqkqqlkn2db9ttq6ellso1g6kdn.apps.googleusercontent.com";
 const client = new OAuth2Client(CLIENT_ID);
 
+module.exports.home = async (req, res) => {
+  res.render("home");
+};
+
 module.exports.uploadVideo = async (req, res) => {
   // console.log(req.file);
   try {
@@ -80,6 +84,8 @@ module.exports.postLogin = async (req, res, next) => {
     const user = await User.findOne({ email });
     if (user) {
       const match = await bcrypt.compare(password, user.password);
+      console.log(match);
+
       if (match) {
         const token = jwt.sign(
           { user_id: user._id, email },
