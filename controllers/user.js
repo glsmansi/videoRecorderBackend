@@ -4,6 +4,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const uuid = require("uuid/v4");
 const AWS = require("aws-sdk");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const s3 = new AWS.S3({
   accessKeyId: process.env.AWS_ID,
