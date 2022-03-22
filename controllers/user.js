@@ -37,10 +37,10 @@ module.exports.uploadVideo = async (req, res) => {
 
     s3.upload(params, (error, data) => {
       if (error) {
-        res.status(500).send(error);
+        res.status(500).json(error);
       }
       console.log(data.Location);
-      res.status(200).send(data.Location);
+      res.status(200).json(data.Location);
     });
   } catch (e) {
     return new ExpressError(e);
