@@ -22,7 +22,7 @@ module.exports.home = async (req, res) => {
 };
 
 module.exports.uploadVideo = async (req, res) => {
-  // console.log(req.file);
+  console.log(req);
   try {
     let myFile = req.file.originalname.split(".");
     const fileType = myFile[myFile.length - 1];
