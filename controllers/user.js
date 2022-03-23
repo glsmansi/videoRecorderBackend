@@ -40,12 +40,14 @@ module.exports.uploadVideo = async (req, res) => {
       if (error) {
         res.status(500).json(error);
       }
-      console.log(data.Location);
+      console.log(req.user);
+
       const videoLink = await UserVideo.create({
-        video: data.Location,
+        // video: data.Location,
         user: req.user,
       });
-
+      videoLink.video.push({ url: data.Location });
+      await videoLink.save();
       res.status(200).send(data.Location);
     });
   } catch (e) {
