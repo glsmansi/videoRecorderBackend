@@ -13,7 +13,8 @@ dotenv.config();
 
 const userRouter = require("./routes/user");
 
-const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/extension";
+const dbUrl = "mongodb://localhost:27017/extension";
+// process.env.DB_URL ||
 mongoose
   .connect(dbUrl, {
     useNewUrlParser: true,

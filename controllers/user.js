@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const UserVideo = require("../models/UserVideo");
 const ExpressError = require("../utils/ExpressError");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -35,12 +36,17 @@ module.exports.uploadVideo = async (req, res) => {
       Body: req.file.buffer,
     };
 
-    s3.upload(params, (error, data) => {
+    s3.upload(params, async (error, data) => {
       if (error) {
         res.status(500).json(error);
       }
       console.log(data.Location);
-      res.status(200).json(data.Location);
+      const videoLink = await UserVideo.create({
+        video: data.Location,
+        user: req.user,
+      });
+
+      res.status(200).send(data.Location);
     });
   } catch (e) {
     return new ExpressError(e);
@@ -97,7 +103,7 @@ module.exports.postLogin = async (req, res, next) => {
         user.save();
         // console.log(token);
         res.cookie("cookietokenkey", token, {
-          httpOnly: true,
+          httpOnly: false,
           secure: true,
           maxAge: 3600 * 60 * 60 * 24,
         });
