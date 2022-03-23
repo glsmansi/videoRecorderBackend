@@ -48,7 +48,7 @@ module.exports.uploadVideo = async (req, res) => {
       });
       videoLink.video.push({ url: data.Location });
       await videoLink.save();
-      res.status(200).send(data.Location);
+      res.status(200).json(data.Location);
     });
   } catch (e) {
     return new ExpressError(e);
