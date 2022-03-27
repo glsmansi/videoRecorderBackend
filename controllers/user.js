@@ -103,7 +103,7 @@ module.exports.postLogin = async (req, res, next) => {
         // save user token
         user.token = token;
         user.save();
-        // console.log(token);
+        console.log(token);
         res.cookie("cookietokenkey", token, {
           httpOnly: false,
           secure: true,
@@ -157,11 +157,7 @@ module.exports.googleLogin = async (req, res) => {
 };
 
 module.exports.loginSuccess = async (req, res) => {
-  if (req.cookies["cookietokenkey"]) {
-    res.render("user/loginSuccess");
-  } else {
-    res.redirect("/");
-  }
+  res.render("user/loginSuccess");
 };
 
 module.exports.userDetails = async (req, res) => {
