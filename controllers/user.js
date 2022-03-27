@@ -35,19 +35,21 @@ module.exports.uploadVideo = async (req, res) => {
       Key: `${uuid()}.${fileType}`,
       Body: req.file.buffer,
     };
+    console.log(myFile);
 
     s3.upload(params, async (error, data) => {
       if (error) {
         res.status(500).json(error);
       }
-      console.log(req.user);
+      // console.log(req.user);
 
       const videoLink = await UserVideo.create({
         // video: data.Location,
-        user: req.user,
+        user: req.user.user_id,
       });
       videoLink.video.push({ url: data.Location });
       await videoLink.save();
+      console.log(data.Location);
       res.status(200).json(data.Location);
     });
   } catch (e) {
