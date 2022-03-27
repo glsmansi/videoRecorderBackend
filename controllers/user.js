@@ -162,7 +162,7 @@ module.exports.loginSuccess = async (req, res) => {
 
 module.exports.userDetails = async (req, res) => {
   // const user = req.user;
-  res.send(req.user);
+  res.json(req.user);
 };
 
 module.exports.logout = (req, res) => {
