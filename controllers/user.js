@@ -158,10 +158,15 @@ module.exports.googleLogin = async (req, res) => {
 
 module.exports.loginSuccess = async (req, res) => {
   if (req.cookies["cookietokenkey"]) {
-    res.status(200).json(req.user).render("user/loginSuccess");
+    res.status(200).send(req.user);
   } else {
     res.redirect("/");
   }
+};
+
+module.exports.userDetails = async (req, res) => {
+  const user = req.user;
+  res.render("user/userDetails", { user });
 };
 
 module.exports.logout = (req, res) => {
