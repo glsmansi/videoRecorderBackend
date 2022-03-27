@@ -158,7 +158,7 @@ module.exports.googleLogin = async (req, res) => {
 
 module.exports.loginSuccess = async (req, res) => {
   if (req.cookies["cookietokenkey"]) {
-    res.status(200).json(req.user).redirect("/loginSuccess");
+    res.status(200).json(req.user).render("user/loginSuccess");
   } else {
     res.redirect("/");
   }
