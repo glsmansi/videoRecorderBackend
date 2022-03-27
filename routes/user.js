@@ -41,7 +41,7 @@ router
 
 router.route("/googleLogin").post(catchAsync(user.googleLogin));
 
-router.route("/loginSuccess").get(catchAsync(user.loginSuccess));
+router.route("/loginSuccess").get(auth, catchAsync(user.loginSuccess));
 
 router.route("/logout").get(user.logout);
 
