@@ -16,13 +16,6 @@ const videoStorage = multer.memoryStorage({
 
 const videoUpload = multer({
   storage: videoStorage,
-  // fileFilter(req, file, cb) {
-  // upload only mp4 and mkv format
-  //   if (!file.originalname.match(/\.(mp4|MPEG-4|mkv)$/)) {
-  //     return new ExpressError("Please upload a video");
-  //   }
-  //   cb(undefined, true);
-  // },
 });
 
 router
@@ -31,18 +24,24 @@ router
 
 router
   .route("/register")
-  .get(catchAsync(user.getRegister))
+  // .get(catchAsync(user.getRegister))
   .post(catchAsync(user.postRegister));
 
 router
   .route("/login")
-  .get(catchAsync(user.getLogin))
+  // .get(catchAsync(user.getLogin))
   .post(catchAsync(user.postLogin));
 
 router.route("/googleLogin").post(catchAsync(user.googleLogin));
 
-router.route("/loginSuccess").get(catchAsync(user.loginSuccess));
-router.route("/userDetails").get(auth, catchAsync(user.userDetails));
+router.route("/slack/install").get(catchAsync(user.slackInstall));
+
+router.route("/slack/oauth_redirect").get(catchAsync(user.oauthRedirect));
+
+router.route("/slackLogin").post(catchAsync(user.slackLogin));
+
+// router.route("/loginSuccess").get(catchAsync(user.loginSuccess));
+// router.route("/userDetails").get(auth, catchAsync(user.userDetails));
 
 router.route("/logout").get(user.logout);
 
