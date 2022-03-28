@@ -98,7 +98,7 @@ module.exports.postLogin = async (req, res, next) => {
       if (match) {
         const token = jwt.sign(
           { user_id: user._id, email },
-          process.env.TOKEN_KEY
+          process.env.TOKEN_KEY || 'thisIsKenil'
         );
         // save user token
         user.token = token;

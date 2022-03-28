@@ -12,7 +12,7 @@ const auth = async (req, res, next) => {
       // return console.log("error");
     }
     console.log(process.env.TOKEN_KEY);
-    const data = await jwt.verify(token, process.env.TOKEN_KEY);
+    const data = await jwt.verify(token, process.env.TOKEN_KEY || 'thisIsKenil');
     req.user = data.user_id;
     console.log(data);
     next();
