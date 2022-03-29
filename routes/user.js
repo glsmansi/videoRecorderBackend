@@ -32,6 +32,7 @@ router
   // .get(catchAsync(user.getLogin))
   .post(catchAsync(user.postLogin));
 
+
 router.route("/googleLogin").post(catchAsync(user.googleLogin));
 
 router.route("/slack/install").get(catchAsync(user.slackInstall));
