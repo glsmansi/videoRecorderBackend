@@ -173,9 +173,9 @@ module.exports.uploadVideo = async (req, res) => {
   }
 };
 
-// module.exports.getRegister = async (req, res) => {
-//   res.render("user/register");
-// };
+module.exports.getRegister = async (req, res) => {
+  res.render("user/register");
+};
 
 module.exports.postRegister = async (req, res, next) => {
   try {
@@ -200,9 +200,9 @@ module.exports.postRegister = async (req, res, next) => {
   }
 };
 
-// module.exports.getLogin = async (req, res) => {
-//   res.render("user/login");
-// };
+module.exports.getLogin = async (req, res) => {
+  res.render("user/login");
+};
 
 module.exports.postLogin = async (req, res, next) => {
   try {
@@ -273,6 +273,11 @@ module.exports.googleLogin = async (req, res) => {
     .catch(console.error);
   //   res.redirect("chrome:extensions");
 };
+
+module.exports.setting = async (req, res) => {
+  res.render("setting");
+};
+
 // module.exports.slackInstall = async (req, res) => {
 //   await installer.handleInstallPath(req, res, {
 //     scopes: ["chat:write"],
@@ -307,9 +312,9 @@ module.exports.googleLogin = async (req, res) => {
 //   installer.handleCallback(req, res, callbackOptions);
 // };
 
-// module.exports.loginSuccess = async (req, res) => {
-//   res.render("user/loginSuccess");
-// };
+module.exports.loginSuccess = async (req, res) => {
+  res.render("user/loginSuccess");
+};
 
 // module.exports.userDetails = async (req, res) => {
 //   // const user = req.user;

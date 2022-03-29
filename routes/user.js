@@ -24,14 +24,15 @@ router
 
 router
   .route("/register")
-  // .get(catchAsync(user.getRegister))
+  .get(catchAsync(user.getRegister))
   .post(catchAsync(user.postRegister));
 
 router
   .route("/login")
-  // .get(catchAsync(user.getLogin))
+  .get(catchAsync(user.getLogin))
   .post(catchAsync(user.postLogin));
 
+router.route("/setting").get(user.setting);
 
 router.route("/googleLogin").post(catchAsync(user.googleLogin));
 
@@ -41,8 +42,8 @@ router.route("/slack/oauth_redirect").get(catchAsync(user.oauthRedirect));
 
 router.route("/slackLogin").post(catchAsync(user.slackLogin));
 
-// router.route("/loginSuccess").get(catchAsync(user.loginSuccess));
-// router.route("/userDetails").get(auth, catchAsync(user.userDetails));
+router.route("/loginSuccess").get(catchAsync(user.loginSuccess));
+router.route("/userDetails").get(auth, catchAsync(user.userDetails));
 
 router.route("/logout").get(user.logout);
 
