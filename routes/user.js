@@ -39,11 +39,6 @@ router
   .get(catchAsync(user.getLogin))
   .post(catchAsync(user.postLogin));
 
-//temperory
-router.get('/admin', (req, res) => {
-  res.render('user/admin')
-})
-//over
 
 router.route("/googleLogin").post(catchAsync(user.googleLogin));
 
