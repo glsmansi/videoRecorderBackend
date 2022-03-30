@@ -313,7 +313,11 @@ module.exports.setting = async (req, res) => {
 // };
 
 module.exports.loginSuccess = async (req, res) => {
-  res.render("user/loginSuccess");
+  if (res.cookies["cookietokenkey"]) {
+    res.render("user/loginSuccess");
+  } else {
+    res.redirect("/login");
+  }
 };
 
 // module.exports.userDetails = async (req, res) => {
