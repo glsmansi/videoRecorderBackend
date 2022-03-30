@@ -18,32 +18,27 @@
     <title>Home</title>
   </head>
   <body>
-    <navbar>
-      <div class="nav">
-        <a href="/">
-          <img src="img/loom.png" class="loomLogo" />
-        </a>
-        <a href="/login">
-          <button class="registerBtn">Sign In</button>
-        </a>
-      </div>
-    </navbar>
-    <div class="fullContainer">
-      <div class="firstContainer">
-        <h1>Show it, say it, send it</h1>
-        <p>
-          Record quick videos of your screen and cam. An essential tool for
-          hybrid workplaces.
-        </p>
-        <a href="#">
-          <button class="getBtn">Get For Free</button>
-        </a>
-        <p>For Mac, Windows, iOS, and Android</p>
-      </div>
-      <div class="secondContainer">
-        <h1>Image</h1>
+    <div class="card container col-xs-12 col-md-6 col-lg-3">
+      <div class="card-body">
+        <h1 class="card-title mt-0 mt-md-2 mt-lg-4">RECORDER</h1>
+        <div class="col-md-12 text-center">
+          <a href="/register" class="btn btn-primary mt-1 mt-md-3 mt-lg-5"
+            >Register</a
+          >
+          &nbsp; &nbsp;
+          <a href="/login" class="btn btn-primary mt-1 mt-md-3 mt-lg-5"
+            >Login</a
+          >
+          <h3 class="mt-1 mt-md-3 mt-lg-5">OR</h3>
+          <div
+            class="d-flex justify-content-center align-items-center mt-1 mt-md-3 mt-lg-5 mb-1 mb-md-3 mb-lg-5"
+          >
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+          </div>
+        </div>
       </div>
     </div>
+
     <script>
       function signOut() {
         var auth2 = gapi.auth2.getAuthInstance();

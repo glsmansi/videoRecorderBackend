@@ -1,82 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
 
-* {
-  padding: 0;
-  margin: 0;
-}
 body {
   font-family: "Montserrat", sans-serif;
-  /* display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; */
+  height: 100vh;
 }
 
-.nav {
-  display: flex;
-  justify-content: space-between;
-  background: #f8f6f0;
-  height: 91px;
-}
-
-.loomLogo {
-  width: 11rem;
-  margin: -1rem 2rem;
-}
-.registerBtn {
-  margin: 36px;
-  /* display: flex; */
-  /* justify-content: center; */
-  width: 94px;
-  height: 35px;
-  text-align: center;
-  border-radius: 19px;
-  border: transparent;
-  background-color: #4b42ad;
-  color: #f8f6f0;
-  letter-spacing: 2px;
-  font-weight: 600;
-}
-.fullContainer {
-  display: flex;
-  /* justify-content: space-around; */
-  /* align-items: center; */
-  height: 39rem;
-}
-.firstContainer {
-  background-color: #393855;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 102px;
-  color: #f8f6f0;
-  width: 45em;
-}
-.firstContainer h1 {
-  font-size: 63px;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-.firstContainer p {
-  padding: 29px 0px;
-  font-size: 17px;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-.getBtn {
-  width: 180px;
-  height: 60px;
-  border-radius: 10px;
-  border: none;
-  background-color: hsla(242, 88.4%, 66.3%, 1);
-  color: #f8f6f0;
-  font-size: 17px;
-  text-align: center;
-  font-weight: 600;
-  letter-spacing: 1px;
-  cursor: pointer;
-}
-/* .container {
+.container {
   border: 2px solid #cf13c0;
   box-shadow: 0 2px 4px 3px rgb(0 0 0 / 30%);
 }
@@ -85,4 +17,4 @@ body {
   text-align: center;
   color: #cf13c0;
   text-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
-} */
+}
