@@ -180,9 +180,8 @@ module.exports.uploadVideo = async (req, res) => {
 module.exports.getRegister = async (req, res) => {
   if (req.cookies["cookietokenkey"]) {
     return res.redirect("/loginSuccess");
-  } else {
-    res.redirect("/login");
   }
+  res.render("user/register");
 };
 
 module.exports.postRegister = async (req, res, next) => {
@@ -212,7 +211,7 @@ module.exports.getLogin = async (req, res) => {
   if (req.cookies["cookietokenkey"]) {
     return res.redirect("/loginSuccess");
   } else {
-    res.redirect("/login");
+    res.render("user/login");
   }
 };
 
