@@ -110,7 +110,7 @@ const client = new OAuth2Client(CLIENT_ID);
 
 module.exports.home = async (req, res) => {
   if (req.cookies["cookietokenkey"]) {
-    res.redirect("/loginSuccess");
+    return res.redirect("/loginSuccess");
   } else {
     res.render("home");
   }
@@ -179,7 +179,7 @@ module.exports.uploadVideo = async (req, res) => {
 
 module.exports.getRegister = async (req, res) => {
   if (req.cookies["cookietokenkey"]) {
-    res.redirect("/loginSuccess");
+    return res.redirect("/loginSuccess");
   } else {
     res.redirect("/login");
   }
@@ -210,7 +210,7 @@ module.exports.postRegister = async (req, res, next) => {
 
 module.exports.getLogin = async (req, res) => {
   if (req.cookies["cookietokenkey"]) {
-    res.redirect("/loginSuccess");
+    return res.redirect("/loginSuccess");
   } else {
     res.redirect("/login");
   }
