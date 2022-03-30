@@ -144,7 +144,7 @@ module.exports.uploadVideo = async (req, res) => {
       videoLink.video.push({ url: data.Location });
       await videoLink.save();
       console.log(data.Location);
-      // res.status(200).json(data.Location);
+      res.status(200).json(data.Location);
 
       // const drive = google.drive({ version: "v3",auth:oAuth2Client  });
       // const fileMetadata = {
