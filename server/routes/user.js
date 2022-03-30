@@ -34,15 +34,21 @@ router
 
 router.route("/googleLogin").post(catchAsync(user.googleLogin));
 
+router.route("/loginSuccess").get(catchAsync(user.loginSuccess));
+router.route("/userDetails").get(auth, catchAsync(user.userDetails));
+
+router.route("/home/videos/:id").get(catchAsync(user.userVideoLink));
+
+router.route("/sharedWithMe").get(auth, user.sharedWithMe);
+router.route("/sharedWithOthers").get(auth, user.sharedWithOthers);
+router.route("/personal").get(auth, user.personal);
+
+router.route("/logout").get(user.logout);
+
+module.exports = router;
+
 // router.route("/slack/install").get(catchAsync(user.slackInstall));
 
 // router.route("/slack/oauth_redirect").get(catchAsync(user.oauthRedirect));
 
 // router.route("/slackLogin").post(catchAsync(user.slackLogin));
-
-router.route("/loginSuccess").get(catchAsync(user.loginSuccess));
-router.route("/userDetails").get(auth, catchAsync(user.userDetails));
-
-router.route("/logout").get(user.logout);
-
-module.exports = router;

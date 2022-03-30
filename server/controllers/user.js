@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 // const uuid = require("uuid/v4");
 const AWS = require("aws-sdk");
+const sequelize = require("sequelize");
 
 Video.belongsTo(User, {
   as: "videos",
@@ -53,6 +54,12 @@ module.exports.uploadVideo = async (req, res) => {
       });
       videoLink.video.push({ url: data.Location });
       await videoLink.save();
+
+      await UserVideo.create({
+        userId: req.user.user_id,
+        videoId: videoLink.id,
+      });
+
       console.log(data.Location);
       // res.status(200).json(data.Location);
 
@@ -204,7 +211,50 @@ module.exports.loginSuccess = async (req, res) => {
   }
 };
 
+// module.exports.getSharedWithMe = async (req, res) => {
+//   // res.render("users/sharedWithMe")
+// };
+module.exports.sharedWithMe = async (req, res) => {
+  const userEmail = req.user.email;
+  const user = await User.findOne({ where: { email: userEmail } });
+  const userVideos = await UserVideo.findAll({ where: { userId: user.id } });
+  const videos = await Video.findAll({
+    where: {
+      userId: {
+        [sequelize.Op.not]: userVideos.id,
+      },
+    },
+  });
+  res.render("users/sharedWithMe", { videos });
+};
+
+module.exports.sharedWithOthers = async (req, res) => {
+  const userEmail = req.user.email;
+  const user = await User.findOne({ where: { email: userEmail } });
+  const userVideos = await UserVideo.findAll({ where: { userId: user.id } });
+  const videos = await Video.findAll({ where: { userId: userVideos.id } });
+
+  res.render("users/sharedWithMe", { videos });
+};
+
+module.exports.personal = async (req, res) => {
+  const userEmail = req.user.email;
+  const user = await User.findOne({ where: { email: userEmail } });
+  const userVideos = await UserVideo.findAll({ where: { userId: user.id } });
+  res.render("users/personal", { userVideos });
+};
+
+module.exports.userVideoLink = async (req, res) => {
+  const { id } = req.params;
+  const video = await Video.findOne({ where: { id: id } });
+  res.render("users/video", { video });
+};
+
 module.exports.logout = (req, res) => {
   res.clearCookie("cookietokenkey");
   res.redirect("/");
 };
+
+// localhost:3000/home/video/5
+//1 entry for uservideo and video
+//2
