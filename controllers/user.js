@@ -341,6 +341,6 @@ module.exports.userDetails = async (req, res) => {
 };
 
 module.exports.logout = (req, res) => {
-  res.clearCookie("cookiestokenkey");
+  res.clearCookie("cookietokenkey");
   res.redirect("/");
 };
