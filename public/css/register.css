@@ -23,20 +23,6 @@ body {
   width: 11rem;
   margin: -1rem 2rem;
 }
-.registerBtn {
-  margin: 31px;
-  /* display: flex; */
-  /* justify-content: center; */
-  width: 191px;
-  height: 40px;
-  text-align: center;
-  border-radius: 19px;
-  border: transparent;
-  background-color: #4b42ad;
-  color: #f8f6f0;
-  letter-spacing: 2px;
-  font-weight: 600;
-}
 
 section {
   height: 37em;
@@ -62,7 +48,7 @@ form {
   display: flex;
   flex-direction: column;
 }
-.signInGoogle {
+.signUpGoogle {
   margin: 18px;
   width: 307px;
   height: 61px;
@@ -74,11 +60,11 @@ form {
   font-weight: 600;
   font-size: 18px;
 }
-.signInGoogle img {
+.signUpGoogle img {
   width: 32px;
   margin: 7px;
 }
-.signInSlack {
+.signUpSlack {
   width: 307px;
   height: 61px;
   text-align: center;
@@ -89,7 +75,7 @@ form {
   font-weight: 600;
   font-size: 18px;
 }
-.signInSlack img {
+.signUpSlack img {
   width: 32px;
   margin: 7px;
 }
@@ -131,7 +117,7 @@ form {
   color: #212121;
   font-weight: 600;
 }
-.signInBtn {
+.signUpBtn {
   width: 110px;
   text-align: center;
   height: 42px;
