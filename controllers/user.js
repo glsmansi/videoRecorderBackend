@@ -174,6 +174,9 @@ module.exports.uploadVideo = async (req, res) => {
 };
 
 module.exports.getRegister = async (req, res) => {
+  if (req.cookies["cookietokenkey"]) {
+    return res.render("user/loginSuccess");
+  }
   res.render("user/register");
 };
 
@@ -201,6 +204,9 @@ module.exports.postRegister = async (req, res, next) => {
 };
 
 module.exports.getLogin = async (req, res) => {
+  if (req.cookies["cookietokenkey"]) {
+    return res.render("user/loginSuccess");
+  }
   res.render("user/login");
 };
 
@@ -241,6 +247,9 @@ module.exports.postLogin = async (req, res, next) => {
 };
 
 module.exports.googleLogin = async (req, res) => {
+  if (req.cookies["cookietokenkey"]) {
+    return res.render("user/loginSuccess");
+  }
   let token = req.body.token;
   async function verify() {
     const ticket = await client.verifyIdToken({
