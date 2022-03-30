@@ -1,11 +1,11 @@
 const express = require("express");
-const catchAsync = require("../utils/catchAsync");
+const catchAsync = require("../../utils/catchAsync");
 const router = express();
 const dotenv = require("dotenv");
 const multer = require("multer");
 const user = require("../controllers/user");
 const auth = require("../middleware/auth");
-const ExpressError = require("../utils/ExpressError");
+// const ExpressError = require("../utils/ExpressError");
 dotenv.config();
 
 const videoStorage = multer.memoryStorage({
@@ -32,15 +32,13 @@ router
   .get(catchAsync(user.getLogin))
   .post(catchAsync(user.postLogin));
 
-router.route("/setting").get(user.setting);
-
 router.route("/googleLogin").post(catchAsync(user.googleLogin));
 
-router.route("/slack/install").get(catchAsync(user.slackInstall));
+// router.route("/slack/install").get(catchAsync(user.slackInstall));
 
-router.route("/slack/oauth_redirect").get(catchAsync(user.oauthRedirect));
+// router.route("/slack/oauth_redirect").get(catchAsync(user.oauthRedirect));
 
-router.route("/slackLogin").post(catchAsync(user.slackLogin));
+// router.route("/slackLogin").post(catchAsync(user.slackLogin));
 
 router.route("/loginSuccess").get(catchAsync(user.loginSuccess));
 router.route("/userDetails").get(auth, catchAsync(user.userDetails));

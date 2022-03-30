@@ -1,27 +1,25 @@
 const express = require("express");
-const app = express();
-const port = process.env.PORT || 3000;
 const path = require("path");
-const mongoose = require("mongoose");
+const port = process.env.PORT || 5000;
 const ExpressError = require("./utils/ExpressError");
 const dotenv = require("dotenv");
 const catchAsync = require("./utils/catchAsync");
-const cookieParser = require("cookie-parser");
-const user = require("./controllers/user");
-
 dotenv.config();
+const cookieParser = require("cookie-parser");
+const user = require("./server/controllers/user");
 
-const userRouter = require("./routes/user");
+const userRouter = require("./server/routes/user");
 
-const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/extension";
+const sequelize = require("./server/database/connection");
 
-mongoose
-  .connect(dbUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("Mongodb connected"))
-  .catch((e) => console.log(e));
+sequelize
+  .authenticate()
+  .then(() => console.log("Connected to Sequelize"))
+  .catch((e) => {
+    console.log(e);
+  });
+
+const app = express();
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -44,9 +42,9 @@ app.use((err, req, res, next) => {
   if (err.message == "") err.message = "Something went wrong";
   //   res.status(statusCode).send(err);
   console.log(err);
-  res.status(statusCode).render("error", { err });
+  res.status(statusCode).send(err);
 });
 
 app.listen(port, () => {
-  console.log(`Connected to port ${port}`);
+  console.log(`Listening to port ${port}`);
 });
