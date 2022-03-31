@@ -71,7 +71,7 @@
           console.log("Signed in as: " + xhr.responseText);
           if (xhr.responseText == "success") {
             signOut();
-            location.assign("/my-video");
+            location.assign("/home");
           }
         };
         xhr.send(JSON.stringify({ token: id_token }));

@@ -148,17 +148,17 @@ section {
   left: 6px;
   top: 1px;
 }
-.nameVideo a{
-      text-decoration: none;
-      color: #212121;
-      font-size: 17px;
+.nameVideo a {
+  text-decoration: none;
+  color: #212121;
+  font-size: 17px;
 }
-.c-video{
+.c-video {
   display: grid;
   grid-template-columns: 50% 50%;
   grid-row-gap: 46px;
 }
-.singleVideo{
+.singleVideo {
   max-width: 470px;
   width: 100%;
   position: relative;
@@ -166,30 +166,30 @@ section {
   margin: -30px 18px 23px;
   border-radius: 17px;
 }
-.share{
-      position: absolute;
-      top: 0px;
-      left: 379px;
-      background-color: #e6e6ea;
-      width: 38px;
-      height: 37px;
-      text-align: center;
-      border-bottom-left-radius: 6px;
-      border-bottom-right-radius: 6px;
-      opacity: 0.8;
-      cursor: pointer;
+.share {
+  position: absolute;
+  top: 0px;
+  left: 379px;
+  background-color: #e6e6ea;
+  width: 38px;
+  height: 37px;
+  text-align: center;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  opacity: 0.8;
+  cursor: pointer;
 }
-.share i{
+.share i {
   font-size: 23px;
   color: #212121;
 }
-.video{
+.video {
   width: 100%;
 }
-.singleVideo:hover .controls{
+.singleVideo:hover .controls {
   transform: translateY(0);
 }
-.controls{
+.controls {
   display: flex;
   position: absolute;
   bottom: 6px;
@@ -197,19 +197,19 @@ section {
   flex-wrap: wrap;
   background-color: rgba(0, 0, 0, 0.7);
   transform: translateY(100%) translateY(-2px);
-  transition:all 0.2s;
+  transition: all 0.2s;
 }
-.buttonsForVideo{
-  padding:5px;
+.buttonsForVideo {
+  padding: 5px;
 }
-.buttonsForVideo button{
+.buttonsForVideo button {
   background: none;
   border: 0;
   outline: 0;
   cursor: pointer;
 }
-.buttonsForVideo button::before{
-  content:'\f144';
+.buttonsForVideo button::before {
+  content: "\f144";
   font-family: "Font Awesome 5 Free";
   width: 30px;
   height: 30px;
@@ -217,24 +217,24 @@ section {
   font-size: 28px;
   color: #fff;
 }
-.buttonsForVideo button.play::before{
-  content:'\f144'
+.buttonsForVideo button.play::before {
+  content: "\f144";
 }
-.buttonsForVideo button.pause::before{
-  content:'\f28b'
+.buttonsForVideo button.pause::before {
+  content: "\f28b";
 }
-.orangeBar{
+.orangeBar {
   height: 9px;
   top: 0;
   left: 0;
   width: 100%;
   background-color: #000;
 }
-.orangeJuice{
+.orangeJuice {
   height: 9px;
   background-color: orangered;
 }
-.volume{
+.volume {
   margin: -4px 30px;
 }
 
@@ -259,91 +259,91 @@ input[type="range"]::-webkit-slider-thumb {
   background: #ff4500;
   cursor: ew-resize;
   box-shadow: 0 0 2px 0 #555;
-  transition: background .3s ease-in-out;
+  transition: background 0.3s ease-in-out;
 }
 
-span{
-      color: white;
-      font-size: 12px;
+span {
+  color: white;
+  font-size: 12px;
 }
-.fullScreenMode i{
-      color: white;
-      font-size: 19px;
-      position: relative;
-      left: 245px;
+.fullScreenMode i {
+  color: white;
+  font-size: 19px;
+  position: relative;
+  left: 245px;
 }
-.headingAndDetails{
+.headingAndDetails {
   display: block;
 }
-.seen{
+.seen {
   display: none;
 }
-.headingAndDetails .nameVideo{
-position: absolute;
-top: 7px;
-left: 0px;
-background-color: #e2e2e6;
-opacity: 0.86;
-width: 230px;
-padding: 4px;
-border-top-right-radius: 7px;
-border-bottom-right-radius: 7px;
+.headingAndDetails .nameVideo {
+  position: absolute;
+  top: 7px;
+  left: 0px;
+  background-color: #e2e2e6;
+  opacity: 0.86;
+  width: 230px;
+  padding: 4px;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
 }
-.shareOptions{
-opacity: 0.8;
-position: absolute;
-top: 43px;
-left: 244px;
-background-color: #dbdcdf;
-padding: 8px;
-border-radius: 10px;
-display: none;
+.shareOptions {
+  opacity: 0.8;
+  position: absolute;
+  top: 43px;
+  left: 244px;
+  background-color: #dbdcdf;
+  padding: 8px;
+  border-radius: 10px;
+  display: none;
 }
-.shareLink{
+.shareLink {
   display: flex;
   font-size: 18px;
 }
-.gmailSent{
-    display: flex;
-    font-size: 18px;
+.gmailSent {
+  display: flex;
+  font-size: 18px;
 }
-.shareLink i{
+.shareLink i {
   padding: 1px 5px;
 }
 .gmailSent i {
   padding: 1px 5px;
 }
-.seenShareOption{
+.seenShareOption {
   display: block;
 }
-.lockUnlock{
-            position: absolute;
-            top: -3px;
-            left: 423px;
-            background-color: #e5e5e9;
-            opacity: 0.8;
-            height: 31px;
-            padding: 4px;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 9px;
-            font-size: 25px;
-            width: 30px;
-            text-align: center;
-            color: #222222;
+.lockUnlock {
+  position: absolute;
+  top: -3px;
+  left: 423px;
+  background-color: #e5e5e9;
+  opacity: 0.8;
+  height: 31px;
+  padding: 4px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 9px;
+  font-size: 25px;
+  width: 30px;
+  text-align: center;
+  color: #222222;
 }
-.lock{
+.lock {
   position: relative;
   top: -27px;
   font-size: 22px;
   display: none;
 }
-.lockSeen{
+.lockSeen {
   display: block;
 }
-.unlockSeen{
+.unlockSeen {
   display: none;
 }
-.unlock{
+.unlock {
   font-size: 22px;
   display: block;
 }

@@ -64,7 +64,7 @@ module.exports.uploadVideo = async (req, res) => {
 
       console.log(userVideo);
       console.log(videoLink);
-      res.status(200).json(`localhost:5000/home/videos/${videoLink.id}`);
+      res.status(200).json(`localhost:5000/${videoLink.id}/watch`);
     });
   } catch (e) {
     return new ExpressError(e);
@@ -127,7 +127,7 @@ module.exports.postLogin = async (req, res, next) => {
           secure: true,
           maxAge: 3600 * 60 * 60 * 24,
         });
-        res.redirect("/my-video");
+        res.redirect("/home");
       } else {
         return next(new ExpressError("Invalid Password"));
       }
@@ -176,7 +176,7 @@ module.exports.googleLogin = async (req, res) => {
   //   res.redirect("chrome:extensions");
 };
 
-module.exports.setting = async (req, res) => {
+module.exports.settings = async (req, res) => {
   res.render("user/setting");
 };
 
@@ -202,7 +202,7 @@ module.exports.sharedWithMe = async (req, res) => {
       },
     },
   });
-  res.render("user/sharedWithMe", { videos });
+  res.render("user/me", { videos });
 };
 
 module.exports.sharedWithOthers = async (req, res) => {
@@ -211,7 +211,7 @@ module.exports.sharedWithOthers = async (req, res) => {
   const userVideos = await UserVideo.findAll({ where: { userId: user.id } });
   const videos = await Video.findAll({ where: { userId: userVideos.id } });
 
-  res.render("user/sharedWithOthers", { videos });
+  res.render("user/team", { videos });
 };
 
 module.exports.personal = async (req, res) => {
@@ -235,10 +235,3 @@ module.exports.logout = (req, res) => {
 // localhost:3000/home/video/5
 //1 entry for uservideo and video
 //2
-
-// .videoContainer {
-//   position: absolute;
-//   left: 55%;
-//   top: 25%;
-//   transform: translate(-50%, -20%);
-// }
