@@ -1,0 +1,349 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; */
+}
+
+.nav {
+  display: flex;
+  position: sticky;
+  top: 0;
+  left: 0px;
+  justify-content: space-between;
+  background: #f8f6f0;
+  height: 91px;
+  width: 87.72em;
+  z-index: 9999;
+}
+
+.loomLogo {
+  width: 11rem;
+  margin: -1rem 2rem;
+  position: absolute;
+  z-index: 1;
+}
+.iconNavi {
+  margin: 35px;
+  padding: -3px;
+}
+.iconNavi i {
+  padding: 1px 12px;
+}
+
+.firstFullContainer {
+  padding: 19px 19px;
+  height: 100%;
+  width: 254px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #f8f6f0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.firstContainer {
+  position: relative;
+  top: 109px;
+}
+.threeContainer {
+  display: flex;
+  padding: 14px 11px;
+  margin: 9px 0px 0px 0px;
+}
+.selected {
+  border: none;
+  background-color: #e2e2e6;
+  border-radius: 7px;
+  width: 15em;
+  height: 26px;
+}
+.threeContainer i {
+  padding: 6px 11px;
+}
+.threeContainer a {
+  display: flex;
+  text-decoration: none;
+  color: #100d0f;
+}
+section {
+  /* padding: 67px; */
+  margin-left: 297px;
+  font-size: 28px;
+  padding: 0px 10px;
+  overflow-x: hidden;
+}
+.personalContainer {
+  padding: 67px 42px;
+}
+.addBtn {
+  background-color: #ff623e;
+  width: 102px;
+  height: 34px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+.logOutBtn {
+  width: 74px;
+  height: 31px;
+  border: none;
+  background-color: #525aa4;
+  border-radius: 5px;
+  color: #f8f6f0;
+  font-weight: 600;
+}
+.heading {
+  padding: 15px 0px;
+}
+.heading h2 {
+  font-size: 19px;
+  color: #868585;
+  font-weight: 800;
+}
+.heading h1 {
+  color: #212121;
+  font-weight: 900;
+  font-size: 48px;
+  position: relative;
+  left: -4px;
+}
+.personalNavLinksAndButtons {
+  display: flex;
+  justify-content: space-between;
+  padding: 31px 0px;
+}
+.personalNavLinks a {
+  text-decoration: none;
+  font-size: 19px;
+  font-weight: 600;
+  padding: 0px 7px 9px;
+}
+.selectedLink {
+  color: #212121;
+  border-bottom: 3px solid #625df5;
+}
+.folderBtn {
+  margin: 0px 12px;
+  width: 128px;
+  text-align: center;
+  height: 35px;
+  border-radius: 9px;
+  position: relative;
+  font-weight: 600;
+  font-size: 17px;
+  color: #212121;
+  background-color: #f8f6f0;
+  border: 2px solid hsla(240, 8%, 46%, 0.2);
+  left: 6px;
+  top: 1px;
+}
+.nameVideo a{
+      text-decoration: none;
+      color: #212121;
+      font-size: 17px;
+}
+.c-video{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-row-gap: 46px;
+}
+.singleVideo{
+  max-width: 470px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin: -30px 18px 23px;
+  border-radius: 17px;
+}
+.share{
+      position: absolute;
+      top: 0px;
+      left: 379px;
+      background-color: #e6e6ea;
+      width: 38px;
+      height: 37px;
+      text-align: center;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 6px;
+      opacity: 0.8;
+      cursor: pointer;
+}
+.share i{
+  font-size: 23px;
+  color: #212121;
+}
+.video{
+  width: 100%;
+}
+.singleVideo:hover .controls{
+  transform: translateY(0);
+}
+.controls{
+  display: flex;
+  position: absolute;
+  bottom: 6px;
+  width: 100%;
+  flex-wrap: wrap;
+  background-color: rgba(0, 0, 0, 0.7);
+  transform: translateY(100%) translateY(-2px);
+  transition:all 0.2s;
+}
+.buttonsForVideo{
+  padding:5px;
+}
+.buttonsForVideo button{
+  background: none;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+}
+.buttonsForVideo button::before{
+  content:'\f144';
+  font-family: "Font Awesome 5 Free";
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  font-size: 28px;
+  color: #fff;
+}
+.buttonsForVideo button.play::before{
+  content:'\f144'
+}
+.buttonsForVideo button.pause::before{
+  content:'\f28b'
+}
+.orangeBar{
+  height: 9px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #000;
+}
+.orangeJuice{
+  height: 9px;
+  background-color: orangered;
+}
+.volume{
+  margin: -4px 30px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  margin-right: 15px;
+  width: 97px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 5px;
+  background-image: linear-gradient(#ff4500, #ff4500);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* Input Thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #ff4500;
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background .3s ease-in-out;
+}
+
+span{
+      color: white;
+      font-size: 12px;
+}
+.fullScreenMode i{
+      color: white;
+      font-size: 19px;
+      position: relative;
+      left: 245px;
+}
+.headingAndDetails{
+  display: block;
+}
+.seen{
+  display: none;
+}
+.headingAndDetails .nameVideo{
+position: absolute;
+top: 7px;
+left: 0px;
+background-color: #e2e2e6;
+opacity: 0.86;
+width: 230px;
+padding: 4px;
+border-top-right-radius: 7px;
+border-bottom-right-radius: 7px;
+}
+.shareOptions{
+opacity: 0.8;
+position: absolute;
+top: 43px;
+left: 244px;
+background-color: #dbdcdf;
+padding: 8px;
+border-radius: 10px;
+display: none;
+}
+.shareLink{
+  display: flex;
+  font-size: 18px;
+}
+.gmailSent{
+    display: flex;
+    font-size: 18px;
+}
+.shareLink i{
+  padding: 1px 5px;
+}
+.gmailSent i {
+  padding: 1px 5px;
+}
+.seenShareOption{
+  display: block;
+}
+.lockUnlock{
+            position: absolute;
+            top: -3px;
+            left: 423px;
+            background-color: #e5e5e9;
+            opacity: 0.8;
+            height: 31px;
+            padding: 4px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 9px;
+            font-size: 25px;
+            width: 30px;
+            text-align: center;
+            color: #222222;
+}
+.lock{
+  position: relative;
+  top: -27px;
+  font-size: 22px;
+  display: none;
+}
+.lockSeen{
+  display: block;
+}
+.unlockSeen{
+  display: none;
+}
+.unlock{
+  font-size: 22px;
+  display: block;
+}

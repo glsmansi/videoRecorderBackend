@@ -42,7 +42,7 @@ router.route("/slack/oauth_redirect").get(catchAsync(user.oauthRedirect));
 
 router.route("/slackLogin").post(catchAsync(user.slackLogin));
 
-router.route("/loginSuccess").get(catchAsync(user.loginSuccess));
+router.route("/my-video").get(catchAsync(user.loginSuccess));
 router.route("/userDetails").get(auth, catchAsync(user.userDetails));
 
 router.route("/logout").get(user.logout);

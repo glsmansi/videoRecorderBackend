@@ -227,7 +227,7 @@ module.exports.postLogin = async (req, res, next) => {
           secure: true,
           maxAge: 3600 * 60 * 60 * 24,
         });
-        res.redirect("/loginSuccess");
+        res.redirect("/my-video");
       } else {
         return next(new ExpressError("Invalid Password"));
       }
@@ -275,7 +275,7 @@ module.exports.googleLogin = async (req, res) => {
 };
 
 module.exports.setting = async (req, res) => {
-  res.render("setting");
+  res.render("user/setting");
 };
 
 // module.exports.slackInstall = async (req, res) => {
@@ -313,7 +313,7 @@ module.exports.setting = async (req, res) => {
 // };
 
 module.exports.loginSuccess = async (req, res) => {
-  res.render("user/loginSuccess");
+  res.render("user/myVideo");
 };
 
 // module.exports.userDetails = async (req, res) => {

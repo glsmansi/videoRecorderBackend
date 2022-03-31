@@ -1,0 +1,397 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; */
+}
+
+.nav {
+  display: flex;
+  position: sticky;
+  top: 0;
+  left: 0px;
+  justify-content: space-between;
+  background: #f8f6f0;
+  height: 91px;
+  width: 87.72em;
+  z-index: 9999;
+}
+
+.loomLogo {
+  width: 11rem;
+  margin: -1rem 2rem;
+  position: absolute;
+  z-index: 1;
+}
+.iconNavi {
+  margin: 35px;
+  padding: -3px;
+}
+.iconNavi i {
+  padding: 1px 12px;
+}
+
+.firstFullContainer {
+  padding: 19px 19px;
+  height: 100%;
+  width: 254px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #f8f6f0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.firstContainer {
+  position: relative;
+  top: 109px;
+}
+.threeContainer {
+  display: flex;
+  padding: 14px 11px;
+  margin: 9px 0px 0px 0px;
+}
+.selected {
+  border: none;
+  background-color: #e2e2e6;
+  border-radius: 7px;
+  width: 15em;
+  height: 26px;
+}
+.threeContainer i {
+  padding: 6px 11px;
+}
+.threeContainer a {
+  display: flex;
+  text-decoration: none;
+  color: #100d0f;
+}
+section {
+  /* padding: 67px; */
+  margin-left: 297px;
+  font-size: 28px;
+  padding: 0px 10px;
+  overflow-x: hidden;
+}
+.logOutBtn {
+  width: 74px;
+  height: 31px;
+  border: none;
+  background-color: #525aa4;
+  border-radius: 5px;
+  color: #f8f6f0;
+  font-weight: 600;
+}
+.setting {
+  padding: 25px 13px;
+}
+
+.heading {
+  padding: 15px 0px;
+}
+.heading h2 {
+  font-size: 19px;
+  color: #868585;
+  font-weight: 800;
+}
+.heading h1 {
+  color: #212121;
+  font-weight: 900;
+  font-size: 48px;
+}
+.navigationLink {
+  padding: 7px 0px 15px;
+}
+.navigationLink a {
+  text-decoration: none;
+  font-size: 19px;
+  font-weight: 600;
+  padding: 0px 7px 9px;
+}
+.notSelected {
+  color: #868585;
+}
+.selectedLink {
+  color: #212121;
+  border-bottom: 3px solid #625df5;
+}
+.nameAndPhoto {
+  padding: 22px 0px;
+  border-bottom: 3px solid hsla(240, 8%, 46%, 0.2);
+}
+.nameAndPhoto h2 {
+  font-size: 19px;
+  font-weight: 800;
+  color: #212121;
+}
+.circleBox {
+  border: 2px solid #212121;
+  display: inline-block;
+  border-radius: 50%;
+  width: 142px;
+  position: relative;
+  /* text-align: center; */
+  margin: 19px;
+  padding: 8px;
+  left: 26px;
+  height: 129px;
+  cursor: pointer;
+}
+.circleBox i {
+  font-size: 31px;
+  padding: 45px;
+  position: relative;
+  left: 10px;
+  top: 3px;
+  color: #2b2b2b;
+}
+.nameAndPhoto form {
+  display: flex;
+  flex-direction: column;
+}
+.nameAndPhoto form label {
+  font-size: 19px;
+  font-weight: 600;
+  color: #5e5c5c;
+}
+.nameAndPhoto form input {
+  width: 302px;
+  margin: 4px 0px 15px;
+  border-radius: 6px;
+  height: 19px;
+  padding: 10px;
+  border: 2px solid hsla(240, 8%, 46%, 0.2);
+  color: #212121;
+  font-weight: 600;
+}
+.buttonsForName {
+  display: flex;
+}
+.buttonsForName button {
+  margin: 7px 12px;
+  width: 96px;
+  text-align: center;
+  height: 35px;
+  border-radius: 9px;
+  font-weight: 600;
+  font-size: 17px;
+}
+.saveBtn {
+  background-color: #4b42ad;
+  color: #f8f6f0;
+  border: none;
+}
+.cancelBtn {
+  color: #212121;
+  background-color: #f8f6f0;
+  border: 2px solid hsla(240, 8%, 46%, 0.2);
+}
+.contactInfoUpdates {
+  padding: 38px 0px;
+  border-bottom: 3px solid hsla(240, 8%, 46%, 0.2);
+}
+.contactInfoUpdates h2 {
+  font-size: 19px;
+  font-weight: 800;
+  color: #212121;
+}
+.contactInfoUpdates h3 {
+  font-size: 17px;
+  font-weight: 800;
+  color: #5e5c5c;
+  padding: 10px 0px;
+}
+.contactInfoUpdates form {
+  display: flex;
+}
+.emailForm {
+  display: flex;
+  flex-direction: column;
+}
+.emailForm label {
+  font-size: 19px;
+  font-weight: 600;
+  color: #5e5c5c;
+}
+.emailForm input {
+  width: 266px;
+  border-radius: 6px;
+  height: 19px;
+  padding: 10px;
+  border: 2px solid hsla(240, 8%, 46%, 0.2);
+  color: #212121;
+  font-weight: 600;
+  margin: 11px 13px 0px 0px;
+}
+.connctedAccount {
+  display: flex;
+  flex-direction: column;
+}
+.saveTheVideo {
+  display: flex;
+  flex-direction: column;
+}
+.connctedAccount label {
+  font-size: 19px;
+  font-weight: 600;
+  color: #5e5c5c;
+}
+.connectWithGoogle {
+  margin: 7px 30px 8px 3px;
+  width: 285px;
+  height: 49px;
+  text-align: center;
+  border-radius: 8px;
+  background-color: transparent;
+  border: 2px solid hsla(240, 8%, 46%, 0.2);
+  color: #212121;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.connectWithGoogle a {
+  text-decoration: none;
+}
+.connectWithGoogle img {
+  width: 32px;
+  margin: 7px;
+}
+.saveTheVideo label {
+  font-size: 19px;
+  font-weight: 600;
+  color: #5e5c5c;
+}
+.connectWithSlack {
+  margin: 7px 30px 8px 3px;
+  width: 285px;
+  height: 49px;
+  text-align: center;
+  border-radius: 8px;
+  background-color: transparent;
+  border: 2px solid hsla(240, 8%, 46%, 0.2);
+  color: #212121;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.connctedAccount a {
+  text-decoration: none;
+}
+.password {
+  padding: 38px 0px;
+  border-bottom: 3px solid hsla(240, 8%, 46%, 0.2);
+}
+.password h2 {
+  font-size: 19px;
+  font-weight: 800;
+  color: #212121;
+}
+.password h3 {
+  font-size: 17px;
+  font-weight: 800;
+  color: #5e5c5c;
+  padding: 10px 0px;
+}
+.currentPassword {
+  display: flex;
+  flex-direction: column;
+}
+.currentPassword label {
+  font-size: 19px;
+  font-weight: 600;
+  color: #5e5c5c;
+}
+.currentPassword input {
+  width: 266px;
+  border-radius: 6px;
+  height: 19px;
+  padding: 10px;
+  border: 2px solid hsla(240, 8%, 46%, 0.2);
+  color: #212121;
+  font-weight: 600;
+  margin: 11px 13px 9px 0px;
+}
+.confirmationPassword {
+  display: flex;
+}
+.newPassword {
+  display: flex;
+  flex-direction: column;
+}
+.newPassword label,
+.confirmPassword label {
+  font-size: 19px;
+  font-weight: 600;
+  color: #5e5c5c;
+}
+.newPassword input,
+.confirmPassword input {
+  width: 266px;
+  margin: 4px 0px 15px;
+  border-radius: 6px;
+  height: 19px;
+  padding: 10px;
+  border: 2px solid hsla(240, 8%, 46%, 0.2);
+  color: #212121;
+  font-weight: 600;
+  margin: 11px 13px 0px 0px;
+}
+.confirmPassword {
+  display: flex;
+  flex-direction: column;
+}
+.resetBtn {
+  width: 188px;
+  text-align: center;
+  height: 42px;
+  border-radius: 9px;
+  background-color: #4b42ad;
+  color: #f8f6f0;
+  border: none;
+  font-weight: 600;
+  font-size: 17px;
+  margin: 8px 3px 19px;
+}
+.savingCancelling button {
+  width: 110px;
+  text-align: center;
+  height: 42px;
+  /* position: relative; */
+  /* left: 106px; */
+  /* top: 6px; */
+  border-radius: 9px;
+  background-color: #d9d7d3;
+  /* color: #f8f6f0; */
+  border: none;
+  font-weight: 600;
+  font-size: 17px;
+}
+.deleteAccount {
+  padding: 38px 0px;
+}
+.deleteAccount h2 {
+  font-size: 19px;
+  font-weight: 800;
+  color: #212121;
+}
+.deleteBtn {
+  background-color: #ff623e;
+  width: 141px;
+  height: 34px;
+  margin: 20px 3px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
