@@ -34,7 +34,8 @@ router
 
 router.route("/googleLogin").post(catchAsync(user.googleLogin));
 
-router.route("/loginSuccess").get(catchAsync(user.loginSuccess));
+router.route("/my-video").get(catchAsync(user.loginSuccess));
+router.route("/setting").get(catchAsync(user.setting));
 router.route("/userDetails").get(auth, catchAsync(user.userDetails));
 
 router.route("/home/videos/:id").get(catchAsync(user.userVideoLink));
