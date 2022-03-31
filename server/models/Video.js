@@ -1,7 +1,7 @@
 const sequelize = require("../database/connection");
 const Sequelize = require("sequelize");
 module.exports = sequelize.define(
-  "User",
+  "Video",
   {
     id: {
       type: Sequelize.INTEGER(11),
@@ -12,8 +12,14 @@ module.exports = sequelize.define(
     fileName: {
       type: Sequelize.STRING(20),
     },
+    url: {
+      type: Sequelize.STRING,
+    },
+    userEmail: {
+      type: Sequelize.STRING(20),
+    },
   },
   {
-    timestamps: true,
+    timestamps: false,
   }
 );

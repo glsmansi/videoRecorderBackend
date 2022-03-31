@@ -9,11 +9,12 @@ module.exports = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    // username: {
-    //   type: Sequelize.STRING(100),
-    // },
+    username: {
+      type: Sequelize.STRING(100),
+    },
     email: {
       type: Sequelize.STRING(100),
+      unique: true,
     },
     password: {
       type: Sequelize.STRING(100),

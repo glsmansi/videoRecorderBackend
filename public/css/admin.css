@@ -52,3 +52,10 @@ body {
 .threeContainer i {
   padding: 5px;
 }
+
+.videoContainer {
+  position: absolute;
+  left: 55%;
+  top: 25%;
+  transform: translate(-50%, -20%);
+}

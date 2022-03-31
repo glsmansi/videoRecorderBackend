@@ -12,17 +12,14 @@ module.exports = {
       fileName: {
         type: Sequelize.STRING(20),
       },
-      userId: {
-        type: Sequelize.INTEGER,
-        references: { model: "Users", key: "id" },
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL",
+      url: {
+        type: Sequelize.STRING,
       },
-      sharedTo: {
-        type: Sequelize.INTEGER,
-        references: { model: "Users", key: "id" },
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL",
+      userEmail: {
+        type: Sequelize.STRING(20),
+      },
+      status: {
+        type: Sequelize.STRING(20),
       },
     });
   },

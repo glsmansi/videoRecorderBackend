@@ -9,8 +9,14 @@ module.exports = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
+    userEmail: {
+      type: Sequelize.STRING,
+    },
+    videoId: {
+      type: Sequelize.INTEGER,
+    },
   },
   {
-    timestamps: true,
+    timestamps: false,
   }
 );

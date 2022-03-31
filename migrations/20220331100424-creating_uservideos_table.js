@@ -2,18 +2,15 @@
 
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.createTable("UserVideo", {
+    return queryInterface.createTable("UserVideos", {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      userId: {
-        type: Sequelize.INTEGER,
-        references: { model: "Users", key: "id" },
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL",
+      userEmail: {
+        type: Sequelize.STRING,
       },
       videoId: {
         type: Sequelize.INTEGER,
@@ -25,6 +22,6 @@ module.exports = {
   },
 
   down(queryInterface, Sequelize) {
-    return queryInterface.dropTable("UsersVideo");
+    return queryInterface.dropTable("UserVideos");
   },
 };

@@ -8,10 +8,10 @@ const jwt = require("jsonwebtoken");
 const AWS = require("aws-sdk");
 const sequelize = require("sequelize");
 
-Video.belongsTo(User, {
-  as: "videos",
-  foreignKey: "user_id",
-});
+// Video.belongsTo(User, {
+//   as: "videos",
+//   foreignKey: "userEmail",
+// });
 
 const s3 = new AWS.S3({
   accessKeyId: process.env.AWS_ID,
@@ -34,10 +34,11 @@ module.exports.uploadVideo = async (req, res) => {
     let myFile = req.file.originalname.split(".");
     const fileType = myFile[myFile.length - 1];
     // console.log(myFile);
+    const fileName = `${req.user.email}.${fileType}`;
     const params = {
       Bucket: process.env.AWS_BUCKET_NAME,
       ACL: "public-read",
-      Key: `${req.user.username}.${fileType}`,
+      Key: `${req.user.email}.${fileType}`,
       Body: req.file.buffer,
     };
     console.log(myFile);
@@ -46,48 +47,24 @@ module.exports.uploadVideo = async (req, res) => {
       if (error) {
         res.status(500).json(error);
       }
-      // console.log(req.user);
+      // console.log(params[Key]);
 
       const videoLink = await Video.create({
-        // video: data.Location,
-        user: req.user.user_id,
+        fileName: fileName,
+        url: data.Location,
+        userEmail: req.user.email,
       });
-      videoLink.video.push({ url: data.Location });
       await videoLink.save();
 
-      await UserVideo.create({
-        userId: req.user.user_id,
+      const userVideo = await UserVideo.create({
+        userEmail: req.user.email,
         videoId: videoLink.id,
       });
+      console.log(req.user.email);
 
-      console.log(data.Location);
-      // res.status(200).json(data.Location);
-
-      // const drive = google.drive({ version: "v3",auth:oAuth2Client  });
-      // const fileMetadata = {
-      //   name: req.file.filename,
-      // };
-      // const media = {
-      //   mimeType: req.file.mimetype,
-      //   body: fs.createReadStream(req.file.path),
-      // };
-      // drive.files.create(
-      //   {
-      //     resource: fileMetadata,
-      //     media: media,
-      //     fields: "id",
-      //   },
-      //   (err, file) => {
-      //     if (err) {
-      //       // Handle error
-      //       console.error(err);
-      //     } else {
-      //       fs.unlinkSync(req.file.path)
-      //       // res.render("success",{name:name,pic:pic,success:true})
-      //     }
-
-      //   }
-      // );
+      console.log(userVideo);
+      console.log(videoLink);
+      res.status(200).json(`localhost:5000/home/videos/${videoLink.id}`);
     });
   } catch (e) {
     return new ExpressError(e);
@@ -133,11 +110,11 @@ module.exports.postLogin = async (req, res, next) => {
     const user = await User.findOne({ where: { email: email } });
     if (user) {
       const match = await bcrypt.compare(password, user.password);
-      console.log(match);
+      console.log(user);
 
       if (match) {
         const token = jwt.sign(
-          { user_id: user._id, email },
+          { user_id: user.id, email },
           process.env.TOKEN_KEY
         );
         // save user token
@@ -225,7 +202,7 @@ module.exports.sharedWithMe = async (req, res) => {
       },
     },
   });
-  res.render("users/sharedWithMe", { videos });
+  res.render("user/sharedWithMe", { videos });
 };
 
 module.exports.sharedWithOthers = async (req, res) => {
@@ -234,20 +211,20 @@ module.exports.sharedWithOthers = async (req, res) => {
   const userVideos = await UserVideo.findAll({ where: { userId: user.id } });
   const videos = await Video.findAll({ where: { userId: userVideos.id } });
 
-  res.render("users/sharedWithMe", { videos });
+  res.render("user/sharedWithOthers", { videos });
 };
 
 module.exports.personal = async (req, res) => {
   const userEmail = req.user.email;
   const user = await User.findOne({ where: { email: userEmail } });
   const userVideos = await UserVideo.findAll({ where: { userId: user.id } });
-  res.render("users/personal", { userVideos });
+  res.render("user/personal", { userVideos });
 };
 
 module.exports.userVideoLink = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findOne({ where: { id: id } });
-  res.render("users/video", { video });
+  res.render("user/video", { video });
 };
 
 module.exports.logout = (req, res) => {
