@@ -38,13 +38,13 @@
             </a>
           </div>
           <div class="threeContainer">
-            <a href="#">
+            <a href="/me">
               <i class="fas fa-user-friends"></i>
               <h2>Shared with Me</h2>
             </a>
           </div>
           <div class="threeContainer">
-            <a href="#">
+            <a href="/team">
               <i class="fas fa-users"></i>
               <h2>Team</h2>
             </a>
@@ -60,7 +60,7 @@
       <section>
         <div class="setting">
           <div class="heading">
-            <h2>Kenil Joshi</h2>
+            <h2><%=user.username%></h2>
             <h1>Personal Settings</h1>
           </div>
           <div class="navigationLink">
@@ -74,10 +74,10 @@
               <i class="fas fa-camera"></i>
             </div>
             <form>
-              <label for="firstName">First name: </label>
-              <input type="text" name="firstName" value="Kenil" />
-              <label for="lastName">Last name: </label>
-              <input type="text" name="lastName" value="Joshi" />
+              <label for="firstName">Username: </label>
+              <input type="text" name="firstName" value="<%=user.username %>" />
+              <!-- <label for="lastName">Last name: </label>
+              <input type="text" name="lastName" value="Joshi" /> -->
               <div class="buttonsForName">
                 <button type="submit" class="saveBtn">Save</button>
                 <button type="submit" class="cancelBtn">Cancel</button>
@@ -93,7 +93,7 @@
             <form>
               <div class="emailForm">
                 <label for="email">Email: </label>
-                <input type="text" name="email" value="keniljoshi3@gmail.com" />
+                <input type="text" name="email" value="<%=user.email%>" />
               </div>
               <div class="connctedAccount">
                 <label for="connectingAccount">Connected accounts</label>
@@ -117,17 +117,17 @@
                 <label for="savingInfo">Saving Info</label>
                 <a href="#">
                   <button class="connectWithGoogle">
-                    <img src="img/googleIcon.png" alt="Google icon by Icons8" />
-                    Connected with Google
+                    <img
+                      src="img/googledrive.png"
+                      alt="Google icon by Icons8"
+                    />
+                    Save in google drive
                   </button>
                 </a>
                 <a href="#">
                   <button class="connectWithSlack">
-                    <img
-                      src="img/slackIcon.png"
-                      alt="Slack New icon by Icons8"
-                    />
-                    Connect with Slack
+                    <img src="img/aws.png" alt="Slack New icon by Icons8" />
+                    Save in AWS
                   </button>
                 </a>
               </div>

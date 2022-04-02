@@ -77,7 +77,7 @@ module.exports.getRegister = async (req, res) => {
 
 module.exports.postRegister = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { username, email, password } = req.body;
     const oldUser = await User.findOne({ where: { email: email } });
     console.log(oldUser);
     if (oldUser) {
@@ -87,6 +87,7 @@ module.exports.postRegister = async (req, res, next) => {
     console.log(encryptedPassword);
 
     const user = await User.create({
+      username,
       email,
       password: encryptedPassword,
       loginType: "login",
@@ -177,7 +178,8 @@ module.exports.googleLogin = async (req, res) => {
 };
 
 module.exports.settings = async (req, res) => {
-  res.render("user/setting");
+  const user = await User.findOne({ where: { email: req.user.email } });
+  res.render("user/setting", { user });
 };
 
 module.exports.loginSuccess = async (req, res) => {
@@ -194,37 +196,58 @@ module.exports.loginSuccess = async (req, res) => {
 module.exports.sharedWithMe = async (req, res) => {
   const userEmail = req.user.email;
   const user = await User.findOne({ where: { email: userEmail } });
-  const userVideos = await UserVideo.findAll({ where: { userId: user.id } });
-  const videos = await Video.findAll({
+  const userVideos = await UserVideo.findAll({
+    where: { userEmail: user.email },
+  });
+  const uservideos = await Video.findAll({
     where: {
-      userId: {
-        [sequelize.Op.not]: userVideos.id,
+      userEmail: {
+        [sequelize.Op.not]: userVideos.email,
       },
     },
   });
-  res.render("user/me", { videos });
+  res.render("user/me", { uservideos });
 };
 
 module.exports.sharedWithOthers = async (req, res) => {
   const userEmail = req.user.email;
   const user = await User.findOne({ where: { email: userEmail } });
-  const userVideos = await UserVideo.findAll({ where: { userId: user.id } });
-  const videos = await Video.findAll({ where: { userId: userVideos.id } });
+  console.log(user);
+  const userVideos = await UserVideo.findAll({
+    where: { userEmail: user.email },
+  });
+  console.log(userVideos);
+  const videos = await Video.findAll({
+    where: { userEmail: userEmail },
+  });
 
-  res.render("user/team", { videos });
+  res.render("user/team", { videos, user });
 };
 
 module.exports.personal = async (req, res) => {
   const userEmail = req.user.email;
   const user = await User.findOne({ where: { email: userEmail } });
-  const userVideos = await UserVideo.findAll({ where: { userId: user.id } });
-  res.render("user/personal", { userVideos });
+  const uservideos = await Video.findAll({
+    where: { userEmail: user.email },
+  });
+
+  res.render("user/myVideo", { uservideos });
 };
 
 module.exports.userVideoLink = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findOne({ where: { id: id } });
   res.render("user/video", { video });
+};
+
+module.exports.download = async (req, res) => {
+  const email = req.user.email;
+  const videoLink = await Video.findOne({
+    where: { userEmail: email },
+    order: [["id", "DESC"]],
+  });
+  console.log(videoLink);
+  res.json(videoLink.url);
 };
 
 module.exports.logout = (req, res) => {

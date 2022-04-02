@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/afb23c7fce.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="./css/myVideoPage.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <navbar>
+      <div class="nav">
+        <a href="/">
+          <img src="img/loom.png" class="loomLogo" />
+        </a>
+        <div class="iconNavi">
+          <i class="fas fa-search"></i>
+          <i class="far fa-bell"></i>
+          <a href="/logout">
+            <button class="logOutBtn">Log out</button>
+          </a>
+        </div>
+      </div>
+    </navbar>
+    <div class="fullContainer">
+      <div class="firstFullContainer">
+        <div class="firstContainer">
+          <h3>libraries</h3>
+          <div class="threeContainer">
+            <a href="/home">
+              <i class="fas fa-user"></i>
+              <h2>Personal</h2>
+            </a>
+          </div>
+          <div class="threeContainer">
+            <a href="/me">
+              <i class="fas fa-user-friends"></i>
+              <h2>Shared with Me</h2>
+            </a>
+          </div>
+          <div class="threeContainer selected">
+            <a href="/team">
+              <i class="fas fa-users"></i>
+              <h2>Team</h2>
+            </a>
+          </div>
+          <div class="threeContainer">
+            <a href="/settings">
+              <i class="fas fa-cog"></i>
+              <h2>Settings</h2>
+            </a>
+          </div>
+        </div>
+      </div>
+      <section>
+        <div class="personalContainer">
+          <div class="heading">
+            <h2>Kenil Joshi</h2>
+            <h1>Team</h1>
+            <div class="personalNavLinksAndButtons">
+              <div class="personalNavLinks">
+                <a href="#" class="selectedLink"> Videos </a>
+              </div>
+              <div class="buttonsForAdd">
+                <button class="folderBtn">New Folder</button>
+                <button class="addBtn">
+                  <i class="fas fa-plus"></i>
+                  Add Video
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="videoContainer">
+          <div class="videos">
+            <div class="c-video">
+              <%for(video of videos){%>
+              <div class="singleVideo">
+                <video class="video" controls>
+                  <source src="<%=video.url%>" type="video/mp4" />
+                </video>
+                <div class="headingAndDetails">
+                  <div class="nameVideo">
+                    <a href="#">
+                      <h3><%=video.fileName%></h3>
+                    </a>
+                  </div>
+                  <div class="lockUnlock">
+                    <div class="unlock">
+                      <i class="fas fa-unlock"></i>
+                    </div>
+                    <div class="lock">
+                      <i class="fas fa-lock"></i>
+                    </div>
+                  </div>
+                  <div class="share">
+                    <i class="fas fa-share"></i>
+                  </div>
+                  <div class="shareOptions">
+                    <div class="shareLink">
+                      <i class="fas fa-link"></i>
+                      <p>share link</p>
+                    </div>
+                    <div class="gmailSent">
+                      <i class="far fa-envelope"></i>
+                      <p>send Email</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <%}%>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+  <script>
+    const videos = document.querySelectorAll(".video");
+    const headingAndDetails = document.querySelectorAll(".headingAndDetails");
+    const shares = document.querySelectorAll(".share");
+    const shareOptions = document.querySelectorAll(".shareOptions");
+    const lockUnlocks = document.querySelectorAll(".lockUnlock");
+    const lock = document.querySelectorAll(".lock");
+    videos.forEach((video, index) => {
+      video.addEventListener("click", () => {
+        headingAndDetails[index].classList.toggle("seen");
+      });
+    });
+    shares.forEach((share, index) => {
+      share.addEventListener("click", () => {
+        shareOptions[index].classList.toggle("seenShareOption");
+      });
+    });
+    lockUnlocks.forEach((lockUnlock, index) => {
+      lockUnlock.addEventListener("click", () => {
+        lock[index].classList.toggle("lockSeen");
+      });
+    });
+  </script>
+</html>

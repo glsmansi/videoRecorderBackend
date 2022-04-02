@@ -20,7 +20,7 @@ body {
   justify-content: space-between;
   background: #f8f6f0;
   height: 91px;
-  width: 87.72em;
+  /* width: 87.72em; */
   z-index: 9999;
 }
 
@@ -284,7 +284,7 @@ span {
   left: 0px;
   background-color: #e2e2e6;
   opacity: 0.86;
-  width: 230px;
+  width: 20rem;
   padding: 4px;
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;

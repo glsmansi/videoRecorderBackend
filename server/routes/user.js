@@ -34,15 +34,15 @@ router
 
 router.route("/googleLogin").post(catchAsync(user.googleLogin));
 
-router.route("/home").get(catchAsync(user.loginSuccess));
-router.route("/settings").get(catchAsync(user.settings));
+router.route("/home").get(auth, catchAsync(user.personal));
+router.route("/settings").get(auth, catchAsync(user.settings));
 router.route("/userDetails").get(auth, catchAsync(user.userDetails));
 
-router.route("/:id/watch").get(catchAsync(user.userVideoLink));
+router.route("/:id/watch").get(auth, catchAsync(user.userVideoLink));
 
 router.route("/me").get(auth, user.sharedWithMe);
 router.route("/team").get(auth, user.sharedWithOthers);
-router.route("/personal").get(auth, user.personal);
+router.route("/download").get(auth, user.download);
 
 router.route("/logout").get(user.logout);
 

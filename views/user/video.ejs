@@ -5,40 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- <link rel="stylesheet" href="../../css/myVideoPage.css" /> -->
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
-
-      * {
-        padding: 0;
-        margin: 0;
-      }
-      body {
-        font-family: "Montserrat", sans-serif;
-        /* display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; */
-      }
-
-      .nav {
-        display: flex;
-        justify-content: space-between;
-        background: #f8f6f0;
-        height: 91px;
-      }
-
-      .loomLogo {
-        width: 11rem;
-        margin: -1rem 2rem;
-      }
-      .videoContainer {
-        position: absolute;
-        left: 55%;
-        top: 25%;
-        transform: translate(-50%, -20%);
-      }
-    </style>
+    <link rel="stylesheet" href="../../css/video.css" />
 
     <script
       src="https://kit.fontawesome.com/afb23c7fce.js"
@@ -62,30 +29,36 @@
       </div>
     </navbar>
     <div class="fullContainer">
-      <div class="firstContainer">
-        <h3>libraries</h3>
-        <div class="threeContainer">
-          <i class="fas fa-user"></i>
-          <h2>Personal</h2>
-        </div>
-        <div class="threeContainer">
-          <i class="fas fa-user-friends"></i>
-          <h2>Shared with Me</h2>
-        </div>
-        <div class="threeContainer">
-          <i class="fas fa-users"></i>
-          <h2>Personal</h2>
+      <div class="firstFullContainer">
+        <div class="firstContainer">
+          <h3>libraries</h3>
+          <div class="threeContainer">
+            <i class="fas fa-user"></i>
+            <h2>Personal</h2>
+          </div>
+
+          <div class="threeContainer">
+            <i class="fas fa-user-friends"></i>
+            <h2>Shared with Me</h2>
+          </div>
+          <div class="threeContainer">
+            <i class="fas fa-users"></i>
+            <h2>Personal</h2>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="videoContainer">
-      <!-- <video src= type="video/mp4"></video> -->
-      <video width="1020" height="640" controls>
-        <source src="<%=video.url%>" type="video/mp4" />
-      </video>
-      <p style="text-align: center">Video Name: <%=video.fileName%></p>
 
-      <!-- <button>Add Video</button> -->
+      <section>
+        <div class="videoContainer">
+          <!-- <video src= type="video/mp4"></video> -->
+          <video width="1020" height="640" controls>
+            <source src="<%=video.url%>" type="video/mp4" />
+          </video>
+          <p style="text-align: center">Video Name: <%=video.fileName%></p>
+
+          <!-- <button>Add Video</button> -->
+        </div>
+      </section>
     </div>
   </body>
 </html>

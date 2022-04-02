@@ -10,6 +10,11 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./css/register.css" />
+    <meta
+      name="google-signin-client_id"
+      content="198561696099-flasriqkqqlkn2db9ttq6ellso1g6kdn.apps.googleusercontent.com"
+    />
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 
     <title>Register</title>
   </head>
@@ -25,12 +30,13 @@
       <div class="heading">
         <h1>Sign up to Loom</h1>
       </div>
+
       <form method="post" action="/register">
         <div class="g-signin2" data-onsuccess="onSignIn">
-          <button class="signUpGoogle">
+          <!-- <button class="signUpGoogle">
             <img src="img/googleIcon.png" alt="Google icon by Icons8" />
             Sign up with Google
-          </button>
+          </button> -->
         </div>
         <a href="#">
           <button class="signUpSlack">
@@ -40,6 +46,13 @@
         </a>
         <div class="option">or</div>
         <div class="form">
+          <label for="email">Username: </label>
+          <input
+            type="text"
+            name="username"
+            id=""
+            placeholder="Enter your username..."
+          />
           <label for="email">Email address: </label>
           <input
             type="text"

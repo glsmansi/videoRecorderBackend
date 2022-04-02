@@ -38,13 +38,13 @@
             </a>
           </div>
           <div class="threeContainer">
-            <a href="#">
+            <a href="/me">
               <i class="fas fa-user-friends"></i>
               <h2>Shared with Me</h2>
             </a>
           </div>
           <div class="threeContainer">
-            <a href="#">
+            <a href="/team">
               <i class="fas fa-users"></i>
               <h2>Team</h2>
             </a>
@@ -60,7 +60,7 @@
       <section>
         <div class="personalContainer">
           <div class="heading">
-            <h2>Kenil Joshi</h2>
+            <!-- <h2>Kenil Joshi</h2> -->
             <h1>Personal Library</h1>
             <div class="personalNavLinksAndButtons">
               <div class="personalNavLinks">
@@ -79,12 +79,15 @@
         <div class="videoContainer">
           <div class="videos">
             <div class="c-video">
+              <%for(video of uservideos){%>
               <div class="singleVideo">
-                <video class="video" src="img/video (1).mp4" controls></video>
+                <video class="video" controls>
+                  <source src="<%=video.url%>" type="video/mp4" />
+                </video>
                 <div class="headingAndDetails">
                   <div class="nameVideo">
                     <a href="#">
-                      <h3>Natural video</h3>
+                      <h3><%=video.fileName%></h3>
                     </a>
                   </div>
                   <div class="lockUnlock">
@@ -110,111 +113,7 @@
                   </div>
                 </div>
               </div>
-              <div class="singleVideo">
-                <video
-                  class="video"
-                  src="img/production ID_3819342.mp4"
-                  controls
-                ></video>
-                <div class="headingAndDetails">
-                  <div class="nameVideo">
-                    <a href="#">
-                      <h3>Natural video</h3>
-                    </a>
-                  </div>
-                  <div class="share">
-                    <i class="fas fa-share"></i>
-                  </div>
-                  <div class="lockUnlock">
-                    <div class="unlock">
-                      <i class="fas fa-unlock"></i>
-                    </div>
-                    <div class="lock">
-                      <i class="fas fa-lock"></i>
-                    </div>
-                  </div>
-                  <div class="shareOptions">
-                    <div class="shareLink">
-                      <i class="fas fa-link"></i>
-                      <p>share link</p>
-                    </div>
-                    <div class="gmailSent">
-                      <i class="far fa-envelope"></i>
-                      <p>send Email</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="singleVideo">
-                <video
-                  class="video"
-                  src="img/production ID_3819342.mp4"
-                  controls
-                ></video>
-                <div class="headingAndDetails">
-                  <div class="nameVideo">
-                    <a href="#">
-                      <h3>Natural video</h3>
-                    </a>
-                  </div>
-                  <div class="lockUnlock">
-                    <div class="unlock">
-                      <i class="fas fa-unlock"></i>
-                    </div>
-                    <div class="lock">
-                      <i class="fas fa-lock"></i>
-                    </div>
-                  </div>
-                  <div class="share">
-                    <i class="fas fa-share"></i>
-                  </div>
-                  <div class="shareOptions">
-                    <div class="shareLink">
-                      <i class="fas fa-link"></i>
-                      <p>share link</p>
-                    </div>
-                    <div class="gmailSent">
-                      <i class="far fa-envelope"></i>
-                      <p>send Email</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="singleVideo">
-                <video
-                  class="video"
-                  src="img/production ID_3819342.mp4"
-                  controls
-                ></video>
-                <div class="headingAndDetails">
-                  <div class="nameVideo">
-                    <a href="#">
-                      <h3>Natural video</h3>
-                    </a>
-                  </div>
-                  <div class="lockUnlock">
-                    <div class="unlock">
-                      <i class="fas fa-unlock"></i>
-                    </div>
-                    <div class="lock">
-                      <i class="fas fa-lock"></i>
-                    </div>
-                  </div>
-                  <div class="share">
-                    <i class="fas fa-share"></i>
-                  </div>
-                  <div class="shareOptions">
-                    <div class="shareLink">
-                      <i class="fas fa-link"></i>
-                      <p>share link</p>
-                    </div>
-                    <div class="gmailSent">
-                      <i class="far fa-envelope"></i>
-                      <p>send Email</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <%}%>
             </div>
           </div>
         </div>
