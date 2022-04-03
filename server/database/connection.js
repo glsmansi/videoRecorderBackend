@@ -5,7 +5,7 @@ const sequelize = new Sequelize(
   process.env.USER_NAME,
   process.env.PASSWORD,
   {
-    host: "localhost",
+    host: "scrapdb2.crbyejbc1y6i.ap-south-1.rds.amazonaws.com",
     dialect: "mysql",
   }
 );
