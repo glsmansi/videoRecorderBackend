@@ -37,6 +37,11 @@ app.route("/").get(catchAsync(user.home));
 //   next(new ExpressError("Page Not Found", 404));
 // });
 
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
+
 app.use((err, req, res, next) => {
   const { statusCode = 400 } = err;
   if (err.message == "") err.message = "Something went wrong";

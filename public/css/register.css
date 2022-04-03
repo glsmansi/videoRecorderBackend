@@ -48,7 +48,7 @@ form {
   display: flex;
   flex-direction: column;
 }
-.signUpGoogle {
+/* #my-signin2 {
   margin: 18px;
   width: 307px;
   height: 61px;
@@ -59,7 +59,7 @@ form {
   color: #212121;
   font-weight: 600;
   font-size: 18px;
-}
+} */
 .signUpGoogle img {
   width: 32px;
   margin: 7px;
@@ -68,12 +68,13 @@ form {
   width: 307px;
   height: 61px;
   text-align: center;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   background-color: transparent;
   border: 2px solid hsla(240, 8%, 46%, 0.2);
   color: #212121;
   font-weight: 600;
   font-size: 18px;
+  margin: 18px;
 }
 .signUpSlack img {
   width: 32px;

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -57,6 +57,200 @@
           <p style="text-align: center">Video Name: <%=video.fileName%></p>
 
           <!-- <button>Add Video</button> -->
+        </div>
+      </section>
+    </div>
+  </body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/afb23c7fce.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <link rel="stylesheet" href="./css/setting.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <navbar>
+      <div class="nav">
+        <a href="/">
+          <img src="img/loom.png" class="loomLogo" />
+        </a>
+        <div class="iconNavi">
+          <i class="fas fa-search"></i>
+          <i class="far fa-bell"></i>
+          <a href="/logout">
+            <button class="logOutBtn">Log out</button>
+          </a>
+        </div>
+      </div>
+    </navbar>
+    <div class="fullContainer">
+      <div class="firstFullContainer">
+        <div class="firstContainer">
+          <h3>libraries</h3>
+          <div class="threeContainer">
+            <a href="/home">
+              <i class="fas fa-user"></i>
+              <h2>Personal</h2>
+            </a>
+          </div>
+          <div class="threeContainer">
+            <a href="/me">
+              <i class="fas fa-user-friends"></i>
+              <h2>Shared with Me</h2>
+            </a>
+          </div>
+          <div class="threeContainer">
+            <a href="/team">
+              <i class="fas fa-users"></i>
+              <h2>Team</h2>
+            </a>
+          </div>
+          <div class="threeContainer selected">
+            <a href="/settings">
+              <i class="fas fa-cog"></i>
+              <h2>Settings</h2>
+            </a>
+          </div>
+        </div>
+      </div>
+      <section>
+        <div class="setting">
+          <div class="heading">
+            <h2><%=user.username%></h2>
+            <h1>Video Details</h1>
+          </div>
+          <!-- <div class="navigationLink">
+            <a href="#" class="selectedLink">My Account</a>
+            <a href="#" class="notSelected">Notifications</a>
+            <a href="#" class="notSelected">Integrations</a>
+          </div> -->
+          <div class="nameAndPhoto">
+            <h2>Name and photos</h2>
+            <div class="circleBox">
+              <i class="fas fa-camera"></i>
+            </div>
+            <form>
+              <label for="firstName">Team Email: </label>
+              <input type="text" name="firstName" value="" />
+              <!-- <label for="lastName">Last name: </label>
+              <input type="text" name="lastName" value="Joshi" /> -->
+              <div class="buttonsForName">
+                <button type="submit" class="saveBtn">Add</button>
+                <button type="submit" class="saveBtn">Edit</button>
+                <button type="submit" class="cancelBtn">Delete</button>
+              </div>
+            </form>
+          </div>
+          <div class="contactInfoUpdates">
+            <h2>User Videos List</h2>
+            <!-- <h3>
+              Access your Loom Workspaces with any email address, or by
+              connecting an account.
+            </h3> -->
+            
+            <form>
+              <div class="emailForm">
+                <label for="email">Email: </label>
+                <input type="text" name="email" value="<%=user.email%>" />
+              </div>
+              <div class="connctedAccount">
+                <label for="connectingAccount">Connected accounts</label>
+                <a href="#">
+                  <button class="connectWithGoogle">
+                    <img src="img/googleIcon.png" alt="Google icon by Icons8" />
+                    Connected with Google
+                  </button>
+                </a>
+                <a href="#">
+                  <button class="connectWithSlack">
+                    <img
+                      src="img/slackIcon.png"
+                      alt="Slack New icon by Icons8"
+                    />
+                    Connect with Slack
+                  </button>
+                </a>
+              </div>
+              <div class="saveTheVideo">
+                <label for="savingInfo">Saving Info</label>
+                <a href="#">
+                  <button class="connectWithGoogle">
+                    <img
+                      src="img/googledrive.png"
+                      alt="Google icon by Icons8"
+                    />
+                    Save in google drive
+                  </button>
+                </a>
+                <a href="#">
+                  <button class="connectWithSlack">
+                    <img src="img/aws.png" alt="Slack New icon by Icons8" />
+                    Save in AWS
+                  </button>
+                </a>
+              </div>
+            </form>
+          </div>
+          <div class="password">
+            <h2>Password</h2>
+            <h3>
+              Note that if you signed in with a connected account, you are using
+              that account’s login information and we cannot change or reset
+              those passwords here.
+            </h3>
+            <form>
+              <div class="currentPassword">
+                <label for="currentPassword">Current Password</label>
+                <input type="pasword" name="password" placeholder="password" />
+              </div>
+              <div class="confirmationPassword">
+                <div class="newPassword">
+                  <label for="newPassword">New Password</label>
+                  <input
+                    type="pasword"
+                    name="password"
+                    placeholder="password"
+                  />
+                </div>
+                <div class="confirmPassword">
+                  <label for="confirmPassword">Confirm Password</label>
+                  <input
+                    type="pasword"
+                    name="password"
+                    placeholder="password"
+                  />
+                </div>
+              </div>
+              <h2>Reset Password</h2>
+              <h3>
+                If you just forgot your password, don’t worry – we got you!
+              </h3>
+              <button type="submit" class="resetBtn">
+                <i class="fas fa-lock"></i>
+                Reset Password
+              </button>
+              <div class="savingCancelling">
+                <button disabled="disabled">Save</button>
+                <button disabled="disabled">Cancel</button>
+              </div>
+            </form>
+          </div>
+          <div class="deleteAccount">
+            <h2>Delete Account</h2>
+            <form>
+              <button type="submit" class="deleteBtn">Delete my account</button>
+            </form>
+          </div>
         </div>
       </section>
     </div>
