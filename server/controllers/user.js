@@ -251,6 +251,11 @@ module.exports.download = async (req, res) => {
   res.json(videoLink.url);
 };
 
+module.exports.userDetails = async (req, res) => {
+  // const user = req.user;
+  res.json(req.user);
+};
+
 module.exports.logout = (req, res) => {
   res.clearCookie("cookietokenkey");
   res.redirect("/");
