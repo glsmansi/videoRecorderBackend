@@ -60,14 +60,14 @@
       <section>
         <div class="personalContainer">
           <div class="heading">
-            <h2>Kenil Joshi</h2>
+            <h2></h2>
             <h1>Team</h1>
             <div class="personalNavLinksAndButtons">
               <div class="personalNavLinks">
                 <a href="#" class="selectedLink"> Videos </a>
               </div>
               <div class="buttonsForAdd">
-                <button class="folderBtn">New Folder</button>
+                <!-- <button class="folderBtn">New Folder</button> -->
                 <button class="addBtn">
                   <i class="fas fa-plus"></i>
                   Add Video
@@ -79,11 +79,12 @@
         <div class="videoContainer">
           <div class="videos">
             <div class="c-video">
-              <%for(video of videos){%>
+              <%if(videos.length){%> <%for(video of videos){%>
               <div class="singleVideo">
-                <video class="video" controls>
-                  <source src="<%=video.url%>" type="video/mp4" />
-                </video>
+                <video class="video" src="<%=video.url%>"></video>
+                <form action="/<%=video.id%>/watch" method="GET">
+                  <button class="addBtn">View Video Details</button>
+                </form>
                 <div class="headingAndDetails">
                   <div class="nameVideo">
                     <a href="#">
@@ -113,6 +114,8 @@
                   </div>
                 </div>
               </div>
+              <%}}else{%>
+              <p>NO VIDEOS SHARED BY YOU IN A TEAM</p>
               <%}%>
             </div>
           </div>

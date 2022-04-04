@@ -79,11 +79,9 @@
         <div class="videoContainer">
           <div class="videos">
             <div class="c-video">
-              <%for(video of uservideos){%>
+              <%if(uservideos.length){%> <%for(video of uservideos){%>
               <div class="singleVideo">
-                <video class="video" controls>
-                  <source src="<%=video.url%>" type="video/mp4" />
-                </video>
+                <video class="video" src="<%=video.url%>"></video>
                 <div class="headingAndDetails">
                   <div class="nameVideo">
                     <a href="#">
@@ -91,12 +89,15 @@
                     </a>
                   </div>
                   <div class="lockUnlock">
+                    <% if(video.status=="private") {%>
                     <div class="unlock">
-                      <i class="fas fa-unlock"></i>
+                      <i class="fa-solid fa-user"></i>
                     </div>
+                    <% }else{ %>
                     <div class="lock">
-                      <i class="fas fa-lock"></i>
+                      <i class="fa-solid fa-users"></i>
                     </div>
+                    <% } %>
                   </div>
                   <div class="share">
                     <i class="fas fa-share"></i>
@@ -113,6 +114,8 @@
                   </div>
                 </div>
               </div>
+              <%}}else{%>
+              <p>NO VIDEOS SHARED BY YOU</p>
               <%}%>
             </div>
           </div>

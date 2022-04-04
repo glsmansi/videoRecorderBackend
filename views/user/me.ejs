@@ -79,11 +79,9 @@
         <div class="videoContainer">
           <div class="videos">
             <div class="c-video">
-              <%for(video of uservideos){%>
+              <%if(uservideos.length){%> <%for(video of uservideos){%>
               <div class="singleVideo">
-                <video class="video" controls>
-                  <source src="<%=video.url%>" type="video/mp4" />
-                </video>
+                <video class="video" src="<%=video.url%>"></video>
                 <div class="headingAndDetails">
                   <div class="nameVideo">
                     <a href="#">
@@ -113,6 +111,9 @@
                   </div>
                 </div>
               </div>
+
+              <%}}else{%>
+              <p>NO VIDEOS SHARED WITH YOU</p>
               <%}%>
             </div>
           </div>

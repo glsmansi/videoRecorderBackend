@@ -34,11 +34,11 @@ module.exports.uploadVideo = async (req, res) => {
     let myFile = req.file.originalname.split(".");
     const fileType = myFile[myFile.length - 1];
     // console.log(myFile);
-    const fileName = `${req.user.email}.${fileType}`;
+    const fileName = `${Date.now()}.${fileType}`;
     const params = {
       Bucket: process.env.AWS_BUCKET_NAME,
       ACL: "public-read",
-      Key: `${req.user.email}.${fileType}`,
+      Key: `${Date.now()}.${fileType}`,
       Body: req.file.buffer,
     };
     console.log(myFile);
@@ -236,8 +236,9 @@ module.exports.personal = async (req, res) => {
 
 module.exports.userVideoLink = async (req, res) => {
   const { id } = req.params;
+  const user = req.user;
   const video = await Video.findOne({ where: { id: id } });
-  res.render("user/video", { video });
+  res.render("user/video", { video, user });
 };
 
 module.exports.download = async (req, res) => {
@@ -254,7 +255,3 @@ module.exports.logout = (req, res) => {
   res.clearCookie("cookietokenkey");
   res.redirect("/");
 };
-
-// localhost:3000/home/video/5
-//1 entry for uservideo and video
-//2
