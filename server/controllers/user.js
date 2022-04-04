@@ -64,7 +64,9 @@ module.exports.uploadVideo = async (req, res) => {
 
       console.log(userVideo);
       console.log(videoLink);
-      res.status(200).json(`localhost:5000/${videoLink.id}/watch`);
+      res
+        .status(200)
+        .json(`videorecorderbackend.herokuapp.com/${videoLink.id}/watch`);
     });
   } catch (e) {
     return new ExpressError(e);
