@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script
       src="https://kit.fontawesome.com/afb23c7fce.js"
       crossorigin="anonymous"
@@ -82,6 +83,9 @@
               <%if(uservideos.length){%> <%for(video of uservideos){%>
               <div class="singleVideo">
                 <video class="video" src="<%=video.url%>"></video>
+                <form action="/<%=video.id%>/watch" method="GET">
+                  <button class="addBtn">View Video Details</button>
+                </form>
                 <div class="headingAndDetails">
                   <div class="nameVideo">
                     <a href="#">
@@ -93,8 +97,8 @@
                     <div class="unlock">
                       <i class="fa-solid fa-user"></i>
                     </div>
-                    <% }else{ %>
-                    <div class="lock">
+                    <% }else { %>
+                    <div class=>
                       <i class="fa-solid fa-users"></i>
                     </div>
                     <% } %>

@@ -4,7 +4,7 @@ module.exports = {
   up(queryInterface, Sequelize) {
     return queryInterface.changeColumn("Videos", "status", {
       type: Sequelize.ENUM("public", "private"),
-      defaultValue: "public",
+      defaultValue: "private",
     });
   },
 

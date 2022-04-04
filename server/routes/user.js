@@ -39,10 +39,28 @@ router.route("/settings").get(auth, catchAsync(user.settings));
 router.route("/userDetails").get(auth, catchAsync(user.userDetails));
 
 router.route("/:id/watch").get(auth, catchAsync(user.userVideoLink));
+router
+  .route("/:id/watch/publicOrPrivate")
+  .post(auth, catchAsync(user.publicOrPrivate));
+
+router
+  .route("/:id/watch/teamMembers/add")
+  .post(auth, catchAsync(user.AddteamMembers));
+
+router
+  .route("/:id/watch/teamMembers/delete")
+  .delete(auth, catchAsync(user.DeleteteamMembers));
+
+router
+  .route("/:id/watch/meetingNotes")
+  .post(auth, catchAsync(user.meetingNotes));
+router
+  .route("/:id/watch/meetingNotes/delete")
+  .delete(auth, catchAsync(user.meetingNotes));
 
 router.route("/me").get(auth, user.sharedWithMe);
 router.route("/team").get(auth, user.sharedWithOthers);
-router.route("/download").get(auth, user.download);
+router.route("/downloadVideo").get(auth, user.downloadVideo);
 
 router.route("/logout").get(user.logout);
 

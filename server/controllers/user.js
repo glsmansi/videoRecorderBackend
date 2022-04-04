@@ -190,9 +190,6 @@ module.exports.loginSuccess = async (req, res) => {
   }
 };
 
-// module.exports.getSharedWithMe = async (req, res) => {
-//   // res.render("users/sharedWithMe")
-// };
 module.exports.sharedWithMe = async (req, res) => {
   const userEmail = req.user.email;
   const user = await User.findOne({ where: { email: userEmail } });
@@ -226,12 +223,13 @@ module.exports.sharedWithOthers = async (req, res) => {
 
 module.exports.personal = async (req, res) => {
   const userEmail = req.user.email;
+  // console.log(req.user.email);
   const user = await User.findOne({ where: { email: userEmail } });
   const uservideos = await Video.findAll({
     where: { userEmail: user.email },
   });
 
-  res.render("user/myVideo", { uservideos });
+  res.render("user/myVideo", { uservideos, user, userEmail });
 };
 
 module.exports.userVideoLink = async (req, res) => {
@@ -241,7 +239,7 @@ module.exports.userVideoLink = async (req, res) => {
   res.render("user/video", { video, user });
 };
 
-module.exports.download = async (req, res) => {
+module.exports.downloadVideo = async (req, res) => {
   const email = req.user.email;
   const videoLink = await Video.findOne({
     where: { userEmail: email },
@@ -254,6 +252,50 @@ module.exports.download = async (req, res) => {
 module.exports.userDetails = async (req, res) => {
   // const user = req.user;
   res.json(req.user);
+};
+
+module.exports.publicOrPrivate = async (req, res) => {
+  const { status } = req.body;
+  const { id } = req.params;
+  const video = await Video.findOne({ where: { id: id } });
+  console.log(video);
+  if (status != video.status) {
+    video.status = status;
+    await video.save();
+    res.redirect(`/${id}/watch`);
+  } else {
+    console.log("no change");
+    res.redirect(`/${id}/watch`);
+  }
+};
+
+module.exports.AddteamMembers = async (req, res) => {
+  const { id } = req.params;
+  const { teamMembers } = req.body;
+  console.log(teamMembers);
+  const video = await Video.findOne({ where: { id: id } });
+  video.teamMembers = teamMembers;
+  await video.save();
+  res.redirect(`/${id}/watch`);
+};
+
+module.exports.DeleteteamMembers = async (req, res) => {
+  const { id } = req.params;
+  const { teamMembers } = req.body;
+  const video = await Video.findOne({ where: { id: id } });
+  video.teamMembers = NULL;
+  await video.save();
+  res.redirect(`${id}/watch`);
+};
+
+module.exports.meetingNotes = async (req, res) => {
+  const { id } = req.params;
+  const { meetingNotes } = req.body;
+  const video = await Video.findOne({ where: { id: id } });
+  console.log(meetingNotes);
+  video.meetingNotes = meetingNotes;
+  await video.save();
+  res.redirect(`/${id}/watch`);
 };
 
 module.exports.logout = (req, res) => {

@@ -18,6 +18,15 @@ module.exports = sequelize.define(
     userEmail: {
       type: Sequelize.STRING(20),
     },
+    status: {
+      type: Sequelize.STRING,
+    },
+    teamMembers: {
+      type: Sequelize.STRING,
+    },
+    meetingNotes: {
+      type: Sequelize.STRING,
+    },
   },
   {
     timestamps: false,

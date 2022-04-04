@@ -106,7 +106,7 @@
               <h2>Team</h2>
             </a>
           </div>
-          <div class="threeContainer selected">
+          <div class="threeContainer">
             <a href="/settings">
               <i class="fas fa-cog"></i>
               <h2>Settings</h2>
@@ -140,24 +140,56 @@
               <i class="fas fa-camera"></i>
             </div> -->
 
-            <form>
-              <label for="firstName">Team Email: </label>
-              <input type="text" name="firstName" value="" />
+            <form action="/<%=video.id%>/watch/teamMembers/add" method=POST>
+          
+              <%if(video.userEmail==user.email){%>
+              <label for="firstName">Team Members Email: </label>
+              <input type="text" name="teamMembers" value="" />
               <!-- <label for="lastName">Last name: </label>
               <input type="text" name="lastName" value="Joshi" /> -->
-              <div class="buttonsForName">
-                <button type="submit" class="saveBtn">Add</button>
-                <button type="submit" class="saveBtn">Edit</button>
-                <button type="submit" class="cancelBtn">Delete</button>
-              </div>
-            </form>
-            <form action="">
-              <label for="notes">Meeting Notes:</label>
-              <textarea type="text" id="notes"></textarea>
-            </form>
+              
+                <div class="buttonsForName">
+                  <button type="submit" class="saveBtn">Add</button><br>
+                </form>
+                <p><%=video.teamMembers%></p><br>
+             
+              
+                <!-- <form action="/<%=video.id%>/watch/teamMembers/delete?_method=DELETE" method="POST">
+                  <button type="submit" class="cancelBtn">Delete</button>
+                </form> -->
+                </div>
+              
+              <%}%>
+            
+          
+              <form action="/<%=video.id%>/watch/meetingNotes" method="POST">
+              
+                <label for="notes">Meeting Notes:</label>
+                <textarea type="text" id="notes" name="meetingNotes"></textarea>
+                <div class="buttonsForName">
+                  <button class="saveBtn" >Add notes</button>
+                </div>
+                
+              </form>
+              <%if(video.meetingNotes){%>
+                <p><%=video.meetingNotes%></p>
+                <%}%>
           </div>
           <div class="contactInfoUpdates">
-            <h2>User Videos List</h2>
+            <h2>Public or Private</h2>
+            <form action="/<%=video.id%>/watch/publicOrPrivate" method="POST">
+              <input type="radio" name="status" id="publicOrPrivate" value="public">
+              <label style="font-size: 1rem; "for="publicOrPrivate">Public :</label><br>
+       
+              <input type="radio" name="status" id="publicOrPrivate" required value="private">
+              <label style="font-size: 1rem; "for="publicOrPrivate">Private:</label>
+              <button type="submit" >Submit</button>
+              
+            </form>
+            <div>
+              <p>Status: <%=video.status%></p>
+
+            </div>
             <!-- <h3>
               Access your Loom Workspaces with any email address, or by
               connecting an account.

@@ -7,6 +7,7 @@ const catchAsync = require("./utils/catchAsync");
 dotenv.config();
 const cookieParser = require("cookie-parser");
 const user = require("./server/controllers/user");
+const methodOverride = require("method-override");
 
 const userRouter = require("./server/routes/user");
 
@@ -27,6 +28,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "./public")));
 
 app.use("/", userRouter);
