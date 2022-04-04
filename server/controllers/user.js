@@ -64,7 +64,7 @@ module.exports.uploadVideo = async (req, res) => {
       const details = {
         watchableLink: `videorecorderbackend.herokuapp.com/${videoLink.id}/watch`,
         downloadableLink: data.Location,
-        fileName,
+        file: fileName,
       };
       console.log(userVideo);
       console.log(videoLink);
