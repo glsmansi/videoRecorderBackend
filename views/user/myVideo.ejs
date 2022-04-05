@@ -106,17 +106,26 @@
                   <div class="share">
                     <i class="fas fa-share"></i>
                   </div>
-                  <form action="/<%=video.id%>/copyLinkToClipboard" method=POST>
+  
                   <div class="shareOptions">
                     <div class="shareLink">
                       <i class="fas fa-link"></i>
-                    <button>share link</button>  
+                      <%if(video.status=="private"){%>
+                      <div style="display: none" id="link1">
+                        videorecorderbackend.herokuapp.com/<%=video.id%>/watch
+                      </div>
+                      <button onclick="copyToClipboard('link1')">
+                        share link
+                      </button>
+                      <%}else{%>
+                      <div style="display: none" id="link2">
+                        videorecorderbackend.herokuapp.com/<%=video.id%>/publicLink/sharable
+                      </div>
+                      <button onclick="copyToClipboard('link2')">
+                        share link
+                      </button>
+                      <%}%>
                     </div>
-                  
-                    <!-- <div class="gmailSent">
-                      <i class="far fa-envelope"></i>
-                      <p>send Email</p>
-                    </div> -->
                   </div>
                 </form>
                 </div>
@@ -152,5 +161,27 @@
         lock[index].classList.toggle("lockSeen");
       });
     });
+  </script>
+  <script>
+    function copyToClipboard(elementId) {
+      // Create a "hidden" input
+      var aux = document.createElement("input");
+
+      // Assign it the value of the specified element
+      aux.setAttribute("value", document.getElementById(elementId).innerHTML);
+
+      // Append it to the body
+      document.body.appendChild(aux);
+
+      // Highlight its content
+      aux.select();
+
+      // Copy the highlighted text
+      document.execCommand("copy");
+      alert("Link Copied To Clipboard");
+
+      // Remove it from the body
+      document.body.removeChild(aux);
+    }
   </script>
 </html>
