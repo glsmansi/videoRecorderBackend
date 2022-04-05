@@ -30,7 +30,7 @@ module.exports.home = async (req, res) => {
   // if (req.cookies["cookietokenkey"]) {
   //   return res.redirect("/home");
   // } else {
-  return res.render("home");
+  res.render("home");
   // }
 };
 
@@ -247,9 +247,9 @@ module.exports.personal = async (req, res) => {
     const uservideos = await Video.findAll({
       where: { userEmail: user.email },
     });
-    return res.render("user/myVideo", { uservideos, user, userEmail });
+    res.render("user/myVideo", { uservideos, user, userEmail });
   } else {
-    return res.render("/");
+    res.render("/");
   }
 };
 
