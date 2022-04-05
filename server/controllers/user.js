@@ -27,11 +27,11 @@ const CLIENT_ID =
 const client = new OAuth2Client(CLIENT_ID);
 
 module.exports.home = async (req, res) => {
-  // if (req.cookies["cookietokenkey"]) {
-  //   return res.redirect("/home");
-  // } else {
-  res.render("home");
-  // }
+  if (req.cookies["cookietokenkey"]) {
+    res.redirect("/home");
+  } else {
+    res.render("home");
+  }
 };
 
 module.exports.uploadVideo = async (req, res) => {
