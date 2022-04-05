@@ -244,6 +244,7 @@ module.exports.personal = async (req, res) => {
   const uservideos = await Video.findAll({
     where: { userEmail: user.email },
   });
+  console.log(uservideos);
   res.render("user/myVideo", { uservideos, user, userEmail });
 };
 
