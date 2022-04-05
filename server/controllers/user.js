@@ -329,12 +329,12 @@ module.exports.copyLinkToClipBoard = async (req, res) => {
   const user = req.user;
   const video = await Video.findOne({ where: { id: id } });
   if (video.status == "private") {
-    // ncp.copy(`videorecorderbackend.herokuapp.com/${id}/watch`);
-    ncp.copy(`localhost:5000/${id}/watch`);
+    ncp.copy(`videorecorderbackend.herokuapp.com/${id}/watch`);
+    // ncp.copy(`localhost:5000/${id}/watch`);
     alert("Link Copied to clipboard!");
   } else {
-    // ncp.copy(`videorecorderbackend.herokuapp.com/${id}/publicLink/sharable`);
-    ncp.copy(`localhost:5000/${id}/publicLink/sharable`);
+    ncp.copy(`videorecorderbackend.herokuapp.com/${id}/publicLink/sharable`);
+    // ncp.copy(`localhost:5000/${id}/publicLink/sharable`);
     alert("Link Copied to clipboard!");
   }
 };
