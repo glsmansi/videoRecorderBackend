@@ -330,12 +330,12 @@ module.exports.copyLinkToClipBoard = async (req, res) => {
     ncp.copy(`videorecorderbackend.herokuapp.com/${id}/watch`);
     // ncp.copy(`localhost:5000/${id}/watch`);
     alert("Link Copied to clipboard!");
-    res.redirect(`/${id}/watch`);
+    // res.redirect(`/${id}/watch`);
   } else {
     ncp.copy(`videorecorderbackend.herokuapp.com/${id}/publicLink/sharable`);
     // ncp.copy(`localhost:5000/${id}/publicLink/sharable`);
     alert("Link Copied to clipboard!");
-    res.redirect(`/${id}/watch`);
+    // res.redirect(`/${id}/watch`);
   }
 };
 
