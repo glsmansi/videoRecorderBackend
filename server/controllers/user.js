@@ -241,16 +241,12 @@ module.exports.sharedWithOthers = async (req, res) => {
 };
 
 module.exports.personal = async (req, res) => {
-  if (req.cookies["cookietokenkey"]) {
-    const userEmail = req.user.email;
-    const user = await User.findOne({ where: { email: userEmail } });
-    const uservideos = await Video.findAll({
-      where: { userEmail: user.email },
-    });
-    res.render("user/myVideo", { uservideos, user, userEmail });
-  } else {
-    res.redirect("/");
-  }
+  const userEmail = req.user.email;
+  const user = await User.findOne({ where: { email: userEmail } });
+  const uservideos = await Video.findAll({
+    where: { userEmail: user.email },
+  });
+  res.render("user/myVideo", { uservideos, user, userEmail });
 };
 
 module.exports.userVideoLink = async (req, res) => {
