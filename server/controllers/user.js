@@ -27,11 +27,11 @@ const CLIENT_ID =
 const client = new OAuth2Client(CLIENT_ID);
 
 module.exports.home = async (req, res) => {
-  if (req.cookies["cookietokenkey"]) {
-    return res.redirect("/home");
-  } else {
-    return res.render("home");
-  }
+  // if (req.cookies["cookietokenkey"]) {
+  //   return res.redirect("/home");
+  // } else {
+  return res.render("home");
+  // }
 };
 
 module.exports.uploadVideo = async (req, res) => {
@@ -83,11 +83,11 @@ module.exports.uploadVideo = async (req, res) => {
 };
 
 module.exports.getRegister = async (req, res) => {
-  if (req.cookies["cookietokenkey"]) {
-    return res.redirect("/home");
-  } else {
-    return res.render("user/register");
-  }
+  // if (req.cookies["cookietokenkey"]) {
+  //   return res.redirect("/home");
+  // } else {
+  res.render("user/register");
+  // }
 };
 
 module.exports.postRegister = async (req, res, next) => {
@@ -116,11 +116,11 @@ module.exports.postRegister = async (req, res, next) => {
 };
 
 module.exports.getLogin = async (req, res) => {
-  if (req.cookies["cookietokenkey"]) {
-    return res.redirect("/home");
-  } else {
-    return res.render("user/login");
-  }
+  // if (req.cookies["cookietokenkey"]) {
+  //   return res.redirect("/home");
+  // } else {
+  res.render("user/login");
+  // }
 };
 
 module.exports.postLogin = async (req, res, next) => {
