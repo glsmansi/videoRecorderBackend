@@ -238,6 +238,7 @@ module.exports.sharedWithOthers = async (req, res) => {
 };
 
 module.exports.personal = async (req, res) => {
+  console.log(req.user.token);
   const userEmail = req.user.email;
   const user = await User.findOne({ where: { email: userEmail } });
   const uservideos = await Video.findAll({
