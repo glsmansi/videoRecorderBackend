@@ -4,7 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script
       src="https://kit.fontawesome.com/afb23c7fce.js"
       crossorigin="anonymous"
@@ -97,21 +103,25 @@
                     <div class="unlock">
                       <i class="fa-solid fa-user"></i>
                     </div>
-                    <% }else { %>
-                    <div class=>
-                      <i class="fa-solid fa-users"></i>
-                    </div>
-                    <% } %>
+                    <% }else { %> <div class=>
+                    <i class="fa-solid fa-users"></i>
                   </div>
-                  <div class="share">
-                    <i class="fas fa-share"></i>
-                  </div>
-                  <form action="/<%=video.id%>/copyLinkToClipboard" method=POST>
-                  <div class="shareOptions">
-                    <div class="shareLink">
-                      <i class="fas fa-link"></i>
-                    <button>share link</button>  
+                  <% } %>
+                </div>
+                <div class="share">
+                  <i class="fas fa-share"></i>
+                </div>
+
+                <div class="shareOptions">
+                  <div class="shareLink">
+                    <i class="fas fa-link"></i>
+                    <div style="display: none" id="link1">
+                      videorecorderbackend.herokuapp.com/<%=video.id%>/watch
                     </div>
+                    <button onclick="copyToClipboard('link1')">
+                      share link
+                    </button>
+                  </div>
                 </div>
               </div>
               <%}}else{%>
@@ -145,5 +155,27 @@
         lock[index].classList.toggle("lockSeen");
       });
     });
+  </script>
+  <script>
+    function copyToClipboard(elementId) {
+      // Create a "hidden" input
+      var aux = document.createElement("input");
+
+      // Assign it the value of the specified element
+      aux.setAttribute("value", document.getElementById(elementId).innerHTML);
+
+      // Append it to the body
+      document.body.appendChild(aux);
+
+      // Highlight its content
+      aux.select();
+
+      // Copy the highlighted text
+      document.execCommand("copy");
+      alert("Link Copied To Clipboard");
+
+      // Remove it from the body
+      document.body.removeChild(aux);
+    }
   </script>
 </html>
