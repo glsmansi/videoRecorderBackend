@@ -125,12 +125,12 @@ module.exports.getLogin = async (req, res) => {
 
 module.exports.postLogin = async (req, res, next) => {
   try {
-    console.log(req.body);
+    console.log("req.body");
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email: email } });
     if (user) {
       const match = await bcrypt.compare(password, user.password);
-      console.log(user);
+      console.log("user");
 
       if (match) {
         const token = jwt.sign(
@@ -141,7 +141,7 @@ module.exports.postLogin = async (req, res, next) => {
         user.token = token;
 
         user.save();
-        console.log(token);
+        console.log("token");
         res.cookie("cookietokenkey", token, {
           httpOnly: false,
           secure: true,
