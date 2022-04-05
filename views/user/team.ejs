@@ -86,7 +86,7 @@
         <div class="videoContainer">
           <div class="videos">
             <div class="c-video">
-              <%if(uservideos.length){%> <%for(video of uservideos){%>
+              <%if(videos.length){%> <%for(video of videos){%>
               <div class="singleVideo">
                 <video class="video" src="<%=video.url%>"></video>
                 <form action="/<%=video.id%>/watch" method="GET">
