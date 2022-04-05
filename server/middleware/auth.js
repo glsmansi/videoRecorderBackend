@@ -4,10 +4,12 @@ dotenv.config();
 
 const auth = async (req, res, next) => {
   try {
-    const token = req.cookies.cookietokenkey;
-    // const token = req.headers.auth;
+    // const token = req.cookies.cookietokenkey;
+    const token = req.headers.auth;
 
-    console.log("auth token", token);
+    console.log("auth token", req.cookies);
+    console.log("auth token", req.headers);
+    console.log("auth token", req);
 
     if (!token) {
       return res.redirect("/login");
