@@ -62,9 +62,9 @@ router
   .route("/:id/watch/changeFileName")
   .post(auth, catchAsync(user.changeFileName));
 
-router
-  .route("/:id/copyLinkToClipboard")
-  .post(auth, catchAsync(user.copyLinkToClipBoard));
+// router
+//   .route("/:id/copyLinkToClipboard")
+//   .post(auth, catchAsync(user.copyLinkToClipBoard));
 
 router.route("/:id/publicLink/sharable").get(user.publicSharableLink);
 

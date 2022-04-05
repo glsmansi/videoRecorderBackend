@@ -322,30 +322,30 @@ module.exports.changeFileName = async (req, res) => {
   res.redirect(`/${id}/watch`);
 };
 
-module.exports.copyLinkToClipBoard = async (req, res) => {
-  const { id } = req.params;
-  const user = req.user;
-  const video = await Video.findOne({ where: { id: id } });
-  if (video.status == "private") {
-    ncp.copy(`videorecorderbackend.herokuapp.com/${id}/watch`, () => {
-      alert("Link Copied to clipboard!");
-      console.log("link copied");
-    });
-    // ncp.copy(`localhost:5000/${id}/watch`);
+// module.exports.copyLinkToClipBoard = async (req, res) => {
+//   const { id } = req.params;
+//   const user = req.user;
+//   const video = await Video.findOne({ where: { id: id } });
+//   if (video.status == "private") {
+//     ncp.copy(`videorecorderbackend.herokuapp.com/${id}/watch`, () => {
+//       alert("Link Copied to clipboard!");
+//       console.log("link copied");
+//     });
+//     // ncp.copy(`localhost:5000/${id}/watch`);
 
-    res.redirect("/home");
-  } else {
-    ncp.copy(
-      `videorecorderbackend.herokuapp.com/${id}/publicLink/sharable`,
-      () => {
-        alert("Link Copied to clipboard!");
-        console.log("link copied");
-      }
-    );
-    // ncp.copy(`localhost:5000/${id}/publicLink/sharable`);
-    res.redirect("/home");
-  }
-};
+//     res.redirect("/home");
+//   } else {
+//     ncp.copy(
+//       `videorecorderbackend.herokuapp.com/${id}/publicLink/sharable`,
+//       () => {
+//         alert("Link Copied to clipboard!");
+//         console.log("link copied");
+//       }
+//     );
+//     // ncp.copy(`localhost:5000/${id}/publicLink/sharable`);
+//     res.redirect("/home");
+//   }
+// };
 
 module.exports.publicSharableLink = async (req, res) => {
   const { id } = req.params;
