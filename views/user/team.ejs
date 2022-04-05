@@ -106,16 +106,12 @@
                   <div class="share">
                     <i class="fas fa-share"></i>
                   </div>
+                  <form action="/<%=video.id%>/copyLinkToClipboard" method=POST>
                   <div class="shareOptions">
                     <div class="shareLink">
                       <i class="fas fa-link"></i>
-                      <p>share link</p>
+                    <button>share link</button>  
                     </div>
-                    <div class="gmailSent">
-                      <i class="far fa-envelope"></i>
-                      <p>send Email</p>
-                    </div>
-                  </div>
                 </div>
               </div>
               <%}}else{%>
