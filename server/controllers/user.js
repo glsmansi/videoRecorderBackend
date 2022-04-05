@@ -249,7 +249,7 @@ module.exports.personal = async (req, res) => {
     });
     res.render("user/myVideo", { uservideos, user, userEmail });
   } else {
-    res.render("/");
+    res.redirect("/");
   }
 };
 
