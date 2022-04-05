@@ -58,6 +58,16 @@ router
   .route("/:id/watch/meetingNotes/delete")
   .delete(auth, catchAsync(user.meetingNotes));
 
+router
+  .route("/:id/watch/changeFileName")
+  .post(auth, catchAsync(user.changeFileName));
+
+router
+  .route("/:id/copyLinkToClipboard")
+  .post(auth, catchAsync(user.copyLinkToClipBoard));
+
+router.route("/:id/publicLink/sharable").get(user.publicSharableLink);
+
 router.route("/me").get(auth, user.sharedWithMe);
 router.route("/team").get(auth, user.sharedWithOthers);
 router.route("/downloadVideo").get(auth, user.downloadVideo);

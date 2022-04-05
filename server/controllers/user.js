@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken");
 // const uuid = require("uuid/v4");
 const AWS = require("aws-sdk");
 const sequelize = require("sequelize");
+var ncp = require("copy-paste");
+const alert = require("alert");
 
 // Video.belongsTo(User, {
 //   as: "videos",
@@ -300,6 +302,34 @@ module.exports.meetingNotes = async (req, res) => {
   video.meetingNotes = meetingNotes;
   await video.save();
   res.redirect(`/${id}/watch`);
+};
+
+module.exports.changeFileName = async (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+  const video = await Video.findOne({ where: { id: id } });
+  video.fileName = name;
+  await video.save();
+  res.redirect(`/${id}/watch`);
+};
+
+module.exports.copyLinkToClipBoard = async (req, res) => {
+  const { id } = req.params;
+  const user = req.user;
+  const video = await Video.findOne({ where: { id: id } });
+  if (video.status == "private") {
+    ncp.copy(`localhost:5000/${id}/watch`);
+    alert("Link Copied to clipboard!");
+  } else {
+    ncp.copy(`localhost:5000/${id}/publicLink/sharable`);
+    alert("Link Copied to clipboard!");
+  }
+};
+
+module.exports.publicSharableLink = async (req, res) => {
+  const { id } = req.params;
+  const video = await Video.findOne({ where: { id: id } });
+  res.render("user/publicVideoPage", { video });
 };
 
 module.exports.logout = (req, res) => {
