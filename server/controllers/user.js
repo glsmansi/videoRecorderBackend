@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const AWS = require("aws-sdk");
 const sequelize = require("sequelize");
 var ncp = require("copy-paste");
+
 const alert = require("alert");
 
 // Video.belongsTo(User, {
@@ -318,10 +319,10 @@ module.exports.copyLinkToClipBoard = async (req, res) => {
   const user = req.user;
   const video = await Video.findOne({ where: { id: id } });
   if (video.status == "private") {
-    ncp.copy(`localhost:5000/${id}/watch`);
+    ncp.copy(`videorecorderbackend.herokuapp.com/${id}/watch`);
     alert("Link Copied to clipboard!");
   } else {
-    ncp.copy(`localhost:5000/${id}/publicLink/sharable`);
+    ncp.copy(`videorecorderbackend.herokuapp.com/${id}/publicLink/sharable`);
     alert("Link Copied to clipboard!");
   }
 };
