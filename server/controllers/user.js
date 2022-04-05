@@ -140,8 +140,8 @@ module.exports.postLogin = async (req, res, next) => {
         // save user token
         user.token = token;
 
-        user.save();
-        console.log("token");
+        await user.save();
+        console.log(token, "token");
         res.cookie("cookietokenkey", token, {
           httpOnly: false,
           secure: true,
