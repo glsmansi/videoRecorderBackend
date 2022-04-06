@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const AWS = require("aws-sdk");
 const sequelize = require("sequelize");
 var ncp = require("copy-paste");
+const nodemailer = require("nodemailer");
 
 const alert = require("alert");
 
@@ -25,6 +26,15 @@ const { OAuth2Client } = require("google-auth-library");
 const CLIENT_ID =
   "198561696099-flasriqkqqlkn2db9ttq6ellso1g6kdn.apps.googleusercontent.com";
 const client = new OAuth2Client(CLIENT_ID);
+
+var smtpTransport = nodemailer.createTransport({
+  service: "Gmail",
+  auth: {
+    user: process.env.GMAIL_ID, // generated ethereal user
+    pass: process.env.GMAIL_PASSWORD,
+  },
+});
+var rand, mailOptions, host, link;
 
 module.exports.home = async (req, res) => {
   if (req.cookies["cookietokenkey"]) {
@@ -225,11 +235,11 @@ module.exports.sharedWithMe = async (req, res) => {
 module.exports.sharedWithOthers = async (req, res) => {
   const userEmail = req.user.email;
   const user = await User.findOne({ where: { email: userEmail } });
-  console.log(user);
+  // console.log(user);
   const userVideos = await UserVideo.findAll({
     where: { userEmail: user.email },
   });
-  console.log(userVideos);
+  // console.log(userVideos);
   const videos = await Video.findAll({
     where: { userEmail: userEmail },
   });
@@ -244,7 +254,7 @@ module.exports.personal = async (req, res) => {
   const uservideos = await Video.findAll({
     where: { userEmail: user.email },
   });
-  console.log(uservideos);
+  // console.log(uservideos);
   res.render("user/myVideo", { uservideos, user, userEmail });
 };
 

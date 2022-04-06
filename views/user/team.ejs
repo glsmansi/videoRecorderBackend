@@ -109,6 +109,9 @@
                     </div>
                     <% } %>
                   </div>
+                  <div style="font-size: 10px;" id="link1">
+                    videorecorderbackend.herokuapp.com/<%=video.id%>/watch
+                  </div>
                   <div class="share">
                     <i class="fas fa-share"></i>
                   </div>
@@ -117,6 +120,7 @@
                     <div class="shareLink">
                       <i class="fas fa-link"></i>
                       <%if(video.status=="private"){%>
+                      <p><%=video.id%></p>
                       <div style="display: none" id="link1">
                         videorecorderbackend.herokuapp.com/<%=video.id%>/watch
                       </div>
@@ -124,6 +128,8 @@
                         share link
                       </button>
                       <%}else{%>
+                      <p><%=video.id%></p>
+                        
                       <div style="display: none" id="link2">
                         videorecorderbackend.herokuapp.com/<%=video.id%>/publicLink/sharable
                       </div>
@@ -172,19 +178,23 @@
     function copyToClipboard(elementId) {
       // Create a "hidden" input
       var aux = document.createElement("input");
-
+      console.log(document.getElementById(elementId).innerHTML)
       // Assign it the value of the specified element
       aux.setAttribute("value", document.getElementById(elementId).innerHTML);
-
+      console.log(aux)
       // Append it to the body
       document.body.appendChild(aux);
+
 
       // Highlight its content
       aux.select();
 
+      document.execCommand('SelectAll');
+
       // Copy the highlighted text
       document.execCommand("copy");
      
+   
 
       // Remove it from the body
       document.body.removeChild(aux);
