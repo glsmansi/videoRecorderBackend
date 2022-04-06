@@ -120,20 +120,20 @@
                     <div class="shareLink">
                       <i class="fas fa-link"></i>
                       <%if(video.status=="private"){%>
-                      <p><%=video.id%></p>
-                      <div style="display: none" id="link1">
+                      
+                      <div style="display: none" id="link1<%=video.id%>">
                         videorecorderbackend.herokuapp.com/<%=video.id%>/watch
                       </div>
-                      <button onclick="copyToClipboard('link1')">
+                      <button onclick="copyToClipboard('link1<%=video.id%>')">
                         share link
                       </button>
                       <%}else{%>
                       <p><%=video.id%></p>
                         
-                      <div style="display: none" id="link2">
+                      <div style="display: none" id="link2<%=video.id%>">
                         videorecorderbackend.herokuapp.com/<%=video.id%>/publicLink/sharable
                       </div>
-                      <button onclick="copyToClipboard('link2')">
+                      <button onclick="copyToClipboard('link2<%=video.id%>')">
                         share link
                       </button>
                       <%}%>
@@ -177,6 +177,7 @@
   <script>
     function copyToClipboard(elementId) {
       // Create a "hidden" input
+      console.log(elementId)
       var aux = document.createElement("input");
       console.log(document.getElementById(elementId).innerHTML)
       // Assign it the value of the specified element
