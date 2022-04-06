@@ -131,7 +131,13 @@
               <source src="<%=video.url%>" type="video/mp4" />
             </video>
             <p style="margin-top: 5rem">Video Name: <%=video.fileName%></p>
-            <p style="margin-top: 5rem">Team Members: <%=video.teamMembers%></p>
+            <p style="margin-top: 5rem">Team Members:</p>
+            <%if(video.teamMembers){var members=video.teamMembers.split(',')%>
+            <%for(i of members){%>
+            <p><%=i%></p>
+            <%}}else{%>
+            <p><%=video.teamMembers%></p>
+            <%}%>
             <p style="margin-top: 5rem">
               Meeting Notes: <%=video.meetingNotes%>
             </p>

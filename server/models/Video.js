@@ -22,7 +22,7 @@ module.exports = sequelize.define(
       type: Sequelize.STRING,
     },
     teamMembers: {
-      type: Sequelize.STRING,
+      type: Sequelize.STRING(1000),
     },
     meetingNotes: {
       type: Sequelize.STRING,
