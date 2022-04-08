@@ -384,35 +384,35 @@ module.exports.changeFileName = async (req, res) => {
   res.redirect(`/${id}/watch`);
 };
 
-// module.exports.copyLinkToClipBoard = async (req, res) => {
-//   const { id } = req.params;
-//   const user = req.user;
-//   const video = await Video.findOne({ where: { id: id } });
-//   if (video.status == "private") {
-//     ncp.copy(`videorecorderbackend.herokuapp.com/${id}/watch`, () => {
-//       alert("Link Copied to clipboard!");
-//       console.log("link copied");
-//     });
-//     // ncp.copy(`localhost:5000/${id}/watch`);
-
-//     res.redirect("/home");
-//   } else {
-//     ncp.copy(
-//       `videorecorderbackend.herokuapp.com/${id}/publicLink/sharable`,
-//       () => {
-//         alert("Link Copied to clipboard!");
-//         console.log("link copied");
-//       }
-//     );
-//     // ncp.copy(`localhost:5000/${id}/publicLink/sharable`);
-//     res.redirect("/home");
-//   }
-// };
+module.exports.changeUserName = async (req, res) => {
+  const { username } = req.body;
+  const user = await User.findOne({ where: { id: req.user.user_id } });
+  user.username = username;
+  await user.save();
+  res.redirect("/settings");
+};
 
 module.exports.publicSharableLink = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findOne({ where: { id: id } });
   res.render("user/publicVideoPage", { video });
+};
+
+module.exports.changePassword = async (req, res) => {
+  const { password, newPassword, confirmPassword } = req.body;
+  const user = await User.findOne({ where: { id: req.user.user_id } });
+  const match = await bcrypt.compare(password, user.password);
+  if (match) {
+    if (newPassword == confirmPassword) {
+      newEncryptedPassword = await bcrypt.hash(newPassword, 10);
+      user.password = newEncryptedPassword;
+      res.redirect("/settings");
+    } else {
+      console.log("no match");
+    }
+  } else {
+    console.log("Wrong password");
+  }
 };
 
 module.exports.logout = (req, res) => {

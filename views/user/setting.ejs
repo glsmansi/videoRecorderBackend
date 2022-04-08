@@ -73,14 +73,14 @@
             <div class="circleBox">
               <i class="fas fa-camera"></i>
             </div>
-            <form>
+            <form action="/changeUsername" method="POST">
               <label for="firstName">Username: </label>
-              <input type="text" name="firstName" value="<%=user.username %>" />
+              <input type="text" id="firstName" name="username" value="<%=user.username %>" />
               <!-- <label for="lastName">Last name: </label>
               <input type="text" name="lastName" value="Joshi" /> -->
               <div class="buttonsForName">
                 <button type="submit" class="saveBtn">Save</button>
-                <button type="submit" class="cancelBtn">Cancel</button>
+                <!-- <button type="submit" class="cancelBtn">Cancel</button> -->
               </div>
             </form>
           </div>
@@ -93,17 +93,17 @@
             <form>
               <div class="emailForm">
                 <label for="email">Email: </label>
-                <input type="text" name="email" value="<%=user.email%>" />
+                <input type="text" name="email" value="<%=user.email%>" readonly style="color:gray" />
               </div>
-              <div class="connctedAccount">
+              <!-- <div class="connctedAccount">
                 <label for="connectingAccount">Connected accounts</label>
                 <a href="#">
                   <button class="connectWithGoogle">
                     <img src="img/googleIcon.png" alt="Google icon by Icons8" />
-                    Connected with Google
+                    Connect with Google
                   </button>
-                </a>
-                <a href="#">
+                </a> -->
+                <!-- <a href="#">
                   <button class="connectWithSlack">
                     <img
                       src="img/slackIcon.png"
@@ -111,8 +111,8 @@
                     />
                     Connect with Slack
                   </button>
-                </a>
-              </div>
+                </a> -->
+              <!-- </div> -->
               <!-- <div class="saveTheVideo">
                 <label for="savingInfo">Saving Info</label>
                 <a href="#">
@@ -131,22 +131,31 @@
                   </button>
                 </a>
               </div> -->
-              <img
-                style="width: 3.5rem; height: 3rem; margin: 7px"
-                src="img/aws.png"
-                alt="Slack New icon by Icons8"
-              />
-              <label class="switch">
-                <input type="checkbox" name="" />
-                <span class="slider round"></span>
-              </label>
+              <div class="connctedAccount" >
+                <label for="connectingAccount">Store In:</label>
 
-              <img
-                src="img/googledrive.png"
-                style="width: 3.5rem; height: 3rem; margin: 7px"
-                alt="Google icon by Icons8"
-              />
-            </form>
+                <div>
+                  <img
+                    style="width: 3.5rem; height: 3rem; margin: 5px"
+                    src="img/aws.png"
+                    alt="AWS New icon by Icons8"
+                  />
+                  <label class="switch">
+                    <input type="checkbox" name=""/>
+                    <span class="slider round"></span>
+                  </label>
+    
+                  <img
+                    src="img/googledrive.png"
+                    style="width: 3.5rem; height: 3rem; margin: 7px"
+                    alt="Google icon by Icons8"
+                  />
+                </div>
+                
+
+              </form>
+              </div>
+              
           </div>
           <div class="password">
             <h2>Password</h2>
@@ -155,7 +164,7 @@
               that account’s login information and we cannot change or reset
               those passwords here.
             </h3>
-            <form>
+            <form action="/changePassword" method="POST">
               <div class="currentPassword">
                 <label for="currentPassword">Current Password</label>
                 <input type="pasword" name="password" placeholder="password" />
@@ -165,7 +174,7 @@
                   <label for="newPassword">New Password</label>
                   <input
                     type="pasword"
-                    name="password"
+                    name="newPassword"
                     placeholder="password"
                   />
                 </div>
@@ -173,7 +182,7 @@
                   <label for="confirmPassword">Confirm Password</label>
                   <input
                     type="pasword"
-                    name="password"
+                    name="confirmPassword"
                     placeholder="password"
                   />
                 </div>
@@ -186,18 +195,18 @@
                 <i class="fas fa-lock"></i>
                 Reset Password
               </button>
-              <div class="savingCancelling">
+              <!-- <div class="savingCancelling">
                 <button disabled="disabled">Save</button>
                 <button disabled="disabled">Cancel</button>
-              </div>
+              </div> -->
             </form>
           </div>
-          <div class="deleteAccount">
+          <!-- <div class="deleteAccount">
             <h2>Delete Account</h2>
             <form>
               <button type="submit" class="deleteBtn">Delete my account</button>
             </form>
-          </div>
+          </div> -->
         </div>
       </section>
     </div>

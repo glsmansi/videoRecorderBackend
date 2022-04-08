@@ -8,6 +8,7 @@ dotenv.config();
 const cookieParser = require("cookie-parser");
 const user = require("./server/controllers/user");
 const methodOverride = require("method-override");
+const ejsMate = require("ejs-mate");
 
 const userRouter = require("./server/routes/user");
 

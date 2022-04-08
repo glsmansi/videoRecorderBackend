@@ -72,6 +72,9 @@ router.route("/me").get(auth, user.sharedWithMe);
 router.route("/team").get(auth, user.sharedWithOthers);
 router.route("/downloadVideo").get(auth, user.downloadVideo);
 
+router.route("/changeUsername").post(auth, user.changeUserName);
+router.route("/changePassword").post(auth, user.changePassword);
+
 router.route("/logout").get(user.logout);
 
 module.exports = router;
