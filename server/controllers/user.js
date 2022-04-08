@@ -9,6 +9,7 @@ const AWS = require("aws-sdk");
 const sequelize = require("sequelize");
 var ncp = require("copy-paste");
 const nodemailer = require("nodemailer");
+const fs = require("fs");
 
 const alert = require("alert");
 
@@ -96,7 +97,7 @@ module.exports.getRegister = async (req, res) => {
   // if (req.cookies["cookietokenkey"]) {
   //   res.redirect("/home");
   // } else {
-  res.render("user/register");
+  res.render("user/register", { loginErr: false });
   // }
 };
 
@@ -106,7 +107,8 @@ module.exports.postRegister = async (req, res, next) => {
     const oldUser = await User.findOne({ where: { email: email } });
     console.log(oldUser);
     if (oldUser) {
-      return next(new ExpressError("User Already Exist", 409));
+      //return next(new ExpressError("User Already Exist", 409));
+      res.render("user/register", { loginErr: true });
     }
 
     const encryptedPassword = await bcrypt.hash(password, 10);
@@ -170,7 +172,7 @@ module.exports.getLogin = async (req, res) => {
   // if (req.cookies["cookietokenkey"]) {
   //   res.redirect("/home");
   // } else {
-  res.render("user/login");
+  res.render("user/login", { loginErr: false, userErr: false });
   // }
 };
 
@@ -200,10 +202,13 @@ module.exports.postLogin = async (req, res, next) => {
         });
         res.redirect("/home");
       } else {
-        return next(new ExpressError("Invalid Password"));
+        //return next(new ExpressError("Invalid Password"));
+        var loginErr = true;
+        res.render("user/login", { loginErr, userErr: false });
       }
     } else {
-      return next(new ExpressError("User doesnot exist "));
+      // return next(new ExpressError("User doesnot exist "));
+      res.render("user/login", { loginErr: false, userErr: true });
     }
   } catch (e) {
     console.log(e);
@@ -248,8 +253,15 @@ module.exports.googleLogin = async (req, res) => {
 };
 
 module.exports.settings = async (req, res) => {
+  var photo = false;
   const user = await User.findOne({ where: { email: req.user.email } });
-  res.render("user/setting", { user });
+  var path = `public/profilepic/${user.username}.jpg`;
+  if (fs.existsSync(path)) {
+    // path exists
+    photo = true;
+    console.log("exists:", path);
+  }
+  res.render("user/setting", { user, passErr: false, photo });
 };
 
 module.exports.loginSuccess = async (req, res) => {
@@ -413,8 +425,25 @@ module.exports.changePassword = async (req, res) => {
       console.log("no match");
     }
   } else {
+    res.render("user/setting", { user, passErr: true });
     console.log("Wrong password");
   }
+};
+module.exports.uploadPhoto = (req, res) => {
+  console.log("photoUpload");
+  console.log(req.files);
+  if (req.files) {
+    console.log(req.files.mypic);
+    var image = req.files.mypic;
+    console.log(req.body.username);
+    var filepath = `C:/Users/TOSHIBA/Desktop/videoRecorderBackend-main/public/profilepic/${req.body.username}.jpg`;
+    console.log(filepath);
+    image.mv(filepath, (err) => {
+      console.log(err);
+    });
+    res.redirect("/settings");
+  }
+  res.redirect("/settings");
 };
 
 module.exports.logout = (req, res) => {

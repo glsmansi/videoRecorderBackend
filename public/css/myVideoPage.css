@@ -347,3 +347,6 @@ span {
   font-size: 22px;
   display: block;
 }
+.text-center {
+  text-align: right;
+}

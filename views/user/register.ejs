@@ -48,6 +48,11 @@
         </a>
         <div class="option">or</div>
         <div class="form">
+          <% if(loginErr){ %>
+          <div class="alert alert-danger text-center" role="alert">
+            User already exist
+          </div>
+          <% }%>
           <label for="email">Username: </label>
           <input
             type="text"

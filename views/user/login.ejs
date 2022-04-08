@@ -48,6 +48,15 @@
         </a>
         <div class="option">or</div>
         <div class="form">
+          <% if(loginErr){ %>
+          <div class="alert alert-danger text-center" role="alert">
+            Invalid password
+          </div>
+          <% }%> <% if(userErr){ %>
+          <div class="alert alert-danger text-center" role="alert">
+            User does not exist
+          </div>
+          <% }%>
           <label for="email">Email address: </label>
           <input
             type="text"
