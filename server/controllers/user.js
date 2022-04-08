@@ -405,7 +405,9 @@ module.exports.changePassword = async (req, res) => {
   if (match) {
     if (newPassword == confirmPassword) {
       newEncryptedPassword = await bcrypt.hash(newPassword, 10);
+      console.log(newEncryptedPassword);
       user.password = newEncryptedPassword;
+      await user.save();
       res.redirect("/settings");
     } else {
       console.log("no match");
