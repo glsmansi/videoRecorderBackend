@@ -159,7 +159,7 @@ section {
   grid-row-gap: 46px;
 }
 .singleVideo {
-  max-width: 470px;
+  max-width: 380px;
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -169,10 +169,10 @@ section {
 .share {
   position: absolute;
   top: 0px;
-  left: 379px;
+  left: 340px;
   background-color: #e6e6ea;
-  width: 38px;
-  height: 37px;
+  width: 30px;
+  height: 35px;
   text-align: center;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
@@ -284,7 +284,7 @@ span {
   left: 0px;
   background-color: #e2e2e6;
   opacity: 0.86;
-  width: 20rem;
+  width: 15rem;
   padding: 4px;
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
@@ -319,11 +319,13 @@ span {
 .lockUnlock {
   position: absolute;
   top: -3px;
-  left: 423px;
+  left: 300px;
   background-color: #e5e5e9;
   opacity: 0.8;
-  height: 31px;
-  padding: 4px;
+  /* height: 31px; */
+  padding: 2px;
+  width: 30px;
+  height: 35px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 9px;
   font-size: 25px;

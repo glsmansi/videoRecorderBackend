@@ -7,11 +7,7 @@ const jwt = require("jsonwebtoken");
 // const uuid = require("uuid/v4");
 const AWS = require("aws-sdk");
 const sequelize = require("sequelize");
-var ncp = require("copy-paste");
 const nodemailer = require("nodemailer");
-const fs = require("fs");
-
-const alert = require("alert");
 
 // Video.belongsTo(User, {
 //   as: "videos",
@@ -28,14 +24,14 @@ const CLIENT_ID =
   "198561696099-flasriqkqqlkn2db9ttq6ellso1g6kdn.apps.googleusercontent.com";
 const client = new OAuth2Client(CLIENT_ID);
 
-var smtpTransport = nodemailer.createTransport({
-  service: "Gmail",
-  auth: {
-    user: process.env.GMAIL_ID, // generated ethereal user
-    pass: process.env.GMAIL_PASSWORD,
-  },
-});
-var rand, mailOptions, host, link;
+// var smtpTransport = nodemailer.createTransport({
+//   service: "Gmail",
+//   auth: {
+//     user: process.env.GMAIL_ID, // generated ethereal user
+//     pass: process.env.GMAIL_PASSWORD,
+//   },
+// });
+// var rand, mailOptions, host, link;
 
 module.exports.home = async (req, res) => {
   if (req.cookies["cookietokenkey"]) {
@@ -97,7 +93,7 @@ module.exports.getRegister = async (req, res) => {
   // if (req.cookies["cookietokenkey"]) {
   //   res.redirect("/home");
   // } else {
-  res.render("user/register", { loginErr: false });
+  res.render("user/register");
   // }
 };
 
@@ -107,8 +103,7 @@ module.exports.postRegister = async (req, res, next) => {
     const oldUser = await User.findOne({ where: { email: email } });
     console.log(oldUser);
     if (oldUser) {
-      //return next(new ExpressError("User Already Exist", 409));
-      res.render("user/register", { loginErr: true });
+      return next(new ExpressError("User Already Exist", 409));
     }
 
     const encryptedPassword = await bcrypt.hash(password, 10);
@@ -172,7 +167,7 @@ module.exports.getLogin = async (req, res) => {
   // if (req.cookies["cookietokenkey"]) {
   //   res.redirect("/home");
   // } else {
-  res.render("user/login", { loginErr: false, userErr: false });
+  res.render("user/login");
   // }
 };
 
@@ -202,13 +197,10 @@ module.exports.postLogin = async (req, res, next) => {
         });
         res.redirect("/home");
       } else {
-        //return next(new ExpressError("Invalid Password"));
-        var loginErr = true;
-        res.render("user/login", { loginErr, userErr: false });
+        return next(new ExpressError("Invalid Password"));
       }
     } else {
-      // return next(new ExpressError("User doesnot exist "));
-      res.render("user/login", { loginErr: false, userErr: true });
+      return next(new ExpressError("User doesnot exist "));
     }
   } catch (e) {
     console.log(e);
@@ -253,15 +245,8 @@ module.exports.googleLogin = async (req, res) => {
 };
 
 module.exports.settings = async (req, res) => {
-  var photo = false;
   const user = await User.findOne({ where: { email: req.user.email } });
-  var path = `public/profilepic/${user.username}.jpg`;
-  if (fs.existsSync(path)) {
-    // path exists
-    photo = true;
-    console.log("exists:", path);
-  }
-  res.render("user/setting", { user, passErr: false, photo });
+  res.render("user/setting", { user });
 };
 
 module.exports.loginSuccess = async (req, res) => {
@@ -425,26 +410,13 @@ module.exports.changePassword = async (req, res) => {
       console.log("no match");
     }
   } else {
-    res.render("user/setting", { user, passErr: true });
     console.log("Wrong password");
   }
 };
-module.exports.uploadPhoto = (req, res) => {
-  console.log("photoUpload");
-  console.log(req.files);
-  if (req.files) {
-    console.log(req.files.mypic);
-    var image = req.files.mypic;
-    console.log(req.body.username);
-    var filepath = `C:/Users/TOSHIBA/Desktop/videoRecorderBackend-main/public/profilepic/${req.body.username}.jpg`;
-    console.log(filepath);
-    image.mv(filepath, (err) => {
-      console.log(err);
-    });
-    res.redirect("/settings");
-  }
-  res.redirect("/settings");
-};
+
+// const upload = multer({ dest: "uploads/" });
+
+module.exports.uploadProfilePic = async (req, res) => {};
 
 module.exports.logout = (req, res) => {
   res.clearCookie("cookietokenkey");

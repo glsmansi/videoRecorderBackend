@@ -74,7 +74,7 @@ router.route("/downloadVideo").get(auth, user.downloadVideo);
 
 router.route("/changeUsername").post(auth, user.changeUserName);
 router.route("/changePassword").post(auth, user.changePassword);
-router.route("/uploadPhoto").post(auth, user.uploadPhoto);
+// // router.route("/changePassword").post(auth, user.changePassword);
 
 router.route("/logout").get(user.logout);
 

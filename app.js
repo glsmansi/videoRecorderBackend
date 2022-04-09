@@ -8,7 +8,7 @@ dotenv.config();
 const cookieParser = require("cookie-parser");
 const user = require("./server/controllers/user");
 const methodOverride = require("method-override");
-const fileUpload = require("express-fileupload");
+// const fileUpload = require("express-fileupload");
 //const expressLayouts=require('express-ejs-layouts')
 
 const userRouter = require("./server/routes/user");
@@ -22,7 +22,7 @@ sequelize
   });
 
 const app = express();
-app.use(fileUpload());
+// app.use(fileUpload());
 app.set("view engine", "ejs");
 //app.use(expressLayouts);
 app.set("views", path.join(__dirname, "views"));
@@ -56,3 +56,8 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
   console.log(`Listening to port ${port}`);
 });
+
+// password : G5YVxqg3l8C9X5AE
+// username : atg-meet
+// host : scrapdb2.crbyejbc1y6i.ap-south-1.rds.amazonaws.com
+// database : atg-meet
