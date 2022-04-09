@@ -268,18 +268,18 @@ module.exports.loginSuccess = async (req, res) => {
 module.exports.sharedWithMe = async (req, res) => {
   const userEmail = req.user.email;
   const user = await User.findOne({ where: { id: req.user.user_id } });
-  const uservideos = await UserVideo.findAll({
+  const userVideos = await UserVideo.findAll({
     where: { userEmail: userEmail },
   });
-  // const uservideos = await Video.findAll({
-  //   where: {
-  //     userId: {
-  //       [sequelize.Op.not]: userVideos.id,
-  //     },
-  //   },
-  // });
-  // res.render("user/me", { uservideos });
+  const uservideos = await Video.findAll({
+    where: {
+      userId: {
+        [sequelize.Op.not]: userVideos.id,
+      },
+    },
+  });
   res.render("user/me", { uservideos });
+  // res.render("user/me", { uservideos });
 };
 
 module.exports.sharedWithOthers = async (req, res) => {
@@ -287,7 +287,7 @@ module.exports.sharedWithOthers = async (req, res) => {
   const user = await User.findOne({ where: { id: req.user.user_id } });
   // console.log(user);
   const userVideos = await UserVideo.findAll({
-    where: { userId: user.id },
+    where: { userEmail: user.email },
   });
   // console.log(userVideos);
   const videos = await Video.findAll({
