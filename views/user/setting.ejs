@@ -70,12 +70,15 @@
           </div>
           <div class="nameAndPhoto">
             <h2>Name and photos</h2>
-        
-
+            <% if(user.profilePic){ %>
+              <div class="circleBox" style="overflow: hidden; padding: 0; position: relative; z-index: 2;">
+              <img src="profilepic/chris.jpg" style=" height: 130px; width: 150px; z-index: 1; border-radius: 5px;" alt="hello">
+            </div>
+            <% } else{ %>  
               <div class="circleBox">
                 <i class="fas fa-camera"></i>
               </div>
-       
+           <% } %>
             <form action="/uploadPhoto" method="post" enctype="multipart/form-data">
              <input type="file" id="myFile" name="mypic">
              <input type="text" id="firstName" name="username" value="<%=user.username %>" hidden/>
@@ -174,11 +177,22 @@
             </h3>
             <form action="/changePassword" method="POST">
               <div class="" style="width: 800px; height: 50px; color: red;">
-                
+                <% if(passErr){ %>
+                  <div class="alert alert-danger text-center" role="alert">
+                    Current password doesn't match
+                  </div>
+               <% }%>
+              </div>
+              <div class="" style="width: 800px; height: 50px; color: red;">
+              <% if(noMatch){ %>
+                <div class="alert alert-danger text-center" role="alert">
+                  New password and Confirm Password must match
+                </div>
+             <% }%>
               </div>
               <div class="currentPassword">
                 <label for="currentPassword">Current Password</label>
-                <input type="pasword" name="password" placeholder="password" />
+                <input type="password" name="password" placeholder="password" />
               </div>
               <div class="confirmationPassword">
                 <div class="newPassword">
@@ -192,7 +206,7 @@
                 <div class="confirmPassword">
                   <label for="confirmPassword">Confirm Password</label>
                   <input
-                    type="pasword"
+                    type="password"
                     name="confirmPassword"
                     placeholder="password"
                   />
