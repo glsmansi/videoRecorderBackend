@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   
     <script
       src="https://kit.fontawesome.com/afb23c7fce.js"
       crossorigin="anonymous"
@@ -187,7 +188,14 @@
               those passwords here.
             </h3>
             <form action="/changePassword" method="POST">
+          
+              
               <div class="" style="width: 800px; height: 50px; color: red;">
+                <% if(success){ %>
+                  <div class="alert alert-danger text-center" style="color:rgb(7, 218, 0)" role="alert">
+                    Password Changed
+                  </div>
+               <% }%>
                 <% if(passErr){ %>
                   <div class="alert alert-danger text-center" role="alert">
                     Current password doesn't match

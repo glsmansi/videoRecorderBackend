@@ -252,7 +252,12 @@ module.exports.settings = async (req, res) => {
   // photo = true;
   // console.log("exists:", path);
   // }
-  res.render("user/setting", { user, passErr: false, noMatch: false });
+  res.render("user/setting", {
+    user,
+    passErr: false,
+    noMatch: false,
+    success: false,
+  });
 };
 
 module.exports.loginSuccess = async (req, res) => {
@@ -411,13 +416,28 @@ module.exports.changePassword = async (req, res) => {
       console.log(newEncryptedPassword);
       user.password = newEncryptedPassword;
       await user.save();
-      res.redirect("/settings");
+      res.render("user/setting", {
+        user,
+        noMatch: false,
+        passErr: false,
+        success: true,
+      });
     } else {
-      res.render("user/setting", { user, noMatch: true, passErr: false });
+      res.render("user/setting", {
+        user,
+        noMatch: true,
+        passErr: false,
+        success: false,
+      });
       console.log("no MATCH");
     }
   } else {
-    res.render("user/setting", { user, passErr: true, noMatch: false });
+    res.render("user/setting", {
+      user,
+      passErr: true,
+      noMatch: false,
+      success: false,
+    });
     console.log("Wrong password");
   }
 };
