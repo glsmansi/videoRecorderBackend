@@ -333,6 +333,7 @@ module.exports.userDetails = async (req, res) => {
 module.exports.publicOrPrivate = async (req, res) => {
   const { status } = req.body;
   const { id } = req.params;
+  console.log(status);
   const video = await Video.findOne({ where: { id: id } });
   console.log(video);
   if (status != video.status) {
