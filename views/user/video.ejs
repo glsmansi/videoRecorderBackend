@@ -185,7 +185,7 @@
               </div>
             </form>
             <form action="/<%=video.id%>/watch/teamMembers/add" method="POST">
-              <%if(video.userEmail==user.email){%>
+              <%if(video.userId==user.id){%>
               <label style="margin-top: 3rem" for="email"
                 >Team Members Email:
               </label>
