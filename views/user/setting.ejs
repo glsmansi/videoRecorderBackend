@@ -83,14 +83,18 @@
               <input  type="file" id="myFile" name="mypic">
               <input type="text" id="firstName" name="username" value="<%=user.username %>" hidden/>
               <div>
-                <button class="saveBtn" style="margin-left:10px ; margin-bottom: 20px; width: 130px;height: 30px; border-radius: 5px; position:relative" type="submit">Upload</button>
-                
+                <!-- <button class="saveBtn" style="margin-left:10px ; margin-bottom: 20px; width: 130px;height: 30px; border-radius: 5px; position:relative" type="submit">Upload</button> -->
+                <div style="display: flex;">
+                  <button class="saveBtn" style="margin-left:10px ; margin-bottom: 20px; width: 130px;height: 30px; border-radius: 5px; position:relative" type="submit">Upload</button>
+                  &nbsp;
+                  <a class="btn" href="/removeProfilePic?_method=DELETE" style="font-size: small; text-decoration: none;"> Remove</a>
+                </div>
               </div>
                
             </form>
-            <form action="/removeProfilePic?_method=DELETE" method="POST">
-              <button class="saveBtn" style="margin-left:10px ; margin-bottom: 20px; width: 130px;height: 30px; border-radius: 5px; position: absolute; top:59.5%;left:30%" type="submit">Remove</button>
-            </form>
+            <!-- <form action="/removeProfilePic?_method=DELETE" method="POST">
+              <button class="cancelBtn" style="margin-left:10px ; margin-bottom: 20px; width: 130px;height: 30px; border-radius: 5px; " type="submit">Remove</button>
+            </form> -->
             <form action="/changeUsername" method="POST">
               <label for="firstName">Username: </label>
               <input type="text" id="firstName" name="username" value="<%=user.username %>" />

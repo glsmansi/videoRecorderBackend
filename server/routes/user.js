@@ -86,7 +86,7 @@ router
   .route("/uploadPhoto")
   .post(auth, profilePicUpload.single("mypic"), user.uploadPhoto);
 
-router.route("/removeProfilePic").delete(auth, user.removeProfilePic);
+router.route("/removeProfilePic").get(auth, user.removeProfilePic);
 
 router.route("/logout").get(user.logout);
 

@@ -188,6 +188,9 @@ section {
   background-color: #4b42ad;
   color: #f8f6f0;
   border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
 }
 .cancelBtn {
   color: #212121;
@@ -454,4 +457,17 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.btn {
+  display: block;
+  width: 130px;
+  height: 30px;
+  background: #4b42ad;
+  padding-top: 1px;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  line-height: 25px;
 }

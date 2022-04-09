@@ -216,7 +216,7 @@
 
             <h2 style="margin-top: 3rem">Public or Private</h2>
             <form action="/<%=video.id%>/watch/publicOrPrivate" method="POST">
-              <div class="status">
+              <div class="status" style="display: flex">
                 <div style="width: 100px">
                   <label style="font-size: 1rem" for="publicOrPrivate"
                     >Public :</label
@@ -225,7 +225,10 @@
                     >Private:</label
                   >
                 </div>
-                <div class="align">
+                <div
+                  class="align"
+                  style="display: flex; flex-direction: column"
+                >
                   <input
                     type="radio"
                     name="status"
