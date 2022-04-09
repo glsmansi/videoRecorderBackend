@@ -9,11 +9,8 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
-      userId: {
-        type: Sequelize.INTEGER,
-        references: { model: "Users", key: "id" },
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL",
+      userEmail: {
+        type: Sequelize.STRING(100),
       },
       videoId: {
         type: Sequelize.INTEGER,
