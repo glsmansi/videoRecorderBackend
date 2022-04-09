@@ -73,7 +73,7 @@
     <navbar>
       <div class="nav">
         <a href="/">
-          <img src="../../img/loom.png" class="loomLogo" />
+          <img src="img/loom.png" class="loomLogo" />
         </a>
         <div class="iconNavi">
           <i class="fas fa-search"></i>
@@ -118,30 +118,55 @@
         <div class="setting">
           <div class="heading">
             <h2><%=user.username%></h2>
-            <h1>Video Details</h1>
+            <h1 style="text-align: center">Video Details</h1>
           </div>
           <!-- <div class="navigationLink">
             <a href="#" class="selectedLink">My Account</a>
             <a href="#" class="notSelected">Notifications</a>
             <a href="#" class="notSelected">Integrations</a>
           </div> -->
-          <div class="videoContainer">
+          <div
+            class="videoContainer"
+            style="
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            "
+          >
             <!-- <video src= type="video/mp4"></video> -->
-            <video width="1020" height="640" controls>
-              <source src="<%=video.url%>" type="video/mp4" />
-            </video>
-            <p style="margin-top: 5rem">Video Name: <%=video.fileName%></p>
-            <p style="margin-top: 5rem">Team Members:</p>
+            <div style="text-align: center">
+              <video width="1020" height="640" controls>
+                <source src="<%=video.url%>" type="video/mp4" />
+              </video>
+            </div>
+
+            <p style="margin-top: 5rem">
+              <span style="font-weight: 900; color: #525aa4">Video Name:</span>
+              <%=video.fileName%>
+            </p>
+            <p style="margin-top: 5rem">
+              <span style="font-weight: 900; color: #525aa4"
+                >Team Members:</span
+              >
+            </p>
             <%if(video.teamMembers){var members=video.teamMembers.split(',')%>
             <%for(i of members){%>
-            <p><%=i%></p>
+            <ul style="margin: 1rem">
+              <li><%=i%></li>
+            </ul>
             <%}}else{%>
             <p><%=video.teamMembers%></p>
             <%}%>
             <p style="margin-top: 5rem">
-              Meeting Notes: <%=video.meetingNotes%>
+              <span style="font-weight: 900; color: #525aa4"
+                >Meeting Notes:</span
+              >
+              <%=video.meetingNotes%>
             </p>
-            <p style="margin-top: 5rem">Status: <%=video.status%></p>
+            <p style="margin-top: 5rem">
+              <span style="font-weight: 900; color: #525aa4">Status:</span>
+              <%=video.status%>
+            </p>
 
             <!-- <button>Add Video</button> -->
           </div>
@@ -149,7 +174,12 @@
           <div class="nameAndPhoto">
             <form action="/<%=video.id%>/watch/changeFileName" method="POST">
               <label for="name">Change File Name: </label>
-              <input type="text" name="name" id="name" />
+              <input
+                type="text"
+                name="name"
+                id="name"
+                style="margin-top: 2rem"
+              />
               <div class="buttonsForName">
                 <button type="submit" class="saveBtn">Change</button>
               </div>
@@ -159,7 +189,13 @@
               <label style="margin-top: 3rem" for="email"
                 >Team Members Email:
               </label>
-              <input type="email" name="teamMembers" id="email" value="" />
+              <input
+                style="margin-top: 2rem"
+                type="email"
+                name="teamMembers"
+                id="email"
+                value=""
+              />
               <div class="buttonsForName">
                 <button type="submit" class="saveBtn">Add</button>
               </div>
@@ -167,7 +203,12 @@
             <%}%>
             <form action="/<%=video.id%>/watch/meetingNotes" method="POST">
               <label style="margin-top: 3rem" for="notes">Meeting Notes:</label>
-              <textarea type="text" id="notes" name="meetingNotes"></textarea>
+              <textarea
+                style="width: 500px; height: 200px; margin: 2rem 0"
+                type="text"
+                id="notes"
+                name="meetingNotes"
+              ></textarea>
               <div class="buttonsForName">
                 <button class="saveBtn">Add notes</button>
               </div>
@@ -175,26 +216,31 @@
 
             <h2 style="margin-top: 3rem">Public or Private</h2>
             <form action="/<%=video.id%>/watch/publicOrPrivate" method="POST">
-              <input
-                type="radio"
-                name="status"
-                id="publicOrPrivate"
-                value="public"
-              />
-              <label style="font-size: 1rem" for="publicOrPrivate"
-                >Public :</label
-              ><br />
-
-              <input
-                type="radio"
-                name="status"
-                id="publicOrPrivate"
-                required
-                value="private"
-              />
-              <label style="font-size: 1rem" for="publicOrPrivate"
-                >Private:</label
-              >
+              <div class="status">
+                <div style="width: 100px">
+                  <label style="font-size: 1rem" for="publicOrPrivate"
+                    >Public :</label
+                  ><br />
+                  <label style="font-size: 1rem" for="publicOrPrivate"
+                    >Private:</label
+                  >
+                </div>
+                <div class="align">
+                  <input
+                    type="radio"
+                    name="status"
+                    id="publicOrPrivate"
+                    required
+                    value="private"
+                  />
+                  <input
+                    type="radio"
+                    name="status"
+                    id="publicOrPrivate"
+                    value="public"
+                  />
+                </div>
+              </div>
               <div class="buttonsForName">
                 <button class="saveBtn">Submit</button>
               </div>

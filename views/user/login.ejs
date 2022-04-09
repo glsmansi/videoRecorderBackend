@@ -14,7 +14,12 @@
       name="google-signin-client_id"
       content="198561696099-flasriqkqqlkn2db9ttq6ellso1g6kdn.apps.googleusercontent.com"
     />
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- <script src="https://apis.google.com/js/platform.js" async defer></script> -->
+    <script
+      src="https://apis.google.com/js/platform.js?onload=renderButton"
+      async
+      defer
+    ></script>
 
     <title>Login</title>
   </head>
@@ -33,19 +38,34 @@
       <div class="heading">
         <h1>Sign in to Loom</h1>
       </div>
+      <div style="position: absolute; left: 41%; top: 25%">
+        <div
+          style="
+            height: 48px;
+            width: 290px;
+            border-radius: 2px;
+            margin-bottom: 12px;
+          "
+          class="g-signin2"
+          id="googleButton"
+          data-onsuccess="onSignIn"
+        ></div>
+        <!-- <button class="signInGoogle">
+          <img src="img/googleIcon.png" alt="Google icon by Icons8" />
+          Sign in with Google
+        </button> -->
+      </div>
+
+      <!-- <div id="my-signin2" class=""></div> -->
+
       <form method="post" action="/login">
-        <div class="g-signin2" data-onsuccess="onSignIn">
-          <button class="signInGoogle">
-            <img src="img/googleIcon.png" alt="Google icon by Icons8" />
-            Sign in with Google
-          </button>
-        </div>
-        <a href="#">
+        <!-- <a href="#">
           <button class="signInSlack">
             <img src="img/slackIcon.png" alt="Slack New icon by Icons8" />
             Sign in with Slack
           </button>
-        </a>
+        </a> -->
+
         <div class="option">or</div>
         <div class="form">
           <% if(loginErr){ %>
@@ -107,7 +127,54 @@
         };
         xhr.send(JSON.stringify({ token: id_token }));
       }
+      function renderButton() {
+        gapi.signin2.render("my-signin2", {
+          scope: "profile email",
+          // margin: 100000,
+          width: 297,
+          height: 55,
+          // textAlign: "center",
+          // borderRadius: "8px",
+          // backgroundColor: "transparent",
+          // border: "2 solid hsla(240, 8%, 46%, 0.2)",
+          // color: "#212121",
+          // fontWeight: 600,
+          // fontSize: 18,
+          longtitle: true,
+          theme: "dark",
+          onsuccess: onSuccess,
+          onfailure: onFailure,
+        });
+      }
     </script>
+    <!-- <script>
+      function onSuccess(googleUser) {
+        console.log("Logged in as: " + googleUser.getBasicProfile().getName());
+      }
+      function onFailure(error) {
+        console.log(error);
+      }
+      function renderButton() {
+        gapi.signin2.render("my-signin2", {
+          scope: "profile email",
+          // margin: 100000,
+          width: 297,
+          height: 55,
+          // textAlign: "center",
+          // borderRadius: "8px",
+          // backgroundColor: "transparent",
+          // border: "2 solid hsla(240, 8%, 46%, 0.2)",
+          // color: "#212121",
+          // fontWeight: 600,
+          // fontSize: 18,
+          longtitle: true,
+          // theme: "dark",
+          onsuccess: onSuccess,
+          onfailure: onFailure,
+        });
+      }
+    </script> -->
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

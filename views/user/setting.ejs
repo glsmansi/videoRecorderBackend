@@ -19,8 +19,8 @@
           <img src="img/loom.png" class="loomLogo" />
         </a>
         <div class="iconNavi">
-          <i class="fas fa-search" hidden></i>
-          <i class="far fa-bell" hidden></i>
+          <!-- <i class="fas fa-search" hidden></i>
+          <i class="far fa-bell" hidden></i> -->
           <a href="/logout">
             <button class="logOutBtn">Log out</button>
           </a>
@@ -70,9 +70,9 @@
           </div>
           <div class="nameAndPhoto">
             <h2>Name and photos</h2>
-            <% if(user.profilePic){ %>
+            <% if(user.profilePicture){ %>
               <div class="circleBox" style="overflow: hidden; padding: 0; position: relative; z-index: 2;">
-              <img src="profilepic/chris.jpg" style=" height: 130px; width: 150px; z-index: 1; border-radius: 5px;" alt="hello">
+              <img src="<%=user.profilePicture%>" style=" height: 130px; width: 150px; z-index: 1; border-radius: 5px;" alt="hello">
             </div>
             <% } else{ %>  
               <div class="circleBox">
@@ -80,9 +80,16 @@
               </div>
            <% } %>
             <form action="/uploadPhoto" method="post" enctype="multipart/form-data">
-             <input type="file" id="myFile" name="mypic">
-             <input type="text" id="firstName" name="username" value="<%=user.username %>" hidden/>
-             <button style="margin-left:90px ; margin-bottom: 20px; width: 130px;" type="submit">Upload</button>
+              <input  type="file" id="myFile" name="mypic">
+              <input type="text" id="firstName" name="username" value="<%=user.username %>" hidden/>
+              <div>
+                <button class="saveBtn" style="margin-left:10px ; margin-bottom: 20px; width: 130px;height: 30px; border-radius: 5px; position:relative" type="submit">Upload</button>
+                
+              </div>
+               
+            </form>
+            <form action="/removeProfilePic?_method=DELETE" method="POST">
+              <button class="saveBtn" style="margin-left:10px ; margin-bottom: 20px; width: 130px;height: 30px; border-radius: 5px; position: absolute; top:59.5%;left:30%" type="submit">Remove</button>
             </form>
             <form action="/changeUsername" method="POST">
               <label for="firstName">Username: </label>

@@ -42,7 +42,7 @@ form {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 35em;
+  height: 30em;
 }
 .form {
   display: flex;
@@ -60,6 +60,21 @@ form {
   font-weight: 600;
   font-size: 18px;
 } */
+
+.registerBtn {
+  margin: 31px;
+  /* display: flex; */
+  /* justify-content: center; */
+  width: 191px;
+  height: 40px;
+  text-align: center;
+  border-radius: 19px;
+  border: transparent;
+  background-color: #4b42ad;
+  color: #f8f6f0;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
 .signUpGoogle img {
   width: 32px;
   margin: 7px;

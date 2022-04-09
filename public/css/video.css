@@ -90,3 +90,20 @@ section {
   color: #f8f6f0;
   font-weight: 600;
 }
+.buttonsForName {
+  display: flex;
+  padding-top: 20px;
+}
+.status {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.align {
+  display: flex;
+  padding-top: 12px;
+  padding-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

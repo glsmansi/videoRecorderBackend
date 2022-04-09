@@ -350,5 +350,9 @@ span {
   display: block;
 }
 .text-center {
-  text-align: right;
+  /* text-align: center; */
+  position: absolute;
+  left: 40%;
+  top: 50%;
+  font-size: bolder;
 }

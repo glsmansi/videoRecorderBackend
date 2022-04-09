@@ -13,9 +13,17 @@ const videoStorage = multer.memoryStorage({
     callback(null, "");
   },
 });
+const profilePicStorage = multer.memoryStorage({
+  destination: function (req, file, callback) {
+    callback(null, "");
+  },
+});
 
 const videoUpload = multer({
   storage: videoStorage,
+});
+const profilePicUpload = multer({
+  storage: profilePicStorage,
 });
 
 router
@@ -74,7 +82,11 @@ router.route("/downloadVideo").get(auth, user.downloadVideo);
 
 router.route("/changeUsername").post(auth, user.changeUserName);
 router.route("/changePassword").post(auth, user.changePassword);
-router.route("/uploadPhoto").post(auth, user.uploadPhoto);
+router
+  .route("/uploadPhoto")
+  .post(auth, profilePicUpload.single("mypic"), user.uploadPhoto);
+
+router.route("/removeProfilePic").delete(auth, user.removeProfilePic);
 
 router.route("/logout").get(user.logout);
 

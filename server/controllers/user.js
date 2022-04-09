@@ -253,14 +253,14 @@ module.exports.googleLogin = async (req, res) => {
 };
 
 module.exports.settings = async (req, res) => {
-  var photo = false;
+  // var photo = false;
   const user = await User.findOne({ where: { email: req.user.email } });
-  var path = `public/profilepic/${user.username}.jpg`;
-  if (fs.existsSync(path)) {
-    // path exists
-    // photo = true;
-    console.log("exists:", path);
-  }
+  // var path = `public/profilepic/${user.username}.jpg`;
+  // if (fs.existsSync(path)) {
+  // path exists
+  // photo = true;
+  // console.log("exists:", path);
+  // }
   res.render("user/setting", { user, passErr: false, noMatch: false });
 };
 
@@ -430,20 +430,61 @@ module.exports.changePassword = async (req, res) => {
     console.log("Wrong password");
   }
 };
-module.exports.uploadPhoto = (req, res) => {
-  console.log("photoUpload");
-  console.log(req.files);
-  if (req.files) {
-    console.log(req.files.mypic);
-    var image = req.files.mypic;
-    console.log(req.body.username);
-    var filepath = `C:/Users/TOSHIBA/Desktop/videoRecorderBackend-main/public/profilepic/${req.body.username}.jpg`;
-    console.log(filepath);
-    image.mv(filepath, (err) => {
-      console.log(err);
+// module.exports.uploadPhoto = async (req, res) => {
+//   console.log("photoUpload");
+//   console.log(req.files);
+//   if (req.files) {
+//     console.log(req.files.mypic);
+//     var image = req.files.mypic;
+//     const user = await User.findOne({ where: { id: req.user.user_id } });
+//     user.profilePicture = image;
+//     console.log(req.body.username);
+//     var filepath = `C:/Users/TOSHIBA/Desktop/videoRecorderBackend-main/public/profilepic/${req.body.username}.jpg`;
+//     console.log(filepath);
+//     image.mv(filepath, (err) => {
+//       console.log(err);
+//     });
+//     res.redirect("/settings");
+//   }
+//   res.redirect("/settings");
+// };
+
+module.exports.uploadPhoto = async (req, res) => {
+  console.log(req.body);
+  console.log(req.file);
+  try {
+    myFile = req.file.originalname.split(".");
+    fileType = myFile[myFile.length - 1];
+    // console.log(myFile);
+    const profilePicName = `${req.body.username}.${fileType}`;
+    const params = {
+      Bucket: process.env.AWS_BUCKET_NAME_TWO,
+      ACL: "public-read",
+      Key: profilePicName,
+      Body: req.file.buffer,
+    };
+    console.log(myFile);
+
+    s3.upload(params, async (error, data) => {
+      if (error) {
+        res.status(500).json(error);
+      }
+      // console.log(params[Key]);
+      const user = await User.findOne({ where: { id: req.user.user_id } });
+      user.profilePicture = data.Location;
+      await user.save();
+      console.log(data.Location);
+      res.status(200).redirect("/settings");
     });
-    res.redirect("/settings");
+  } catch (e) {
+    return new ExpressError(e);
   }
+};
+
+module.exports.removeProfilePic = async (req, res) => {
+  const user = await User.findOne({ where: { id: req.user.user_id } });
+  user.profilePicture = null;
+  await user.save();
   res.redirect("/settings");
 };
 
