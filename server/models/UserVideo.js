@@ -9,7 +9,7 @@ module.exports = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    userEmail: {
+    userId: {
       type: Sequelize.STRING,
     },
     videoId: {

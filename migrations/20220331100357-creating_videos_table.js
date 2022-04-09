@@ -15,8 +15,8 @@ module.exports = {
       url: {
         type: Sequelize.STRING,
       },
-      userEmail: {
-        type: Sequelize.STRING(20),
+      userId: {
+        type: Sequelize.INTEGER(11),
       },
       status: {
         type: Sequelize.STRING(20),

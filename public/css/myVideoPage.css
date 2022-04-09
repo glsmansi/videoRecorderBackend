@@ -351,7 +351,7 @@ span {
 }
 .text-center {
   /* text-align: center; */
-  position: absolute;
+  position: relative;
   left: 40%;
   top: 50%;
   font-size: bolder;

@@ -28,15 +28,6 @@ const CLIENT_ID =
   "198561696099-flasriqkqqlkn2db9ttq6ellso1g6kdn.apps.googleusercontent.com";
 const client = new OAuth2Client(CLIENT_ID);
 
-var smtpTransport = nodemailer.createTransport({
-  service: "Gmail",
-  auth: {
-    user: process.env.GMAIL_ID, // generated ethereal user
-    pass: process.env.GMAIL_PASSWORD,
-  },
-});
-var rand, mailOptions, host, link;
-
 module.exports.home = async (req, res) => {
   if (req.cookies["cookietokenkey"]) {
     res.redirect("/home");
@@ -70,12 +61,12 @@ module.exports.uploadVideo = async (req, res) => {
       const videoLink = await Video.create({
         fileName: fileName,
         url: data.Location,
-        userEmail: req.user.email,
+        userId: req.user.user_id,
       });
       await videoLink.save();
 
       const userVideo = await UserVideo.create({
-        userEmail: req.user.email,
+        userId: req.user.user_id,
         videoId: videoLink.id,
       });
       console.log(req.user.email);
@@ -270,15 +261,15 @@ module.exports.loginSuccess = async (req, res) => {
 };
 
 module.exports.sharedWithMe = async (req, res) => {
-  const userEmail = req.user.email;
-  const user = await User.findOne({ where: { email: userEmail } });
+  // const userEmail = req.user.email;
+  const user = await User.findOne({ where: { id: req.user.user_id } });
   const userVideos = await UserVideo.findAll({
-    where: { userEmail: user.email },
+    where: { userId: user.id },
   });
   const uservideos = await Video.findAll({
     where: {
-      userEmail: {
-        [sequelize.Op.not]: userVideos.email,
+      userId: {
+        [sequelize.Op.not]: userVideos.id,
       },
     },
   });
@@ -286,15 +277,15 @@ module.exports.sharedWithMe = async (req, res) => {
 };
 
 module.exports.sharedWithOthers = async (req, res) => {
-  const userEmail = req.user.email;
-  const user = await User.findOne({ where: { email: userEmail } });
+  // const userEmail = req.user.email;
+  const user = await User.findOne({ where: { id: req.user.user_id } });
   // console.log(user);
   const userVideos = await UserVideo.findAll({
-    where: { userEmail: user.email },
+    where: { userId: user.id },
   });
   // console.log(userVideos);
   const videos = await Video.findAll({
-    where: { userEmail: userEmail },
+    where: { userId: req.user.user_id },
   });
 
   res.render("user/team", { videos, user });
@@ -303,9 +294,9 @@ module.exports.sharedWithOthers = async (req, res) => {
 module.exports.personal = async (req, res) => {
   console.log("user token", req.user.token);
   const userEmail = req.user.email;
-  const user = await User.findOne({ where: { email: userEmail } });
+  const user = await User.findOne({ where: { id: req.user.user_id } });
   const uservideos = await Video.findAll({
-    where: { userEmail: user.email },
+    where: { userId: user.id },
   });
   // console.log(uservideos);
   res.render("user/myVideo", { uservideos, user, userEmail });
@@ -319,9 +310,9 @@ module.exports.userVideoLink = async (req, res) => {
 };
 
 module.exports.downloadVideo = async (req, res) => {
-  const email = req.user.email;
+  // const email = req.user.email;
   const videoLink = await Video.findOne({
-    where: { userEmail: email },
+    where: { userId: req.user.user_id },
     order: [["id", "DESC"]],
   });
   console.log(videoLink);

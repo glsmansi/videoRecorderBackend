@@ -15,7 +15,7 @@ module.exports = sequelize.define(
     url: {
       type: Sequelize.STRING,
     },
-    userEmail: {
+    userId: {
       type: Sequelize.STRING(20),
     },
     status: {
