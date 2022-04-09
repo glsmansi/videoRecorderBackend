@@ -76,8 +76,8 @@
           <img src="img/loom.png" class="loomLogo" />
         </a>
         <div class="iconNavi">
-          <i class="fas fa-search"></i>
-          <i class="far fa-bell"></i>
+          <!-- <i class="fas fa-search"></i>
+          <i class="far fa-bell"></i> -->
           <a href="/logout">
             <button class="logOutBtn">Log out</button>
           </a>
@@ -204,7 +204,12 @@
             <form action="/<%=video.id%>/watch/meetingNotes" method="POST">
               <label style="margin-top: 3rem" for="notes">Meeting Notes:</label>
               <textarea
-                style="width: 500px; height: 200px; margin: 2rem 0"
+                style="
+                  width: 500px;
+                  height: 200px;
+                  margin: 2rem 0;
+                  font-size: 1rem;
+                "
                 type="text"
                 id="notes"
                 name="meetingNotes"
