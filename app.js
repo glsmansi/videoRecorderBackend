@@ -8,6 +8,7 @@ dotenv.config();
 const cookieParser = require("cookie-parser");
 const user = require("./server/controllers/user");
 const methodOverride = require("method-override");
+const expressLayouts = require("express-ejs-layouts");
 // const fileUpload = require("express-fileupload");
 //const expressLayouts=require('express-ejs-layouts')
 
@@ -22,9 +23,9 @@ sequelize
   });
 
 const app = express();
-// app.use(fileUpload());
 app.set("view engine", "ejs");
-//app.use(expressLayouts);
+app.use(expressLayouts);
+
 app.set("views", path.join(__dirname, "views"));
 app.use(cookieParser());
 app.use(express.json());

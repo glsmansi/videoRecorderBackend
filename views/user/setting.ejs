@@ -1,258 +1,187 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   
-    <script
-      src="https://kit.fontawesome.com/afb23c7fce.js"
-      crossorigin="anonymous"
-    ></script>
-
-    <link rel="stylesheet" href="./css/setting.css" />
-    <title>Document</title>
-  </head>
-  <body>
-    <navbar>
-      <div class="nav">
-        <a href="/">
-          <img src="img/loom.png" class="loomLogo" />
-        </a>
-        <div class="iconNavi">
-          <!-- <i class="fas fa-search" hidden></i>
-          <i class="far fa-bell" hidden></i> -->
-          <a href="/logout">
-            <button class="logOutBtn">Log out</button>
-          </a>
-        </div>
-      </div>
-    </navbar>
-    <div class="fullContainer">
-      <div class="firstFullContainer">
-        <div class="firstContainer">
-          <h3>libraries</h3>
-          <div class="threeContainer">
-            <a href="/home">
-              <i class="fas fa-user"></i>
-              <h2>Personal</h2>
-            </a>
-          </div>
-          <div class="threeContainer">
-            <a href="/me">
-              <i class="fas fa-user-friends"></i>
-              <h2>Shared with Me</h2>
-            </a>
-          </div>
-          <div class="threeContainer">
-            <a href="/team">
-              <i class="fas fa-users"></i>
-              <h2>Team</h2>
-            </a>
-          </div>
-          <div class="threeContainer selected">
-            <a href="/settings">
-              <i class="fas fa-cog"></i>
-              <h2>Settings</h2>
-            </a>
-          </div>
-        </div>
-      </div>
-      <section>
-        <div class="setting">
-          <div class="heading">
-            <h2><%=user.username%></h2>
-            <h1>Personal Settings</h1>
-          </div>
-          <div class="navigationLink">
-            <a href="#" class="selectedLink">My Account</a>
-            <!-- <a href="#" class="notSelected">Notifications</a>
-            <a href="#" class="notSelected">Integrations</a> -->
-          </div>
-          <div class="nameAndPhoto">
-            <h2>Name and photos</h2>
-            <% if(user.profilePicture){ %>
-              <div class="circleBox" style="overflow: hidden; padding: 0; position: relative; z-index: 2;">
-              <img src="<%=user.profilePicture%>" style=" height: 130px; width: 150px; z-index: 1; border-radius: 5px;" alt="hello">
-            </div>
-            <% } else{ %>  
-              <div class="circleBox">
-                <i class="fas fa-camera"></i>
-              </div>
-           <% } %>
-            <form action="/uploadPhoto" method="post" enctype="multipart/form-data">
-              <input  type="file" id="myFile" name="mypic">
-              <input type="text" id="firstName" name="username" value="<%=user.username %>" hidden/>
-              <div>
-                <!-- <button class="saveBtn" style="margin-left:10px ; margin-bottom: 20px; width: 130px;height: 30px; border-radius: 5px; position:relative" type="submit">Upload</button> -->
-                <div style="display: flex;">
-                  <button class="saveBtn" style="margin-left:10px ; margin-bottom: 20px; width: 130px;height: 30px; border-radius: 5px; position:relative" type="submit">Upload</button>
-                  &nbsp;
-                  <a class="btn" href="/removeProfilePic?_method=DELETE" style="font-size: small; text-decoration: none;"> Remove</a>
-                </div>
-              </div>
-               
-            </form>
-            <!-- <form action="/removeProfilePic?_method=DELETE" method="POST">
-              <button class="cancelBtn" style="margin-left:10px ; margin-bottom: 20px; width: 130px;height: 30px; border-radius: 5px; " type="submit">Remove</button>
-            </form> -->
-            <form action="/changeUsername" method="POST">
-              <label for="firstName">Username: </label>
-              <input type="text" id="firstName" name="username" value="<%=user.username %>" />
-              <!-- <label for="lastName">Last name: </label>
-              <input type="text" name="lastName" value="Joshi" /> -->
-              <div class="buttonsForName">
-                <button type="submit" class="saveBtn">Save</button>
-                <!-- <button type="submit" class="cancelBtn">Cancel</button> -->
-              </div>
-            </form>
-          </div>
-          <div class="contactInfoUpdates">
-            <h2>Contact Info</h2>
-            <h3>
-              Access your Loom Workspaces with any email address, or by
-              connecting an account.
-            </h3>
-            <form>
-              <div class="emailForm">
-                <label for="email">Email: </label>
-                <input type="text" name="email" value="<%=user.email%>" readonly style="color:gray" />
-              </div>
-              <!-- <div class="connctedAccount">
-                <label for="connectingAccount">Connected accounts</label>
-                <a href="#">
-                  <button class="connectWithGoogle">
-                    <img src="img/googleIcon.png" alt="Google icon by Icons8" />
-                    Connect with Google
-                  </button>
-                </a> -->
-                <!-- <a href="#">
-                  <button class="connectWithSlack">
-                    <img
-                      src="img/slackIcon.png"
-                      alt="Slack New icon by Icons8"
-                    />
-                    Connect with Slack
-                  </button>
-                </a> -->
-              <!-- </div> -->
-              <!-- <div class="saveTheVideo">
-                <label for="savingInfo">Saving Info</label>
-                <a href="#">
-                  <button class="connectWithGoogle">
-                    <img
-                      src="img/googledrive.png"
-                      alt="Google icon by Icons8"
-                    />
-                    Save in google drive
-                  </button>
-                </a>
-                <a href="#">
-                  <button class="connectWithSlack">
-                    <img src="img/aws.png" alt="Slack New icon by Icons8" />
-                    Save in AWS
-                  </button>
-                </a>
-              </div> -->
-              <div class="connctedAccount" >
-                <label for="connectingAccount">Store In:</label>
-
-                <div>
-                  <img
-                    style="width: 3.5rem; height: 3rem; margin: 5px"
-                    src="img/aws.png"
-                    alt="AWS New icon by Icons8"
-                  />
-                  <label class="switch">
-                    <input type="checkbox" name=""/>
-                    <span class="slider round"></span>
-                  </label>
-    
-                  <img
-                    src="img/googledrive.png"
-                    style="width: 3.5rem; height: 3rem; margin: 7px"
-                    alt="Google icon by Icons8"
-                  />
-                </div>
-                
-
-              </form>
-              </div>
-              
-          </div>
-          <div class="password">
-            <h2>Password</h2>
-            <h3>
-              Note that if you signed in with a connected account, you are using
-              that account’s login information and we cannot change or reset
-              those passwords here.
-            </h3>
-            <form action="/changePassword" method="POST">
-          
-              
-              <div class="" style="width: 800px; height: 50px; color: red;">
-                <% if(success){ %>
-                  <div class="alert alert-danger text-center" style="color:rgb(7, 218, 0)" role="alert">
-                    Password Changed
-                  </div>
-               <% }%>
-                <% if(passErr){ %>
-                  <div class="alert alert-danger text-center" role="alert">
-                    Current password doesn't match
-                  </div>
-               <% }%>
-              </div>
-              <div class="" style="width: 800px; height: 50px; color: red;">
-              <% if(noMatch){ %>
-                <div class="alert alert-danger text-center" role="alert">
-                  New password and Confirm Password must match
-                </div>
-             <% }%>
-              </div>
-              <div class="currentPassword">
-                <label for="currentPassword">Current Password</label>
-                <input type="password" name="password" placeholder="password" />
-              </div>
-              <div class="confirmationPassword">
-                <div class="newPassword">
-                  <label for="newPassword">New Password</label>
-                  <input
-                    type="password"
-                    name="newPassword"
-                    placeholder="password"
-                  />
-                </div>
-                <div class="confirmPassword">
-                  <label for="confirmPassword">Confirm Password</label>
-                  <input
-                    type="password"
-                    name="confirmPassword"
-                    placeholder="password"
-                  />
-                </div>
-              </div>
-              <h2>Reset Password</h2>
-              <h3>
-                If you just forgot your password, don’t worry – we got you!
-              </h3>
-              <button type="submit" class="resetBtn">
-                <i class="fas fa-lock"></i>
-                Reset Password
-              </button>
-              <!-- <div class="savingCancelling">
-                <button disabled="disabled">Save</button>
-                <button disabled="disabled">Cancel</button>
-              </div> -->
-            </form>
-          </div>
-          <!-- <div class="deleteAccount">
-            <h2>Delete Account</h2>
-            <form>
-              <button type="submit" class="deleteBtn">Delete my account</button>
-            </form>
-          </div> -->
-        </div>
-      </section>
+<section>
+  <div class="setting">
+    <div class="heading">
+      <h2><%=user.username%></h2>
+      <h1>Personal Settings</h1>
     </div>
-  </body>
-</html>
+    <div class="navigationLink">
+      <a href="#" class="selectedLink">My Account</a>
+      <!-- <a href="#" class="notSelected">Notifications</a>
+      <a href="#" class="notSelected">Integrations</a> -->
+    </div>
+    <div class="nameAndPhoto">
+      <h2>Name and photos</h2>
+      <% if(user.profilePicture){ %>
+        <div class="circleBox" style="overflow: hidden; padding: 0; position: relative; z-index: 2;">
+        <img src="<%=user.profilePicture%>" style=" height: 130px; width: 150px; z-index: 1; border-radius: 5px;" alt="hello">
+      </div>
+      <% } else{ %>  
+        <div class="circleBox">
+          <i class="fas fa-camera"></i>
+        </div>
+     <% } %>
+      <form action="/uploadPhoto" method="post" enctype="multipart/form-data">
+        <input  type="file" id="myFile" name="mypic">
+        <input type="text" id="firstName" name="username" value="<%=user.username %>" hidden/>
+        <div style="display: flex;">
+          <button class="saveBtn" style="margin-left:10px ; margin-bottom: 20px; width: 130px;height: 30px; border-radius: 5px; position:relative" type="submit">Upload</button>
+          &nbsp;
+          <a class="btn" href="/removeProfilePic?_method=DELETE" style="font-size: small; text-decoration: none;"> Remove</a>
+        </div>
+      </form>
+      <form action="/changeUsername" method="POST">
+        <label for="firstName">Username: </label>
+        <input type="text" id="firstName" name="username" value="<%=user.username %>" />
+        <!-- <label for="lastName">Last name: </label>
+        <input type="text" name="lastName" value="Joshi" /> -->
+        <div class="buttonsForName">
+          <button type="submit" class="saveBtn">Save</button>
+          <!-- <button type="submit" class="cancelBtn">Cancel</button> -->
+        </div>
+      </form>
+    </div>
+    <div class="contactInfoUpdates">
+      <h2>Contact Info</h2>
+      <h3>
+        Access your Loom Workspaces with any email address, or by
+        connecting an account.
+      </h3>
+      <form>
+        <div class="emailForm">
+          <label for="email">Email: </label>
+          <input type="text" name="email" value="<%=user.email%>" readonly style="color:gray" />
+        </div>
+        <!-- <div class="connctedAccount">
+          <label for="connectingAccount">Connected accounts</label>
+          <a href="#">
+            <button class="connectWithGoogle">
+              <img src="img/googleIcon.png" alt="Google icon by Icons8" />
+              Connect with Google
+            </button>
+          </a> -->
+          <!-- <a href="#">
+            <button class="connectWithSlack">
+              <img
+                src="img/slackIcon.png"
+                alt="Slack New icon by Icons8"
+              />
+              Connect with Slack
+            </button>
+          </a> -->
+        <!-- </div> -->
+        <!-- <div class="saveTheVideo">
+          <label for="savingInfo">Saving Info</label>
+          <a href="#">
+            <button class="connectWithGoogle">
+              <img
+                src="img/googledrive.png"
+                alt="Google icon by Icons8"
+              />
+              Save in google drive
+            </button>
+          </a>
+          <a href="#">
+            <button class="connectWithSlack">
+              <img src="img/aws.png" alt="Slack New icon by Icons8" />
+              Save in AWS
+            </button>
+          </a>
+        </div> -->
+        <div class="connctedAccount" >
+          <label for="connectingAccount" hidden>Store In:</label>
+
+          <div>
+            <img
+              style="width: 3.5rem; height: 3rem; margin: 5px"
+              src="img/aws.png"
+              alt="AWS New icon by Icons8"
+              hidden
+            />
+            <label class="switch"  hidden>
+              <input type="checkbox" name=""  hidden/>
+              <span class="slider round"  hidden></span>
+            </label>
+
+            <img
+              src="img/googledrive.png"
+              style="width: 3.5rem; height: 3rem; margin: 7px"
+              alt="Google icon by Icons8" hidden
+            />
+          </div>
+          
+
+        </form>
+        </div>
+        
+    </div>
+    <div class="password">
+      <h2>Password</h2>
+      <h3>
+        Note that if you signed in with a connected account, you are using
+        that account’s login information and we cannot change or reset
+        those passwords here.
+      </h3>
+      <form action="/changePassword" method="POST">
+        <div class="" style="width: 800px; height: 50px; color: red;">
+        <% if(success){ %>
+            <div class="alert alert-danger text-center" style="color:rgb(7, 218, 0)" role="alert">
+              Password Changed
+            </div>
+         <% }%>
+          <% if(passErr){ %>
+            <div class="alert alert-danger text-center" role="alert">
+              Current password doesn't match
+            </div>
+         <% }%>
+        </div>
+        <div class="" style="width: 800px; height: 50px; color: red;">
+        <% if(false){ %>
+          <div class="alert alert-danger text-center" role="alert">
+            New password and Confirm Password must match
+          </div>
+       <% }%>
+        </div>
+        <div class="currentPassword">
+          <label for="currentPassword">Current Password</label>
+          <input type="password" name="password" placeholder="password" />
+        </div>
+        <div class="confirmationPassword">
+          <div class="newPassword">
+            <label for="newPassword">New Password</label>
+            <input
+              type="password"
+              name="newPassword"
+              placeholder="password"
+            />
+          </div>
+          <div class="confirmPassword">
+            <label for="confirmPassword">Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="password"
+            />
+          </div>
+        </div>
+        <h2>Reset Password</h2>
+        <h3>
+          If you just forgot your password, don’t worry – we got you!
+        </h3>
+        <button type="submit" class="resetBtn">
+          <i class="fas fa-lock"></i>
+          Reset Password
+        </button>
+        <!-- <div class="savingCancelling">
+          <button disabled="disabled">Save</button>
+          <button disabled="disabled">Cancel</button>
+        </div> -->
+      </form>
+    </div>
+    <!-- <div class="deleteAccount">
+      <h2>Delete Account</h2>
+      <form>
+        <button type="submit" class="deleteBtn">Delete my account</button>
+      </form>
+    </div> -->
+  </div>
+</section>

@@ -21,9 +21,7 @@ module.exports = sequelize.define(
     status: {
       type: Sequelize.STRING,
     },
-    teamMembers: {
-      type: Sequelize.STRING(1000),
-    },
+
     meetingNotes: {
       type: Sequelize.STRING,
     },

@@ -1,26 +1,27 @@
+
 <div class="fullContainer">
   <div class="firstFullContainer">
     <div class="firstContainer">
       <h3>libraries</h3>
-      <div class="threeContainer">
+      <div id="personal" class="threeContainer">
         <a href="/home">
           <i class="fas fa-user"></i>
           <h2>Personal</h2>
         </a>
       </div>
-      <div class="threeContainer">
+      <div id="me" class="threeContainer">
         <a href="/me">
           <i class="fas fa-user-friends"></i>
           <h2>Shared with Me</h2>
         </a>
       </div>
-      <div class="threeContainer">
+      <div id="team" class="threeContainer">
         <a href="/team">
           <i class="fas fa-users"></i>
           <h2>Team</h2>
         </a>
       </div>
-      <div class="threeContainer">
+      <div id="setting" class="threeContainer">
         <a href="/settings">
           <i class="fas fa-cog"></i>
           <h2>Settings</h2>
@@ -28,4 +29,22 @@
       </div>
     </div>
   </div>
-</div>
+  <script>
+    if(location.href=="http://localhost:5000/home")
+    {
+      document.getElementById("personal").classList.add('selected')
+    }
+    if(location.href=="http://localhost:5000/me")
+    {
+      document.getElementById("me").classList.add('selected')
+    }
+    if(location.href=="http://localhost:5000/team")
+    {
+      document.getElementById("team").classList.add('selected')
+    }
+    if(location.href=="http://localhost:5000/settings")
+    {
+      console.log("hai");
+      document.getElementById("setting").classList.add('selected')
+    }
+  </script>

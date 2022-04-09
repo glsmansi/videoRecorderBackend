@@ -1,194 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <script
-      src="https://kit.fontawesome.com/afb23c7fce.js"
-      crossorigin="anonymous"
-    ></script>
-
-    <link rel="stylesheet" href="./css/myVideoPage.css" />
-    <title>Document</title>
-  </head>
-  <body>
-    <navbar>
-      <div class="nav">
-        <a href="/">
-          <img src="img/loom.png" class="loomLogo" />
-        </a>
-        <div class="iconNavi">
-          <!-- <i class="fas fa-search"></i>
-          <i class="far fa-bell"></i> -->
-          <a href="/logout">
-            <button class="logOutBtn">Log out</button>
-          </a>
+<section>
+  <div class="personalContainer">
+    <div class="heading">
+      <!-- <h2>Kenil Joshi</h2> -->
+      <h1>Shared With Me</h1>
+      <div class="personalNavLinksAndButtons">
+        <div class="personalNavLinks">
+          <a href="#" class="selectedLink"> Videos </a>
+        </div>
+        <div class="buttonsForAdd">
+          <button hidden class="folderBtn">New Folder</button>
+          <button class="addBtn">
+            <i class="fas fa-plus"></i>
+            Add Video
+          </button>
         </div>
       </div>
-    </navbar>
-    <div class="fullContainer">
-      <div class="firstFullContainer">
-        <div class="firstContainer">
-          <h3>libraries</h3>
-          <div class="threeContainer">
-            <a href="/home">
-              <i class="fas fa-user"></i>
-              <h2>Personal</h2>
-            </a>
-          </div>
-          <div class="threeContainer selected">
-            <a href="/me">
-              <i class="fas fa-user-friends"></i>
-              <h2>Shared with Me</h2>
-            </a>
-          </div>
-          <div class="threeContainer">
-            <a href="/team">
-              <i class="fas fa-users"></i>
-              <h2>Team</h2>
-            </a>
-          </div>
-          <div class="threeContainer">
-            <a href="/settings">
-              <i class="fas fa-cog"></i>
-              <h2>Settings</h2>
-            </a>
-          </div>
-        </div>
-      </div>
-      <section>
-        <div class="personalContainer">
-          <div class="heading">
-            <!-- <h2>Kenil Joshi</h2> -->
-            <h1>Shared With Me</h1>
-            <div class="personalNavLinksAndButtons">
-              <div class="personalNavLinks">
-                <a href="#" class="selectedLink"> Videos </a>
-              </div>
-              <div class="buttonsForAdd">
-                <button class="folderBtn">New Folder</button>
-                <button class="addBtn">
-                  <i class="fas fa-plus"></i>
-                  Add Video
-                </button>
-              </div>
+    </div>
+  </div>
+  <div class="videoContainer">
+    <div class="videos">
+      <div class="c-video">
+        <%if(uservideos.length){%> <%for(video of uservideos){%>
+        <div class="singleVideo">
+          <video class="video" src="<%=video.url%>"></video>
+          <form action="/<%=video.id%>/watch" method="GET">
+            <button class="addBtn">View Video Details</button>
+          </form>
+          <div class="headingAndDetails">
+            <div class="nameVideo">
+              <a href="#">
+                <h3><%=video.fileName%></h3>
+              </a>
             </div>
-          </div>
-        </div>
-        <div class="videoContainer">
-          <div class="videos">
-            <div class="c-video">
-              <%if(uservideos.length){%> <%for(video of uservideos){%>
-              <div class="singleVideo">
-                <video class="video" src="<%=video.url%>"></video>
-                <form action="/<%=video.id%>/watch" method="GET">
-                  <button class="addBtn">View Video Details</button>
-                </form>
-                <div class="headingAndDetails">
-                  <div class="nameVideo">
-                    <a href="#">
-                      <h3><%=video.fileName%></h3>
-                    </a>
-                  </div>
-                  <div class="lockUnlock">
-                    <% if(video.status=="private") {%>
-                    <div class="unlock">
-                      <i class="fa-solid fa-user"></i>
-                    </div>
-                    <% }else { %> <div class=>
-                    <i class="fa-solid fa-users"></i>
-                  </div>
-                  <% } %>
-                </div>
-
-                <div class="share">
-                  <i class="fas fa-share"></i>
-                </div>
-
-                <div class="shareOptions">
-                  <div class="shareLink">
-                    <i class="fas fa-link"></i>
-                    <%if(video.status=="private"){%>
-                    <div style="display: none" id="link1">
-                      videorecorderbackend.herokuapp.com/<%=video.id%>/watch
-                    </div>
-                    <button onclick="copyToClipboard('link1')">
-                      share link
-                    </button>
-                    <%}else{%>
-                    <div style="display: none" id="link2">
-                      videorecorderbackend.herokuapp.com/<%=video.id%>/publicLink/sharable
-                    </div>
-                    <button onclick="copyToClipboard('link2')">
-                      share link
-                    </button>
-                    <%}%>
-                  </div>
-                </div>
+            <div class="lockUnlock">
+              <% if(video.status=="private") {%>
+              <div class="unlock">
+                <i class="fa-solid fa-user"></i>
               </div>
+              <% }else { %> <div class=>
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <% } %>
+          </div>
 
-              <%}}else{%>
-              <h3 class="text-center" style="left: 55%">
-                NO VIDEOS SHARED WITH YOU
-              </h3>
+          <div class="share">
+            <i class="fas fa-share"></i>
+          </div>
+
+          <div class="shareOptions">
+            <div class="shareLink">
+              <i class="fas fa-link"></i>
+              <%if(video.status=="private"){%>
+              <div style="display: none" id="link1">
+                videorecorderbackend.herokuapp.com/<%=video.id%>/watch
+              </div>
+              <button onclick="copyToClipboard('link1')">share link</button>
+              <%}else{%>
+              <div style="display: none" id="link2">
+                videorecorderbackend.herokuapp.com/<%=video.id%>/publicLink/sharable
+              </div>
+              <button onclick="copyToClipboard('link2')">share link</button>
               <%}%>
             </div>
           </div>
         </div>
-      </section>
+
+        <%}}else{%>
+        <h3 class="text-center" style="left: 55%">NO VIDEOS SHARED WITH YOU</h3>
+        <%}%>
+      </div>
     </div>
-  </body>
-  <script>
-    const videos = document.querySelectorAll(".video");
-    const headingAndDetails = document.querySelectorAll(".headingAndDetails");
-    const shares = document.querySelectorAll(".share");
-    const shareOptions = document.querySelectorAll(".shareOptions");
-    const lockUnlocks = document.querySelectorAll(".lockUnlock");
-    const lock = document.querySelectorAll(".lock");
-    videos.forEach((video, index) => {
-      video.addEventListener("click", () => {
-        headingAndDetails[index].classList.toggle("seen");
-      });
+  </div>
+</section>
+<script>
+  const videos = document.querySelectorAll(".video");
+  const headingAndDetails = document.querySelectorAll(".headingAndDetails");
+  const shares = document.querySelectorAll(".share");
+  const shareOptions = document.querySelectorAll(".shareOptions");
+  const lockUnlocks = document.querySelectorAll(".lockUnlock");
+  const lock = document.querySelectorAll(".lock");
+  videos.forEach((video, index) => {
+    video.addEventListener("click", () => {
+      headingAndDetails[index].classList.toggle("seen");
     });
-    shares.forEach((share, index) => {
-      share.addEventListener("click", () => {
-        shareOptions[index].classList.toggle("seenShareOption");
-      });
+  });
+  shares.forEach((share, index) => {
+    share.addEventListener("click", () => {
+      shareOptions[index].classList.toggle("seenShareOption");
     });
-    lockUnlocks.forEach((lockUnlock, index) => {
-      lockUnlock.addEventListener("click", () => {
-        lock[index].classList.toggle("lockSeen");
-      });
+  });
+  lockUnlocks.forEach((lockUnlock, index) => {
+    lockUnlock.addEventListener("click", () => {
+      lock[index].classList.toggle("lockSeen");
     });
-  </script>
-  <script>
-    function copyToClipboard(elementId) {
-      // Create a "hidden" input
-      var aux = document.createElement("input");
+  });
+</script>
+<script>
+  function copyToClipboard(elementId) {
+    // Create a "hidden" input
+    var aux = document.createElement("input");
 
-      // Assign it the value of the specified element
-      aux.setAttribute("value", document.getElementById(elementId).innerHTML);
+    // Assign it the value of the specified element
+    aux.setAttribute("value", document.getElementById(elementId).innerHTML);
 
-      // Append it to the body
-      document.body.appendChild(aux);
+    // Append it to the body
+    document.body.appendChild(aux);
 
-      // Highlight its content
-      aux.select();
+    // Highlight its content
+    aux.select();
 
-      // Copy the highlighted text
-      document.execCommand("copy");
+    // Copy the highlighted text
+    document.execCommand("copy");
 
-      // Remove it from the body
-      document.body.removeChild(aux);
-      alert("Link Copied To Clipboard");
-    }
-  </script>
-</html>
+    // Remove it from the body
+    document.body.removeChild(aux);
+    alert("Link Copied To Clipboard");
+  }
+</script>

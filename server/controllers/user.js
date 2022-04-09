@@ -312,7 +312,8 @@ module.exports.userVideoLink = async (req, res) => {
   const { id } = req.params;
   const user = req.user;
   const video = await Video.findOne({ where: { id: id } });
-  res.render("user/video", { video, user });
+  const uservideo = await UserVideo({ where: { id: video.id } });
+  res.render("user/video", { video, user, uservideo });
 };
 
 module.exports.downloadVideo = async (req, res) => {
@@ -350,16 +351,16 @@ module.exports.AddteamMembers = async (req, res) => {
   const { id } = req.params;
   const { teamMembers } = req.body;
   console.log(teamMembers);
-  const video = await Video.findOne({ where: { id: id } });
+  const uservideo = await UserVideo.findOne({ where: { id: id } });
   // video.teamMembers.push("," + teamMembers);
-  if (video.teamMembers) {
-    var members = video.teamMembers.split(",");
+  if (uservideo.teamMembers) {
+    var members = uservideo.teamMembers.split(",");
     // if (members.indexOf(teamMembers) != -1) {
     members.push(teamMembers);
     // }
-    video.teamMembers = members.join(",");
+    uservideo.teamMembers = members.join(",");
   } else {
-    video.teamMembers = teamMembers;
+    uservideo.teamMembers = teamMembers;
   }
 
   await video.save();
@@ -369,7 +370,7 @@ module.exports.AddteamMembers = async (req, res) => {
 module.exports.DeleteteamMembers = async (req, res) => {
   const { id } = req.params;
   const { teamMembers } = req.body;
-  const video = await Video.findOne({ where: { id: id } });
+  const video = await UserVideo.findOne({ where: { id: id } });
   video.teamMembers = NULL;
   await video.save();
   res.redirect(`${id}/watch`);

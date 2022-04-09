@@ -15,6 +15,9 @@ module.exports = sequelize.define(
     videoId: {
       type: Sequelize.INTEGER,
     },
+    teamMembers: {
+      type: Sequelize.STRING(1000),
+    },
   },
   {
     timestamps: false,

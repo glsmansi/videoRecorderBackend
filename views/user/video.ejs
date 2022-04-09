@@ -149,13 +149,13 @@
                 >Team Members:</span
               >
             </p>
-            <%if(video.teamMembers){var members=video.teamMembers.split(',')%>
-            <%for(i of members){%>
+            <%if(uservideo.teamMembers){var
+            members=uservideo.teamMembers.split(',')%> <%for(i of members){%>
             <ul style="margin: 1rem">
               <li><%=i%></li>
             </ul>
             <%}}else{%>
-            <p><%=video.teamMembers%></p>
+            <p><%=uservideo.teamMembers%></p>
             <%}%>
             <p style="margin-top: 5rem">
               <span style="font-weight: 900; color: #525aa4"
@@ -167,8 +167,6 @@
               <span style="font-weight: 900; color: #525aa4">Status:</span>
               <%=video.status%>
             </p>
-
-            <!-- <button>Add Video</button> -->
           </div>
           <hr style="margin: 5rem 0" />
           <div class="nameAndPhoto">
