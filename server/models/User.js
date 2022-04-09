@@ -25,9 +25,9 @@ module.exports = sequelize.define(
     token: {
       type: Sequelize.STRING,
     },
-    // profilePicture: {
-    //   type: Sequelize.STRING(1000),
-    // },
+    profilePicture: {
+      type: Sequelize.STRING(1000),
+    },
   },
   {
     timestamps: false,
