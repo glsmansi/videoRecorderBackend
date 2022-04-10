@@ -368,28 +368,34 @@ module.exports.AddteamMembers = async (req, res) => {
   const { id } = req.params;
   const { teamMembers } = req.body;
   console.log(teamMembers);
-  const uservideo = await UserVideo.findOne({ where: { id: id } });
+  const uservideo = await UserVideo.create({
+    userEmail: req.user.email,
+    videoId: id,
+    teamMembers: teamMembers,
+  });
+  await uservideo.save();
   // video.teamMembers.push("," + teamMembers);
-  if (uservideo.teamMembers) {
-    var members = uservideo.teamMembers.split(",");
-    // if (members.indexOf(teamMembers) != -1) {
-    members.push(teamMembers);
-    // }
-    uservideo.teamMembers = members.join(",");
-  } else {
-    uservideo.teamMembers = teamMembers;
-  }
+  // if (uservideo.teamMembers) {
+  // var members = uservideo.teamMembers.split(",");
+  // if (members.indexOf(teamMembers) != -1) {
+  // members.push(teamMembers);
+  // }
+  // uservideo.teamMembers = members.join(",");
+  // } else {
+  // uservideo.teamMembers = teamMembers;
+  // }
 
-  await video.save();
   res.redirect(`/${id}/watch`);
 };
 
 module.exports.DeleteteamMembers = async (req, res) => {
   const { id } = req.params;
   const { teamMembers } = req.body;
-  const video = await UserVideo.findOne({ where: { id: id } });
-  video.teamMembers = NULL;
-  await video.save();
+  const uservideo = await UserVideo.destroy({
+    where: { videoId: id, teamMembers: teamMembers },
+  });
+  // video.teamMembers = NULL;
+  await uservideo.save();
   res.redirect(`${id}/watch`);
 };
 
