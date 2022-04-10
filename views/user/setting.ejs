@@ -128,11 +128,17 @@
               Password Changed
             </div>
          <% }%>
+         <% if(noMatch){ %>
+          <div class="alert alert-danger text-center" role="alert">
+            Current password doesn't match
+          </div>
+       <% }%>
           <% if(passErr){ %>
             <div class="alert alert-danger text-center" role="alert">
               Current password doesn't match
             </div>
          <% }%>
+         
         </div>
         <div class="" style="width: 800px; height: 50px; color: red;">
         <% if(false){ %>
