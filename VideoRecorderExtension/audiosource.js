@@ -1,6 +1,5 @@
 chrome.runtime.onMessage.addListener(
     async function(request, sender, sendResponse) {
-        setTimeout(()=>{
             if(request.greeting==="audiosource"){
                 var tabid=request.tabid
                 console.log("AudioSource");
@@ -14,6 +13,5 @@ chrome.runtime.onMessage.addListener(
                  })
                  sendResponse({message:"hai"})
             }
-        },1)
         return true;
     });

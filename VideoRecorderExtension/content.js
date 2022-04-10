@@ -34,6 +34,10 @@ if(cookieValue){
 }
 chrome.runtime.onMessage.addListener(
 	async function(request, sender, sendResponse) {
+		if(request.greeting==="evoke"){
+			prepareFrame();
+			remove();
+		}
 			if (request.greeting === "start-content"){
 					tabid=request.tabid;
 						prepareFrame();
@@ -42,10 +46,9 @@ chrome.runtime.onMessage.addListener(
 								console.log(response);
 							  })
 		
-						},100)
+						},200)
 			}
 			if (request.greeting === "stopss"){
-				console.log("removed");
 				remove();
 				chrome.runtime.sendMessage({greeting: "cancel"}, function(response) {
 					console.log(response);
@@ -65,11 +68,14 @@ function prepareFrame() {
 	ifrm.id="iframe"
 	ifrm.setAttribute("allow", "microphone; camera");
 	document.body.appendChild(ifrm);	
+	console.log("append");
 }
 function remove(){
 	var ifrm = document.getElementById("iframe");
-	if(ifrm)
-	document.body.removeChild(ifrm);
+	if(ifrm){
+		document.body.removeChild(ifrm);
+		console.log("removed");
+	}
    }
 if(location.href=="https://videorecorderbackend.herokuapp.com/"){
 	console.log("logout");

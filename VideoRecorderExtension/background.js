@@ -196,6 +196,7 @@ data.append('video', blob, 'video.mp4');
 let request = new XMLHttpRequest();
 request.open('POST', 'https://videorecorderbackend.herokuapp.com/uploadVideo'); 
 request.setRequestHeader("auth", cookieValue);
+//request.setRequestHeader('Content-Type', 'multipart/form-data');
 
 // upload progress event
 request.upload.addEventListener('progress', function(e) {
