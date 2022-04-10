@@ -16,6 +16,7 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="../../css/home.css" />
+    <%if(!currentUser){%>
 <style>
     body{
         overflow: scroll;
@@ -34,7 +35,7 @@
     <!-- <title>Document</title>
   </head> -->
   <body>
-   
+  
     <navbar>
         <div class="nav">
           <a href="/">
@@ -45,6 +46,7 @@
           </a>
         </div>
       </navbar>
+      <%}%>
   
      
       <section class="videoDetails">
