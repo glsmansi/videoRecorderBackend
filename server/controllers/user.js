@@ -325,6 +325,7 @@ module.exports.userVideoLink = async (req, res) => {
       const token = req.cookies.loginkey;
       const data = await jwt.verify(token, process.env.TOKEN_KEY);
       const userData = data;
+      console.log(data);
       res.render("user/video", { video, user, uservideo, userData });
     } else {
       res.redirect("/login");
