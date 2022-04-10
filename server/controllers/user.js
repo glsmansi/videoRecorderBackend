@@ -307,7 +307,7 @@ module.exports.personal = async (req, res) => {
   const uservideos = await Video.findAll({
     where: { userId: user.id },
   });
-  // console.log(uservideos);
+  console.log("uservideos");
   res.render("user/myVideo", { uservideos, user, userEmail });
 };
 
@@ -328,7 +328,7 @@ module.exports.userVideoLink = async (req, res) => {
       console.log(userData);
       res.render("user/video", { video, user, uservideo, userData });
     } else {
-      res.redirect("/login");
+      // res.redirect("/login");
     }
   }
 };
