@@ -1,87 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="./css/home.css" />
-    <meta
-      name="google-signin-client_id"
-      content="198561696099-flasriqkqqlkn2db9ttq6ellso1g6kdn.apps.googleusercontent.com"
-    />
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <title>Home</title>
-  </head>
-  <body>
-    <navbar>
-      <div class="nav">
-        <a href="/">
-          <img src="img/loom.png" class="loomLogo" />
-        </a>
-        <a href="/login">
-          <button class="registerBtn">Sign In</button>
-        </a>
-      </div>
-    </navbar>
-    <div class="fullContainer">
-      <div class="firstContainer">
-        <h1>Show it, say it, send it</h1>
-        <p>
-          Record quick videos of your screen and cam. An essential tool for
-          hybrid workplaces.
-        </p>
-        <a href="#">
-          <button class="getBtn">Get For Free</button>
-        </a>
-        <p>For Mac, Windows, iOS, and Android</p>
-      </div>
-      <div class="secondContainer">
-        <!-- <h1>Image</h1> -->
-        <img src="img/mainimage.jpg" alt="" />
-      </div>
+<link rel="stylesheet" href="./css/home.css" />
+
+<navbar>
+  <div class="nav">
+    <a href="/">
+      <img src="img/loom.png" class="loomLogo" />
+    </a>
+    <div class="iconNavi">
+      <!-- <i class="fas fa-search"></i>
+      <i class="far fa-bell"></i> -->
+
+      <a href="/login">
+        <button class="registerBtn">Sign In</button>
+      </a>
     </div>
-    <!-- <script>
-      function signOut() {
-        var auth2 = gapi.auth2.getAuthInstance();
-        auth2.signOut().then(function () {
-          console.log("User signed out.");
-        });
+  </div>
+</navbar>
+<div class="fullContainer">
+  <div class="firstContainer">
+    <h1>Show it, say it, send it</h1>
+    <p>
+      Record quick videos of your screen and cam. An essential tool for hybrid
+      workplaces.
+    </p>
+    <a href="#">
+      <button class="getBtn">Get For Free</button>
+    </a>
+    <p>For Mac, Windows, iOS, and Android</p>
+  </div>
+  <div class="secondContainer">
+    <!-- <h1>Image</h1> -->
+    <img src="img/mainimage.jpg" alt="" />
+  </div>
+</div>
+<!-- <script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log("User signed out.");
+    });
+  }
+</script>
+
+<script>
+  function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log("Name: " + profile.getName());
+    console.log("Image URL: " + profile.getImageUrl());
+    console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+    var id_token = googleUser.getAuthResponse().id_token;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/googleLogin");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onload = function () {
+      console.log(id_token);
+      console.log("Signed in as: " + xhr.responseText);
+      if (xhr.responseText == "success") {
+        signOut();
+        location.assign("/home");
       }
-    </script>
-
-    <script>
-      function onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log("Name: " + profile.getName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail()); // This is null if the 'email' scope is not present.
-
-        var id_token = googleUser.getAuthResponse().id_token;
-
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/googleLogin");
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onload = function () {
-          console.log(id_token);
-          console.log("Signed in as: " + xhr.responseText);
-          if (xhr.responseText == "success") {
-            signOut();
-            location.assign("/home");
-          }
-        };
-        xhr.send(JSON.stringify({ token: id_token }));
-      }
-    </script> -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-      crossorigin="anonymous"
-    ></script>
-  </body>
-</html>
+    };
+    xhr.send(JSON.stringify({ token: id_token }));
+  }
+</script> -->
+<!-- <script
+  src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+  crossorigin="anonymous"
+></script> -->

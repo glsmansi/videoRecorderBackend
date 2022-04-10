@@ -10,7 +10,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh; */
-  /* overflow-y: hidden; */
+  overflow-x: hidden;
 }
 
 .nav {
@@ -25,7 +25,7 @@ body {
   margin: -1rem 2rem;
 }
 .registerBtn {
-  margin: 36px;
+  /* margin: 36px; */
   /* display: flex; */
   /* justify-content: center; */
   width: 94px;
@@ -40,6 +40,8 @@ body {
 }
 .fullContainer {
   display: flex;
+  position: absolute;
+  top: -18px;
   /* justify-content: space-around; */
   /* align-items: center; */
   height: 60rem;
@@ -91,7 +93,7 @@ body {
 
 .secondContainer {
   background-size: cover;
-  /* height: 1050; */
+  /* height: 1050px; */
 }
 
 .secondContainer img {

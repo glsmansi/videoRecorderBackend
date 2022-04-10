@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const user = require("./server/controllers/user");
 const methodOverride = require("method-override");
 const expressLayouts = require("express-ejs-layouts");
+
 // const fileUpload = require("express-fileupload");
 //const expressLayouts=require('express-ejs-layouts')
 
@@ -26,6 +27,23 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(expressLayouts);
 
+app.use((req, res, next) => {
+  let names = "cookietokenkey";
+  function getCookie(name) {
+    const value = `; ${req.headers.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(";").shift();
+  }
+  let cookieValue = getCookie(names);
+  // console.log(req.cookie);
+
+  console.log(cookieValue);
+  // console.log(req);
+  res.locals.currentUser = cookieValue;
+  // console.log(res.locals.currentUser);
+  next();
+});
+
 app.set("views", path.join(__dirname, "views"));
 app.use(cookieParser());
 app.use(express.json());
@@ -40,11 +58,6 @@ app.route("/").get(catchAsync(user.home));
 // app.all("*", (req, res, next) => {
 //   next(new ExpressError("Page Not Found", 404));
 // });
-
-app.use((req, res, next) => {
-  res.locals.currentUser = req.user;
-  next();
-});
 
 app.use((err, req, res, next) => {
   const { statusCode = 400 } = err;

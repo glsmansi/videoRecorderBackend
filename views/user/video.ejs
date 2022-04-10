@@ -1,60 +1,3 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" href="../../css/video.css" />
-
-    <script
-      src="https://kit.fontawesome.com/afb23c7fce.js"
-      crossorigin="anonymous"
-    ></script>
-    <title>Document</title>
-  </head>
-  <body>
-    <navbar>
-      <div class="nav">
-        <a href="/">
-          <img src="../../img/loom.png" class="loomLogo" />
-        </a>
-        <div class="iconNavi">
-          <i class="fas fa-search"></i>
-          <i class="far fa-bell"></i>
-          <a href="/logout">
-            <button class="logOutBtn">Log out</button>
-          </a>
-        </div>
-      </div>
-    </navbar>
-    <div class="fullContainer">
-      <div class="firstFullContainer">
-        <div class="firstContainer">
-          <h3>libraries</h3>
-          <div class="threeContainer">
-            <i class="fas fa-user"></i>
-            <h2>Personal</h2>
-          </div>
-
-          <div class="threeContainer">
-            <i class="fas fa-user-friends"></i>
-            <h2>Shared with Me</h2>
-          </div>
-          <div class="threeContainer">
-            <i class="fas fa-users"></i>
-            <h2>Personal</h2>
-          </div>
-        </div>
-      </div>
-
-      <section>
-        
-      </section>
-    </div>
-  </body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -149,7 +92,7 @@
                 >Team Members:</span
               >
             </p>
-            <%if(uservideo.teamMembers){var
+            <%if(uservideo.teamMembers){ var
             members=uservideo.teamMembers.split(',')%> <%for(i of members){%>
             <ul style="margin: 1rem">
               <li><%=i%></li>
@@ -169,6 +112,7 @@
             </p>
           </div>
           <hr style="margin: 5rem 0" />
+          <%if(currentUser.id==video.userId){%>
           <div class="nameAndPhoto">
             <form action="/<%=video.id%>/watch/changeFileName" method="POST">
               <label for="name">Change File Name: </label>
@@ -183,7 +127,6 @@
               </div>
             </form>
             <form action="/<%=video.id%>/watch/teamMembers/add" method="POST">
-              <%if(video.userId==user.id){%>
               <label style="margin-top: 3rem" for="email"
                 >Team Members Email:
               </label>
@@ -198,7 +141,7 @@
                 <button type="submit" class="saveBtn">Add</button>
               </div>
             </form>
-            <%}%>
+
             <form action="/<%=video.id%>/watch/meetingNotes" method="POST">
               <label style="margin-top: 3rem" for="notes">Meeting Notes:</label>
               <textarea
@@ -253,12 +196,10 @@
                 <button class="saveBtn">Submit</button>
               </div>
             </form>
-
-            <!-- <h3>
-              Access your Loom Workspaces with any email address, or by
-              connecting an account.
-            </h3> -->
           </div>
+          <%}else {%>
+          <h3 class="text-center" style="left: 80%">Not Authorised User</h3>
+          <%}%>
         </div>
       </section>
     </div>

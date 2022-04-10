@@ -7,7 +7,7 @@ const auth = async (req, res, next) => {
     const token = req.cookies.cookietokenkey;
     // const token = req.headers.auth;
 
-    console.log(token);
+    console.log("auth token", token);
 
     if (!token) {
       return res.redirect("/login");

@@ -1,3 +1,4 @@
+<%if(currentUser){%>
 <div class="fullContainer">
   <div class="firstFullContainer">
     <div class="firstContainer">
@@ -28,6 +29,7 @@
       </div>
     </div>
   </div>
+  <%}%>
   <script>
     if (location.href == "https://videorecorderbackend.herokuapp.com/home") {
       document.getElementById("personal").classList.add("selected");

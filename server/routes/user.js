@@ -74,7 +74,7 @@ router
 //   .route("/:id/copyLinkToClipboard")
 //   .post(auth, catchAsync(user.copyLinkToClipBoard));
 
-router.route("/:id/publicLink/sharable").get(user.publicSharableLink);
+// router.route("/:id/publicLink/sharable").get(user.publicSharableLink);
 
 router.route("/me").get(auth, user.sharedWithMe);
 router.route("/team").get(auth, user.sharedWithOthers);

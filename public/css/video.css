@@ -107,3 +107,10 @@ section {
   flex-direction: column;
   justify-content: space-between;
 }
+.text-center {
+  /* text-align: center; */
+  position: relative;
+  left: 40%;
+  top: 20%;
+  font-size: bolder;
+}

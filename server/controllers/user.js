@@ -163,7 +163,10 @@ module.exports.getLogin = async (req, res) => {
   // if (req.cookies["cookietokenkey"]) {
   //   res.redirect("/home");
   // } else {
-  res.render("user/login", { loginErr: false, userErr: false });
+  res.render("user/login", {
+    loginErr: false,
+    userErr: false,
+  });
   // }
 };
 
@@ -310,10 +313,14 @@ module.exports.personal = async (req, res) => {
 
 module.exports.userVideoLink = async (req, res) => {
   const { id } = req.params;
-  const user = req.user;
+  // const user = req.user;
   const video = await Video.findOne({ where: { id: id } });
   const uservideo = await UserVideo({ where: { id: video.id } });
-  res.render("user/video", { video, user, uservideo });
+  if (video.status == "public") {
+    res.render("user/publicVideoPage", { video });
+  } else {
+    res.render("user/video", { video, user, uservideo });
+  }
 };
 
 module.exports.downloadVideo = async (req, res) => {
@@ -403,11 +410,11 @@ module.exports.changeUserName = async (req, res) => {
   res.redirect("/settings");
 };
 
-module.exports.publicSharableLink = async (req, res) => {
-  const { id } = req.params;
-  const video = await Video.findOne({ where: { id: id } });
-  res.render("user/publicVideoPage", { video });
-};
+// module.exports.publicSharableLink = async (req, res) => {
+//   const { id } = req.params;
+//   const video = await Video.findOne({ where: { id: id } });
+//   res.render("user/publicVideoPage", { video });
+// };
 
 module.exports.changePassword = async (req, res) => {
   const { password, newPassword, confirmPassword } = req.body;
