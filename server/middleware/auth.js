@@ -4,7 +4,7 @@ dotenv.config();
 
 const auth = async (req, res, next) => {
   try {
-    const token = req.cookies.cookietokenkey;
+    const token = req.cookies.loginkey;
     // const token = req.headers.auth;
 
     console.log("auth token", token);
@@ -24,12 +24,4 @@ const auth = async (req, res, next) => {
   }
 };
 
-const midd = (req, res, next) => {
-  try {
-    console.log("mansi");
-    next();
-  } catch (e) {
-    console.log(e);
-  }
-};
 module.exports = auth;

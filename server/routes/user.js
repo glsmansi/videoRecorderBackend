@@ -46,7 +46,7 @@ router.route("/home").get(auth, catchAsync(user.personal));
 router.route("/settings").get(auth, catchAsync(user.settings));
 router.route("/userDetails").get(auth, catchAsync(user.userDetails));
 
-router.route("/:id/watch").get(auth, catchAsync(user.userVideoLink));
+router.route("/:id/watch").get(catchAsync(user.userVideoLink));
 router
   .route("/:id/watch/publicOrPrivate")
   .post(auth, catchAsync(user.publicOrPrivate));

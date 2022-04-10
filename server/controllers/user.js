@@ -29,7 +29,7 @@ const CLIENT_ID =
 const client = new OAuth2Client(CLIENT_ID);
 
 module.exports.home = async (req, res) => {
-  if (req.cookies["cookietokenkey"]) {
+  if (req.cookies["loginkey"]) {
     res.redirect("/home");
   } else {
     res.render("home");
@@ -85,7 +85,7 @@ module.exports.uploadVideo = async (req, res) => {
 };
 
 module.exports.getRegister = async (req, res) => {
-  // if (req.cookies["cookietokenkey"]) {
+  // if (req.cookies["loginkey"]) {
   //   res.redirect("/home");
   // } else {
   res.render("user/register", { loginErr: false });
@@ -160,7 +160,7 @@ module.exports.postRegister = async (req, res, next) => {
 // });
 
 module.exports.getLogin = async (req, res) => {
-  // if (req.cookies["cookietokenkey"]) {
+  // if (req.cookies["loginkey"]) {
   //   res.redirect("/home");
   // } else {
   res.render("user/login", {
@@ -189,7 +189,7 @@ module.exports.postLogin = async (req, res, next) => {
 
         await user.save();
         console.log(token, "token");
-        res.cookie("cookietokenkey", token, {
+        res.cookie("loginkey", token, {
           httpOnly: false,
           secure: true,
           maxAge: 3600 * 60 * 60 * 24,
@@ -232,7 +232,7 @@ module.exports.googleLogin = async (req, res) => {
   }
   verify()
     .then(() => {
-      res.cookie("cookietokenkey", token, {
+      res.cookie("loginkey", token, {
         httpOnly: true,
         secure: true,
         // maxAge: 1,
@@ -264,7 +264,7 @@ module.exports.settings = async (req, res) => {
 };
 
 module.exports.loginSuccess = async (req, res) => {
-  // if (req.cookies["cookietokenkey"]) {
+  // if (req.cookies["loginkey"]) {
   res.render("user/myVideo");
 };
 
@@ -313,13 +313,22 @@ module.exports.personal = async (req, res) => {
 
 module.exports.userVideoLink = async (req, res) => {
   const { id } = req.params;
-  // const user = req.user;
   const video = await Video.findOne({ where: { id: id } });
-  const uservideo = await UserVideo({ where: { id: video.id } });
+  const user = await User.findOne({ where: { id: video.userId } });
+  const uservideo = await UserVideo.findAll({
+    where: { userEmail: user.email, videoId: video.id },
+  });
   if (video.status == "public") {
     res.render("user/publicVideoPage", { video });
-  } else {
-    res.render("user/video", { video, user, uservideo });
+  } else if (video.status == "private") {
+    if (req.cookies.loginkey) {
+      const token = req.cookies.loginkey;
+      const data = await jwt.verify(token, process.env.TOKEN_KEY);
+      const userData = data;
+      res.render("user/video", { video, user, uservideo, userData });
+    } else {
+      res.redirect("/login");
+    }
   }
 };
 
@@ -510,6 +519,6 @@ module.exports.removeProfilePic = async (req, res) => {
 };
 
 module.exports.logout = (req, res) => {
-  res.clearCookie("cookietokenkey");
+  res.clearCookie("loginkey");
   res.redirect("/");
 };
