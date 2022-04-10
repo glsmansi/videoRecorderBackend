@@ -28,7 +28,7 @@ app.set("view engine", "ejs");
 app.use(expressLayouts);
 
 app.use((req, res, next) => {
-  let names = "cookietokenkey";
+  let names = "loginkey";
   function getCookie(name) {
     const value = `; ${req.headers.cookie}`;
     const parts = value.split(`; ${name}=`);

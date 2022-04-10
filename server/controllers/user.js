@@ -520,5 +520,6 @@ module.exports.removeProfilePic = async (req, res) => {
 
 module.exports.logout = (req, res) => {
   res.clearCookie("loginkey");
+  // res.clearCookie("cookietokenkey");
   res.redirect("/");
 };
