@@ -44,14 +44,11 @@
                 >Team Members:</span
               >
             </p>
-            <%if(uservideo.teamMembers){ var
-            members=uservideo.teamMembers.split(',')%> <%for(i of members){%>
+         
             <ul style="margin: 1rem">
-              <li><%=i%></li>
+              <li><%=uservideo.teamMembers%></li>
             </ul>
-            <%}}else{%>
-            <p><%=uservideo.teamMembers%></p>
-            <%}%>
+           
             <p style="margin-top: 5rem">
               <span style="font-weight: 900; color: #525aa4"
                 >Meeting Notes:</span

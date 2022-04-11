@@ -328,7 +328,7 @@ module.exports.userVideoLink = async (req, res) => {
       console.log(userData);
       res.render("user/video", { video, user, uservideo, userData });
     } else {
-      // res.redirect("/login");
+      res.redirect("/login");
     }
   }
 };
