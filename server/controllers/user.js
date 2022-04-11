@@ -318,6 +318,7 @@ module.exports.userVideoLink = async (req, res) => {
   const uservideo = await UserVideo.findAll({
     where: { userEmail: user.email, videoId: video.id },
   });
+  console.log(uservideo.teamMembers);
   if (video.status == "public") {
     res.render("user/publicVideoPage", { video });
   } else if (video.status == "private") {
