@@ -249,19 +249,19 @@ module.exports.sharedWithMe = async (req, res) => {
   const uservideos = await UserVideo.findAll({
     where: { teamMembers: userEmail },
   });
+
+  var arr = [];
+  for (let i = 0; i < uservideos.length; i++) {
+    arr.push(uservideos[i]);
+  }
+  console.log(arr);
   const sharedvideos = await Video.findAll({
     where: {
-      id: uservideos.videoId,
+      id: arr.videoId,
     },
   });
-  if (sharedvideos.length) {
-    var arr = [];
-    for (let i = 0; i < sharedvideos.length; i++) {
-      arr.push(sharedvideos[i]);
-    }
-    console.log(arr);
-    res.render("user/me", { sharedvideos });
-  }
+
+  res.render("user/me", { sharedvideos });
 };
 module.exports.sharedWithOthers = async (req, res) => {
   // const userEmail = req.user.email;
