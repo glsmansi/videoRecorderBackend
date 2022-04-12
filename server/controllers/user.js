@@ -267,7 +267,7 @@ module.exports.sharedWithMe = async (req, res) => {
       },
     });
     sharedvideos.push(videos);
-    console.log(sharedvideos[i]);
+    console.log(sharedvideos);
   }
 
   res.render("user/me", { sharedvideos });

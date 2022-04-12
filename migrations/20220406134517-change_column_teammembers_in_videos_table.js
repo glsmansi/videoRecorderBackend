@@ -3,7 +3,7 @@
 module.exports = {
   up(queryInterface, Sequelize) {
     return queryInterface.changeColumn("UserVideos", "teamMembers", {
-      type: SeqUelize.STRING(255),
+      type: Sequelize.STRING(255),
     });
   },
 

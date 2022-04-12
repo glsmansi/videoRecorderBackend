@@ -16,7 +16,7 @@
   "production": {
     "username": "atg-meet",
     "password": "G5YVxqg3l8C9X5AE",
-    "database": "atg-meet",
+    "database": "atgmeet",
     "host": "scrapdb2.crbyejbc1y6i.ap-south-1.rds.amazonaws.com",
     "dialect": "mysql"
   }
