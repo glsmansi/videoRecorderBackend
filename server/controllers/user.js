@@ -134,9 +134,6 @@ module.exports.postRegister = async (req, res, next) => {
 };
 
 module.exports.getLogin = async (req, res) => {
-  // if (req.cookies["loginkey"]) {
-  //   res.redirect("/home");
-  // } else {
   res.render("user/login", {
     loginErr: false,
     userErr: false,
@@ -255,17 +252,17 @@ module.exports.sharedWithMe = async (req, res) => {
   const sharedvideos = await Video.findAll({
     where: {
       id: uservideos.videoId,
-
-      // [sequelize.Op.not]: userVideos.id,
     },
   });
-  if(sharedvideos.length){
-    var arr = []; for (let i = 0; i <sharedvideos.length; i++) {arr.push(sharedvideos[i]);}
-    console.log(arr)
-  res.render("user/me", { sharedvideos });
-  // res.render("user/me", { uservideos });
+  if (sharedvideos.length) {
+    var arr = [];
+    for (let i = 0; i < sharedvideos.length; i++) {
+      arr.push(sharedvideos[i]);
+    }
+    console.log(arr);
+    res.render("user/me", { sharedvideos });
+  }
 };
-
 module.exports.sharedWithOthers = async (req, res) => {
   // const userEmail = req.user.email;
   const user = await User.findOne({ where: { id: req.user.user_id } });
@@ -273,7 +270,7 @@ module.exports.sharedWithOthers = async (req, res) => {
   const userVideos = await UserVideo.findAll({
     where: { userEmail: user.email },
   });
-  // console.log(userVideos);
+
   const videos = await Video.findAll({
     where: { userId: req.user.user_id },
   });
@@ -298,15 +295,7 @@ module.exports.userVideoLink = async (req, res) => {
   const user = await User.findOne({ where: { id: video.userId } });
   const uservideo = await UserVideo.findAll({
     where: { userEmail: user.email, videoId: video.id },
-    // attributes: ["teamMembers"],
   });
-  // console.log(user.email);
-  // console.log(video.id);
-  // let arr = [];
-  // for (let i = 0; i < uservideo.length; i++) {
-  //   arr.push(uservideo[i].teamMembers);
-  // }
-  // console.log("teamMembers:", arr);
 
   var userData;
 
@@ -379,16 +368,6 @@ module.exports.AddteamMembers = async (req, res) => {
     teamMembers: teamMembers,
   });
   await uservideo.save();
-  // video.teamMembers.push("," + teamMembers);
-  // if (uservideo.teamMembers) {
-  // var members = uservideo.teamMembers.split(",");
-  // if (members.indexOf(teamMembers) != -1) {
-  // members.push(teamMembers);
-  // }
-  // uservideo.teamMembers = members.join(",");
-  // } else {
-  // uservideo.teamMembers = teamMembers;
-  // }
 
   res.redirect(`/${id}/watch`);
 };
@@ -431,12 +410,6 @@ module.exports.changeUserName = async (req, res) => {
   res.redirect("/settings");
 };
 
-// module.exports.publicSharableLink = async (req, res) => {
-//   const { id } = req.params;
-//   const video = await Video.findOne({ where: { id: id } });
-//   res.render("user/publicVideoPage", { video });
-// };
-
 module.exports.changePassword = async (req, res) => {
   const { password, newPassword, confirmPassword } = req.body;
   const user = await User.findOne({ where: { id: req.user.user_id } });
@@ -472,24 +445,6 @@ module.exports.changePassword = async (req, res) => {
     console.log("Wrong password");
   }
 };
-// module.exports.uploadPhoto = async (req, res) => {
-//   console.log("photoUpload");
-//   console.log(req.files);
-//   if (req.files) {
-//     console.log(req.files.mypic);
-//     var image = req.files.mypic;
-//     const user = await User.findOne({ where: { id: req.user.user_id } });
-//     user.profilePicture = image;
-//     console.log(req.body.username);
-//     var filepath = `C:/Users/TOSHIBA/Desktop/videoRecorderBackend-main/public/profilepic/${req.body.username}.jpg`;
-//     console.log(filepath);
-//     image.mv(filepath, (err) => {
-//       console.log(err);
-//     });
-//     res.redirect("/settings");
-//   }
-//   res.redirect("/settings");
-// };
 
 module.exports.uploadPhoto = async (req, res) => {
   console.log(req.body);
