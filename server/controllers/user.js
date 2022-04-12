@@ -302,7 +302,7 @@ module.exports.userVideoLink = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findOne({ where: { id: id } });
   const user = await User.findOne({ where: { id: video.userId } });
-  const uservideo = await UserVideo.findAll({
+  const userVideo = await UserVideo.findAll({
     where: { userEmail: user.email, videoId: video.id },
   });
 
@@ -317,7 +317,7 @@ module.exports.userVideoLink = async (req, res) => {
       return res.render("user/publicVideoPage", {
         video,
         user,
-        uservideo,
+        userVideo,
         userData,
       });
     } else {
@@ -329,6 +329,10 @@ module.exports.userVideoLink = async (req, res) => {
       const data = await jwt.verify(token, process.env.TOKEN_KEY);
       const userData = data;
       console.log(userData);
+      let uservideo = [];
+      for (let i = 0; i < userVideo.length; i++) {
+        uservideo.push(userVideo[i]);
+      }
       res.render("user/video", { video, user, uservideo, userData });
     } else {
       res.redirect("/login");
