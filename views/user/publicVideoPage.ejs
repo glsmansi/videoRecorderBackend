@@ -21,8 +21,8 @@
       <link rel="stylesheet" href="../../css/home.css" />
 <style>
     body{
-        overflow: scroll;
-        position: relative;
+        /* overflow: scroll;
+        position: relative; */
     }
     .videoDetails{
         position: absolute;
@@ -33,6 +33,123 @@
     .details{
         font-size: 2rem;
     }
+    @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; */
+}
+
+.nav {
+  display: flex;
+  position: sticky;
+  top: 0;
+  left: 0px;
+  justify-content: space-between;
+  background: #f8f6f0;
+  height: 91px;
+  /* width: auto; */
+  z-index: 9999;
+}
+
+.loomLogo {
+  width: 11rem;
+  margin: -1rem 2rem;
+  position: absolute;
+  z-index: 1;
+}
+.iconNavi {
+  margin: 35px;
+  padding: -3px;
+}
+.iconNavi i {
+  padding: 1px 12px;
+}
+
+.firstFullContainer {
+  padding: 19px 19px;
+  height: 100%;
+  width: 254px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #f8f6f0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.firstContainer {
+  position: relative;
+  top: 109px;
+}
+.threeContainer {
+  display: flex;
+  padding: 14px 11px;
+  margin: 9px 0px 0px 0px;
+}
+.selected {
+  border: none;
+  background-color: #e2e2e6;
+  border-radius: 7px;
+  width: 15em;
+  height: 26px;
+}
+.threeContainer i {
+  padding: 6px 11px;
+}
+.threeContainer a {
+  display: flex;
+  text-decoration: none;
+  color: #100d0f;
+}
+section {
+  padding: 10px;
+  margin-left: 350px;
+  font-size: 28px;
+  padding: 0px 10px;
+  overflow-x: hidden;
+}
+.logOutBtn {
+  width: 74px;
+  height: 31px;
+  border: none;
+  background-color: #525aa4;
+  border-radius: 5px;
+  color: #f8f6f0;
+  font-weight: 600;
+}
+.buttonsForName {
+  display: flex;
+  padding-top: 20px;
+}
+.status {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.align {
+  display: flex;
+  padding-top: 12px;
+  padding-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.text-center {
+  /* text-align: center; */
+  position: relative;
+  left: 40%;
+  top: 20%;
+  font-size: bolder;
+}
+
 </style>
     <!-- <title>Document</title>
   </head> -->
