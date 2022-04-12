@@ -86,6 +86,7 @@
             >Team Members:</span
           >
         </p>
+        <%if(uservideo.length){%>
         <%let arr=[]; for(let i=0;i<uservideo.length;i++){%>
           <%arr.push(uservideo[i].teamMembers)%>
         <%}%>
@@ -96,7 +97,8 @@
             <li><%=i%></li>
               <%}}%>
           </ul>
-         <%}%>
+        <%}}%>
+
         <p style="margin-top: 5rem">
           <span style="font-weight: 900; color: #525aa4"
             >Meeting Notes:</span
