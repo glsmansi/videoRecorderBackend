@@ -253,7 +253,7 @@ module.exports.sharedWithMe = async (req, res) => {
   var arr = [];
   var sharedvideos = [];
   for (let i = 0; i < uservideos.length; i++) {
-    if (uservideos[i].videoId in arr) {
+    if (arr.includes(uservideos[i].videoId)) {
       console.log("sdfdsf");
       continue;
     }
