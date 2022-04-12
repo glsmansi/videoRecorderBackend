@@ -259,7 +259,9 @@ module.exports.sharedWithMe = async (req, res) => {
       // [sequelize.Op.not]: userVideos.id,
     },
   });
-
+  if(sharedvideos.length){
+    var arr = []; for (let i = 0; i <sharedvideos.length; i++) {arr.push(sharedvideos[i]);}
+    console.log(arr)
   res.render("user/me", { sharedvideos });
   // res.render("user/me", { uservideos });
 };
