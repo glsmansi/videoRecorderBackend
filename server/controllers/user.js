@@ -252,9 +252,9 @@ module.exports.sharedWithMe = async (req, res) => {
 
   var arr = [];
   for (let i = 0; i < uservideos.length; i++) {
-    arr.push(uservideos[i]);
+    arr.push(uservideos[i].videoId);
   }
-  console.log(arr.videoId);
+  console.log(arr);
   const sharedvideos = await Video.findAll({
     where: {
       id: arr.videoId,
