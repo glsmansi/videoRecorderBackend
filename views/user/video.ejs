@@ -9,9 +9,9 @@
 
   <body>
     <%let arr=[]; for(let i=0;i<uservideo.length;i++){%>
-      <%console.log("teammembers",uservideo[i].teamMembers);arr.push(uservideo[i].teamMembers)%>
+      <%arr.push(uservideo[i].teamMembers)%>
     <%}%>
-  <% if((userData.email in arr) || (userData.user_id==user.id)){ %> 
+  <% console.log("teammembers",arr);console.log("owner",userData.email);if((userData.email in arr) || (userData.user_id==user.id)){ %> 
       <section>
         <div class="setting">
           <div class="heading">
