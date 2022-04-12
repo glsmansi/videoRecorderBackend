@@ -9,7 +9,7 @@
 
   <body>
     <%let arr=[]; for(let i=0;i<uservideo.length;i++){%>
-      <%console.log(uservideo[i].teamMembers);arr.push(uservideo[i].teamMembers)%>
+      <%console.log("teammembers",uservideo[i].teamMembers);arr.push(uservideo[i].teamMembers)%>
     <%}%>
   <% if((userData.email in arr) || (userData.user_id==user.id)){ %> 
       <section>
