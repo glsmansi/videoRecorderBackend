@@ -321,7 +321,7 @@ module.exports.userVideoLink = async (req, res) => {
         userData,
       });
     } else {
-      res.render("user/publicVideoPage", { video });
+      res.render("user/publicVideoPage", { video, uservideo });
     }
   } else if (video.status == "private") {
     if (req.cookies.loginkey) {
