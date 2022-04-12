@@ -108,6 +108,7 @@
           <%=video.status%>
         </p>
       </div>
+      <%if(currentUser){%>
       <hr style="margin: 5rem 0" />
       <%if(userData.user_id==video.userId){%>
       <div class="nameAndPhoto">
@@ -194,7 +195,7 @@
           </div>
         </form>
         </div>
-      <%}%>
+      <%}}%>
 
       </div>
   </section>
