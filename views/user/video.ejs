@@ -8,11 +8,14 @@
   
 
   <body>
-  
+    <%let arr=[]; for(let i=0;i<uservideo.length;i++){%>
+      <%arr.push(uservideo[i].teamMembers)%>
+    <%}%>
+  <% if((userData.email in arr) || (userData.user_id==user.id)){ %> 
       <section>
         <div class="setting">
           <div class="heading">
-            <h2><%=user.username%></h2>
+           
             <h1 style="text-align: center">Video Details</h1>
           </div>
           <!-- <div class="navigationLink">
@@ -44,9 +47,12 @@
                 >Team Members:</span
               >
             </p>
-         <% if(uservideo.teamMembers){ %> 
+         <% if(arr){ %> 
             <ul style="margin: 1rem">
-              <li><%=uservideo.teamMembers%></li>
+              <%for(let i of arr){%>
+                <%if(i!=null){%>
+              <li><%=i%></li>
+                <%}}%>
             </ul>
            <%}%>
             <p style="margin-top: 5rem">
@@ -146,8 +152,8 @@
               </div>
             </form>
           </div>
-          <%}else {%>
-          <h3 class="text-center" style="left: 80%">Not Authorised User</h3>
+          <%}}else {%>
+          <h3 class="text-center" style="text-align: center;font-size:2rem;position: absolute;left:28%;top:50%">Not Authorised User. Please Request Permission From The Owner </h3>
           <%}%>
         </div>
       </section>

@@ -25,7 +25,7 @@ body {
   margin: -1rem 2rem;
 }
 .registerBtn {
-  /* margin: 36px; */
+  margin: 36px;
   /* display: flex; */
   /* justify-content: center; */
   width: 94px;
@@ -41,7 +41,7 @@ body {
 .fullContainer {
   display: flex;
   position: absolute;
-  top: -18px;
+  /* top: -18px; */
   /* justify-content: space-around; */
   /* align-items: center; */
   height: 60rem;

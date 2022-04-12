@@ -9,6 +9,7 @@ const cookieParser = require("cookie-parser");
 const user = require("./server/controllers/user");
 const methodOverride = require("method-override");
 const expressLayouts = require("express-ejs-layouts");
+const auth = require("./server/middleware/auth");
 
 // const fileUpload = require("express-fileupload");
 //const expressLayouts=require('express-ejs-layouts')
@@ -24,8 +25,6 @@ sequelize
   });
 
 const app = express();
-app.set("view engine", "ejs");
-app.use(expressLayouts);
 
 app.use((req, res, next) => {
   let names = "loginkey";
@@ -37,12 +36,16 @@ app.use((req, res, next) => {
   let cookieValue = getCookie(names);
   // console.log(req.cookie);
 
-  console.log(cookieValue);
+  // console.log(cookieValue);
   // console.log(req);
   res.locals.currentUser = cookieValue;
-  // console.log(res.locals.currentUser);
+
+  // console.log("user", req);
   next();
 });
+
+app.set("view engine", "ejs");
+app.use(expressLayouts);
 
 app.set("views", path.join(__dirname, "views"));
 app.use(cookieParser());

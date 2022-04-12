@@ -88,20 +88,34 @@ module.exports.getRegister = async (req, res) => {
   // if (req.cookies["loginkey"]) {
   //   res.redirect("/home");
   // } else {
-  res.render("user/register", { loginErr: false });
+  res.render("user/register", { loginErr: false, passErr: false });
   // }
 };
 
 module.exports.postRegister = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
+
     const oldUser = await User.findOne({ where: { email: email } });
     console.log(oldUser);
     if (oldUser) {
       //return next(new ExpressError("User Already Exist", 409));
-      res.render("user/register", { loginErr: true });
+      res.render("user/register", { loginErr: true, passErr: false });
     }
 
+    // if (password.search(/(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}/) == -1) {
+    //   console.log(password);
+    //   return res.render("user/register", { loginErr: false, passErr: true });
+    // }
+    if (
+      password < 8 ||
+      password.search(/[0-9]/) == -1 ||
+      password.search(/[a-z]/) == -1 ||
+      password.search(/[A-Z]/) == -1 ||
+      password.search(/[!/@/#/$/%/^/&/(/)/_/+/./,/:/;/*/]/) == -1
+    ) {
+      return res.render("user/register", { loginErr: false, passErr: true });
+    }
     const encryptedPassword = await bcrypt.hash(password, 10);
     console.log(encryptedPassword);
 
@@ -118,46 +132,6 @@ module.exports.postRegister = async (req, res, next) => {
     return next(new ExpressError(e));
   }
 };
-
-// app.get("/send", function (req, res) {
-//   rand = Math.floor(Math.random() * 100 + 54);
-//   host = req.get("host");
-//   link = "http://" + req.get("host") + "/verify?id=" + rand;
-//   mailOptions = {
-//     to: req.query.to,
-//     subject: "Please confirm your Email account",
-//     html:
-//       "Hello,<br> Please Click on the link to verify your email.<br><a href=" +
-//       link +
-//       ">Click here to verify</a>",
-//   };
-//   console.log(mailOptions);
-//   smtpTransport.sendMail(mailOptions, function (error, response) {
-//     if (error) {
-//       console.log(error);
-//       res.end("error");
-//     } else {
-//       console.log("Message sent: " + response.message);
-//       res.end("sent");
-//     }
-//   });
-// });
-
-// app.get("/verify", function (req, res) {
-//   console.log(req.protocol + ":/" + req.get("host"));
-//   if (req.protocol + "://" + req.get("host") == "http://" + host) {
-//     console.log("Domain is matched. Information is from Authentic email");
-//     if (req.query.id == rand) {
-//       console.log("email is verified");
-//       res.end("<h1>Email " + mailOptions.to + " is been Successfully verified");
-//     } else {
-//       console.log("email is not verified");
-//       res.end("<h1>Bad Request</h1>");
-//     }
-//   } else {
-//     res.end("<h1>Request is from unknown source");
-//   }
-// });
 
 module.exports.getLogin = async (req, res) => {
   // if (req.cookies["loginkey"]) {
@@ -215,19 +189,24 @@ module.exports.googleLogin = async (req, res) => {
 
   async function verify() {
     const ticket = await client.verifyIdToken({
-      idToken: token,
+      idToken: req.body.token,
       audience: CLIENT_ID,
     });
     const payload = ticket.getPayload();
     const userid = payload["sub"];
     console.log(payload);
     const user = await User.findOne({ where: { email: payload.email } });
+    const token = jwt.sign(
+      { user_id: user.id, email: payload.email },
+      process.env.TOKEN_KEY
+    );
     if (!user) {
       const newUser = await User.create({
         email: payload.email,
-        token,
+
         loginType: "googleLogin",
       });
+      await newUser.save();
     }
   }
   verify()
@@ -317,10 +296,33 @@ module.exports.userVideoLink = async (req, res) => {
   const user = await User.findOne({ where: { id: video.userId } });
   const uservideo = await UserVideo.findAll({
     where: { userEmail: user.email, videoId: video.id },
+    // attributes: ["teamMembers"],
   });
-  console.log(uservideo.teamMembers);
+  // console.log(user.email);
+  // console.log(video.id);
+  // let arr = [];
+  // for (let i = 0; i < uservideo.length; i++) {
+  //   arr.push(uservideo[i].teamMembers);
+  // }
+  // console.log("teamMembers:", arr);
+
+  var userData;
+
   if (video.status == "public") {
-    res.render("user/publicVideoPage", { video });
+    if (req.cookies.loginkey) {
+      const token = req.cookies.loginkey;
+      const data = await jwt.verify(token, process.env.TOKEN_KEY);
+      userData = data;
+      console.log(userData);
+      return res.render("user/publicVideoPage", {
+        video,
+        user,
+        uservideo,
+        userData,
+      });
+    } else {
+      res.render("user/publicVideoPage", { video, uservideo, userData });
+    }
   } else if (video.status == "private") {
     if (req.cookies.loginkey) {
       const token = req.cookies.loginkey;

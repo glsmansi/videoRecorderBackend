@@ -17,6 +17,7 @@
           </button>
         </div>
       </div>
+
     </div>
   </div>
   <div class="videoContainer">
@@ -53,7 +54,7 @@
             <div class="shareOptions">
               <div class="shareLink">
                 <i class="fas fa-link"></i>
-                <%if(video.status=="private"){%>
+               
                 
                 <div style="display: none" id="link1<%=video.id%>">
                   videorecorderbackend.herokuapp.com/<%=video.id%>/watch
@@ -61,16 +62,7 @@
                 <button onclick="copyToClipboard('link1<%=video.id%>')">
                   share link
                 </button>
-                <%}else{%>
                 
-                  
-                <div style="display: none" id="link2<%=video.id%>">
-                  videorecorderbackend.herokuapp.com/<%=video.id%>/publicLink/sharable
-                </div>
-                <button onclick="copyToClipboard('link2<%=video.id%>')">
-                  share link
-                </button>
-                <%}%>
               </div>
             </div>
           </form>

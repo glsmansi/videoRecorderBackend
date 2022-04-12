@@ -24,7 +24,7 @@ body {
   margin: -1rem 2rem;
 }
 .registerBtn {
-  /* margin: 31px; */
+  margin: 31px;
   /* display: flex; */
   /* justify-content: center; */
   width: 191px;
@@ -80,7 +80,7 @@ form {
 }
 .signInGoogle img {
   width: 32px;
-  margin: 7px;
+  margin: 10px;
 }
 .signInSlack {
   width: 307px;

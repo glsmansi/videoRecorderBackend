@@ -2,13 +2,13 @@
 
 module.exports = {
   up(queryInterface, Sequelize) {
-    return queryInterface.changeColumn("Videos", "teamMembers", {
-      type: Sequelize.STRING(255),
+    return queryInterface.changeColumn("UserVideos", "teamMembers", {
+      type: SeqUelize.STRING(255),
     });
   },
 
   down(queryInterface, Sequelize) {
-    return queryInterface.changeColumn("Videos", "teamMembers", {
+    return queryInterface.removeColumn("UserVideos", "teamMembers", {
       type: Sequelize.STRING,
     });
   },
