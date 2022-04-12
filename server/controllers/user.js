@@ -252,7 +252,7 @@ module.exports.sharedWithMe = async (req, res) => {
 
   var arr = [];
   for (let i = 0; i < uservideos.length; i++) {
-    if (i in arr) {
+    if (uservideos[i].videoId in arr) {
       continue;
     }
     arr.push(uservideos[i].videoId);
