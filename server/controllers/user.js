@@ -141,7 +141,6 @@ module.exports.getLogin = async (req, res) => {
     loginErr: false,
     userErr: false,
   });
-  // }
 };
 
 module.exports.postLogin = async (req, res, next) => {
@@ -250,17 +249,18 @@ module.exports.loginSuccess = async (req, res) => {
 module.exports.sharedWithMe = async (req, res) => {
   const userEmail = req.user.email;
   const user = await User.findOne({ where: { id: req.user.user_id } });
-  const userVideos = await UserVideo.findAll({
-    where: { userEmail: userEmail },
+  const uservideos = await UserVideo.findAll({
+    where: { teamMembers: userEmail },
   });
-  const uservideos = await Video.findAll({
+  const sharedvideos = await Video.findAll({
     where: {
-      userId: {
-        [sequelize.Op.not]: userVideos.id,
-      },
+      id: uservideos.videoId,
+
+      // [sequelize.Op.not]: userVideos.id,
     },
   });
-  res.render("user/me", { uservideos });
+
+  res.render("user/me", { sharedvideos });
   // res.render("user/me", { uservideos });
 };
 
@@ -321,7 +321,7 @@ module.exports.userVideoLink = async (req, res) => {
         userData,
       });
     } else {
-      res.render("user/publicVideoPage", { video, uservideo, userData });
+      res.render("user/publicVideoPage", { video });
     }
   } else if (video.status == "private") {
     if (req.cookies.loginkey) {

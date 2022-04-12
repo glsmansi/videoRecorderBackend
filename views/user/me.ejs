@@ -22,7 +22,9 @@
   <div class="videoContainer">
     <div class="videos">
       <div class="c-video">
-        <%if(uservideos.length){%> <%for(video of uservideos){%>
+        <%if(uservideos.length){%> 
+          <%var arr = []; for (let i = 0; i <sharedvideos.length; i++) {%> <%arr.push(sharedvideos[i]);}%>
+        <%for(video of arr){%>
         <div class="singleVideo">
           <video class="video" src="<%=video.url%>"></video>
           <form action="/<%=video.id%>/watch" method="GET">
