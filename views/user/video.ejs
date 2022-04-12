@@ -11,7 +11,7 @@
     <%let arr=[]; for(let i=0;i<uservideo.length;i++){%>
       <%arr.push(uservideo[i].teamMembers)%>
     <%}%>
-  <% console.log("teammembers",arr);console.log("owner",userData.email);if((userData.email in arr) || (userData.user_id==user.id)){ %> 
+  <% console.log("teammembers",arr);console.log("owner",userData.email);if((arr.includes(userData.email)) || (userData.user_id==user.id)){ %> 
       <section>
         <div class="setting">
           <div class="heading">
