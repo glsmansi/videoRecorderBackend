@@ -251,19 +251,23 @@ module.exports.sharedWithMe = async (req, res) => {
   });
 
   var arr = [];
+  var sharedvideos = [];
   for (let i = 0; i < uservideos.length; i++) {
     if (uservideos[i].videoId in arr) {
+      console.log("sdfdsf");
       continue;
     }
     arr.push(uservideos[i].videoId);
   }
   console.log(arr);
-
-  const sharedvideos = await Video.findOne({
-    where: {
-      id: arr.videoId,
-    },
-  });
+  for (let i = 0; i < arr.length(); i++) {
+    const videos = await Video.findOne({
+      where: {
+        id: arr.videoId,
+      },
+    });
+    sharedvideos.push(videos);
+  }
 
   res.render("user/me", { sharedvideos });
 };
