@@ -1,0 +1,63 @@
+body {
+  font-family: "Montserrat", sans-serif;
+}
+.digit-group input {
+  width: 30px;
+  height: 50px;
+  background-color: #18182a;
+  border: none;
+  line-height: 50px;
+  text-align: center;
+  font-size: 24px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 200;
+  color: white;
+  margin: 0 2px;
+  margin-top: 3rem;
+}
+
+.digit-group .splitter {
+  padding: 0 5px;
+  color: white;
+  font-size: 24px;
+}
+
+.prompt {
+  margin-bottom: 3rem;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+}
+
+.nav {
+  display: flex;
+  position: sticky;
+  top: 0;
+  left: 0px;
+  justify-content: space-between;
+  background: #f8f6f0;
+  height: 91px;
+  /* width: auto; */
+  z-index: 9999;
+}
+.loomLogo {
+  width: 11rem;
+  margin: -1rem 2rem;
+  position: absolute;
+  z-index: 1;
+}
+.logoutBtn {
+  width: 74px;
+  height: 31px;
+  border: none;
+  background-color: #525aa4;
+  border-radius: 5px;
+  color: #f8f6f0;
+  font-weight: 600;
+  margin-top: 3rem;
+}
+.container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

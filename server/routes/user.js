@@ -35,6 +35,8 @@ router
   .get(catchAsync(user.getRegister))
   .post(catchAsync(user.postRegister));
 
+router.route("/validate").post(catchAsync(user.emailVerification));
+
 router
   .route("/login")
   .get(catchAsync(user.getLogin))

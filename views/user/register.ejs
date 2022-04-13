@@ -24,9 +24,7 @@
     <div class="iconNavi">
       <!-- <i class="fas fa-search"></i>
       <i class="far fa-bell"></i> -->
-      <a href="/login">
-        <button class="registerBtn">Sign In</button>
-      </a>
+      <button class="btn"><a href="/login">Sign In</a></button>
     </div>
   </div>
 </navbar>
@@ -82,7 +80,11 @@
             User already exist
           </div>
        <% }%>
-      
+       <% if(notVerified){ %>
+        <div class="alert alert-danger text-center" role="alert">
+          Email Not
+        </div>
+     <% }%>
         <label for="email">Username: </label>
         <input
           type="text"
@@ -104,6 +106,7 @@
           id=""
           placeholder="Enter your Password..."
         />
+      
         <button type="submit" class="signUpBtn">Sign Up</button>
       </div>
     </form>

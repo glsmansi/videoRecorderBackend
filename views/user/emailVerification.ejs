@@ -1,0 +1,81 @@
+<link rel="stylesheet" href="./css/emailVerification.css">
+
+<navbar>
+  <div class="nav">
+    <a href="/">
+      <img src="img/loom.png" class="loomLogo" />
+    </a>
+    <div class="iconNavi">
+      <!-- <i class="fas fa-search"></i>
+        <i class="far fa-bell"></i> -->
+      <!-- <a href="/login">
+        <button class="registerBtn">Sign In</button> -->
+      </a>
+    </div>
+  </div>
+</navbar>
+<div class="container"style="text-align: center;">
+  <div class="prompt">
+    OTP has been send to Email ID
+    <br />
+    Kindly enter the OTP
+  </div>
+  <form
+    action="/validate"
+    method="POST"
+    class="digit-group"
+    data-group-name="digits"
+    data-autosubmit="false"
+  >
+    <input type="text" id="digit-1" name="otp" data-next="digit-2" />
+    <input
+      type="text"
+      id="digit-2"
+      name="otp"
+      data-next="digit-3"
+      data-previous="digit-1"
+    />
+    <input
+      type="text"
+      id="digit-3"
+      name="otp"
+      data-next="digit-4"
+      data-previous="digit-2"
+    />
+    <input
+      type="text"
+      id="digit-4"
+      name="otp"
+      data-next="digit-5"
+      data-previous="digit-3"
+    />
+    <div class="wrapper">
+      <button class=logoutBtn>
+       Send
+      </button>
+    </div>
+  </form>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'>
+</script>
+<script>
+    $('.digit-group').find('input').each(function () {
+        $(this).attr('maxlength', 1);
+        $(this).on('keyup', function (e) {
+            var parent = $($(this).parent());
+
+            if (e.keyCode === 8 || e.keyCode === 37) {
+                var prev = parent.find('input#' + $(this).data('previous'));
+
+                if (prev.length) {
+                    $(prev).select();
+                }
+            } else if ((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 96 &&
+                e.keyCode <= 105) || e.keyCode === 39) {
+                var next = parent.find('input#' + $(this).data('next')); if
+                    (next.length) { $(next).select(); } else { if (parent.data('autosubmit')) { parent.submit(); } }
+            }
+        });
+    }); 
+</script>
+</script>

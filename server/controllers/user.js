@@ -18,6 +18,10 @@ const fs = require("fs");
 //   foreignKey: "userEmail",
 // });
 
+function getRandom(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 const s3 = new AWS.S3({
   accessKeyId: process.env.AWS_ID,
   secretAccessKey: process.env.AWS_SECRET,
@@ -88,19 +92,27 @@ module.exports.getRegister = async (req, res) => {
   // if (req.cookies["loginkey"]) {
   //   res.redirect("/home");
   // } else {
-  res.render("user/register", { loginErr: false, passErr: false });
+  res.render("user/register", {
+    loginErr: false,
+    passErr: false,
+    notVerified: false,
+  });
   // }
 };
 
 module.exports.postRegister = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
-
+    const isVerified = false;
     const oldUser = await User.findOne({ where: { email: email } });
     console.log(oldUser);
     if (oldUser) {
       //return next(new ExpressError("User Already Exist", 409));
-      res.render("user/register", { loginErr: true, passErr: false });
+      return res.render("user/register", {
+        loginErr: true,
+        passErr: false,
+        notVerified: false,
+      });
     }
 
     // if (password.search(/(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}/) == -1) {
@@ -119,6 +131,30 @@ module.exports.postRegister = async (req, res, next) => {
     const encryptedPassword = await bcrypt.hash(password, 10);
     console.log(encryptedPassword);
 
+    // otp = getRandom(1000, 9999);
+    // let transporter = nodemailer.createTransport({
+    //   service: "gmail",
+    //   // secure: true, // true for 465, false for other ports
+    //   auth: {
+    //     user: process.env.GMAIL_ID, // generated ethereal user
+    //     pass: process.env.GMAIL_PASSWORD, // generated ethereal password
+    //   },
+    // });
+    // let mailOptions = {
+    //   from: "gl.sai.mansi8@gmail.com", // sender address
+    //   to: email, // list of receivers
+    //   subject: "ATG-MEET email verification", // Subject line
+    //   text: `${otp} is your OTP foe email verification`, // plain text
+    // };
+
+    // transporter.sendMail(mailOptions, (error, info) => {
+    //   if (error) {
+    //     return console.log(error);
+    //   } else {
+    //     console.log(info);
+    //     res.render("user/emailVerification.ejs");
+    //   }
+    // });
     const user = await User.create({
       username,
       email,
@@ -130,6 +166,24 @@ module.exports.postRegister = async (req, res, next) => {
   } catch (e) {
     console.log(e);
     return next(new ExpressError(e));
+  }
+};
+
+module.exports.emailVerification = async (req, res) => {
+  const enteredOTP1 = req.body.otp;
+  enteredOTP = enteredOTP1.map(Number).join("");
+  console.log(req.body);
+  console.log(otp);
+  console.log(enteredOTP);
+  if (enteredOTP == otp) {
+    console.log("SUCCESS");
+    res.redirect("/login");
+  } else {
+    res.render("user/register", {
+      loginErr: false,
+      passErr: false,
+      notVerified: true,
+    });
   }
 };
 

@@ -23,21 +23,24 @@ body {
   width: 11rem;
   margin: -1rem 2rem;
 }
-.registerBtn {
-  margin: 31px;
+.btn {
+  margin: 2rem;
   /* display: flex; */
   /* justify-content: center; */
-  width: 191px;
-  height: 40px;
+  width: 8rem;
+  height: 2.2rem;
   text-align: center;
   border-radius: 19px;
   border: transparent;
   background-color: #4b42ad;
+}
+
+.btn a {
   color: #f8f6f0;
   letter-spacing: 2px;
   font-weight: 600;
+  text-decoration: none;
 }
-
 section {
   height: 27em;
 }
