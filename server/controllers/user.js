@@ -126,7 +126,11 @@ module.exports.postRegister = async (req, res, next) => {
       password.search(/[A-Z]/) == -1 ||
       password.search(/[!/@/#/$/%/^/&/(/)/_/+/./,/:/;/*/]/) == -1
     ) {
-      return res.render("user/register", { loginErr: false, passErr: true });
+      return res.render("user/register", {
+        loginErr: false,
+        passErr: true,
+        notVerified: false,
+      });
     }
     const encryptedPassword = await bcrypt.hash(password, 10);
     console.log(encryptedPassword);
