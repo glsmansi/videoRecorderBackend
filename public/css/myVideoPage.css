@@ -462,9 +462,8 @@ span {
   }
   .heading h1 {
     font-size: 35px;
-    position: absolute;
-    top: 6rem;
-    left: 8rem;
+    text-align: center;
+    margin: 3rem 0.7rem;
   }
 
   .personalNavLinks a {
@@ -477,7 +476,7 @@ span {
     flex-direction: column;
     position: absolute;
     top: 30rem;
-    left: 20%;
+    left: 15.5%;
   }
   /* .firstFullContainer {
     display: none;
@@ -508,18 +507,21 @@ span {
   .firstContainer {
     display: flex;
     position: absolute;
-    top: 0;
+    top: 1rem;
+  }
+  .firstContainer a {
+    padding: 3px;
   }
   .threeContainer {
     display: flex;
     padding: 2px 0;
-    margin: 9px 0px 0px 0px;
+    margin: 10px 0px 0px 0px;
   }
 
   .threeContainer a {
     display: flex;
     text-decoration: none;
     color: #100d0f;
-    font-size: 12px;
+    font-size: 11px;
   }
 }
