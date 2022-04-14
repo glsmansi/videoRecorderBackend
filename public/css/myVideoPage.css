@@ -524,4 +524,7 @@ span {
     color: #100d0f;
     font-size: 11px;
   }
+  .selected {
+    width: auto;
+  }
 }
