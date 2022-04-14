@@ -451,6 +451,12 @@ span {
   }
 }
 @media (max-width: 620px) {
+  body {
+    overflow-x: hidden;
+  }
+  .nav {
+    width: auto;
+  }
   .heading {
     padding: 15px 0px;
   }

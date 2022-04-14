@@ -3,7 +3,7 @@
 <section>
   <div class="setting">
     <div class="heading">
-      <h2><%=user.username%></h2>
+   
       <h1>Personal Settings</h1>
     </div>
     <div class="navigationLink">
@@ -28,7 +28,7 @@
         <div style="display: flex;">
           <button class="saveBtn" style="margin-left:10px ; margin-bottom: 20px; width: 130px;height: 30px; border-radius: 5px; position:relative" type="submit">Upload</button>
           &nbsp;
-          <a class="btn" href="/removeProfilePic?_method=DELETE" style="font-size: small; text-decoration: none;"> Remove</a>
+          <a class="removeBtn" href="/removeProfilePic?_method=DELETE" style="font-size: small; text-decoration: none;"> Remove</a>
         </div>
       </form>
       <form action="/changeUsername" method="POST">
@@ -171,10 +171,10 @@
             />
           </div>
         </div>
-        <h2>Reset Password</h2>
+        <!-- <h2>Reset Password</h2>
         <h3>
           If you just forgot your password, don’t worry – we got you!
-        </h3>
+        </h3> -->
         <button type="submit" class="resetBtn">
           <i class="fas fa-lock"></i>
           Reset Password

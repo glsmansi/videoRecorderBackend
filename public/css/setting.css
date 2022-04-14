@@ -470,7 +470,7 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-.btn {
+.removeBtn {
   display: block;
   width: 130px;
   height: 30px;
@@ -481,4 +481,258 @@ input:checked + .slider:before {
   color: white;
   font-weight: bold;
   line-height: 25px;
+}
+
+.btn {
+  /* margin: 1rem; */
+  padding-top: 1px;
+  width: 7rem;
+  height: 2.2rem;
+  text-align: center;
+  border-radius: 19px;
+  border: transparent;
+  background-color: #4b42ad;
+}
+
+.btn a {
+  font-size: 16px;
+  color: #f8f6f0;
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-decoration: none;
+}
+@media (max-width: 1069px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .heading {
+    padding: 15px 0px;
+  }
+
+  .setting {
+    position: absolute;
+    top: 10rem;
+    left: 10%;
+    z-index: 3;
+  }
+  .heading h1 {
+    font-size: 30px;
+    text-align: center;
+    margin-right: 50%;
+  }
+
+  .firstFullContainer {
+    position: absolute;
+    top: 4rem;
+    display: flex;
+    height: 3rem;
+    width: 100%;
+    z-index: 9;
+  }
+
+  .firstContainer h3 {
+    display: none;
+  }
+  .firstContainer {
+    display: flex;
+    position: absolute;
+    top: 1rem;
+  }
+  .firstContainer a {
+    padding: 3px;
+  }
+  .threeContainer {
+    display: flex;
+    padding: 2px 0;
+    margin: 10px 0px 0px 0px;
+  }
+
+  .threeContainer a {
+    display: flex;
+    text-decoration: none;
+    color: #100d0f;
+    font-size: 11px;
+  }
+  .selected {
+    width: auto;
+  }
+  .contactInfoUpdates h2 {
+    font-size: 16px;
+  }
+  .contactInfoUpdates h3 {
+    display: inline-block;
+    font-size: 14px;
+  }
+  .navigationLink a {
+    font-size: 16px;
+  }
+  .nameAndPhoto h2 {
+    font-size: 16px;
+  }
+  .nameAndPhoto form input {
+    height: 15px;
+  }
+  .buttonsForName button {
+    width: 4rem;
+  }
+  .emailForm label {
+    font-size: 16px;
+  }
+  .currentPassword label {
+    font-size: 16px;
+    margin-top: -5rem;
+  }
+  .newPassword label,
+  .confirmPassword label {
+    font-size: 16px;
+  }
+  .resetBtn {
+    width: 9rem;
+    font-size: 14px;
+  }
+  .confirmationPassword {
+    display: flex;
+    flex-direction: column;
+  }
+  .newPassword input,
+  .confirmPassword input,
+  .currentPassword input {
+    height: 16px;
+  }
+  .confirmPassword label {
+    margin-top: 1rem;
+  }
+  .nameAndPhoto form label {
+    font-size: 16px;
+  }
+  .password h2 {
+    font-size: 16px;
+  }
+  .password h3 {
+    font-size: 14px;
+    line-height: 1.2rem;
+    padding-right: 3rem;
+  }
+  .buttonsForName button {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 692px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .heading {
+    padding: 15px 0px;
+  }
+
+  .setting {
+    position: absolute;
+    top: 10rem;
+    left: 10%;
+    z-index: 3;
+  }
+  .heading h1 {
+    font-size: 30px;
+    text-align: center;
+    margin-right: 50%;
+  }
+
+  .firstFullContainer {
+    position: absolute;
+    top: 4rem;
+    display: flex;
+    height: 3rem;
+    width: 100%;
+    z-index: 9;
+  }
+
+  .firstContainer h3 {
+    display: none;
+  }
+  .firstContainer {
+    display: flex;
+    position: absolute;
+    top: 1rem;
+  }
+  .firstContainer a {
+    padding: 3px;
+  }
+  .threeContainer {
+    display: flex;
+    padding: 2px 0;
+    margin: 10px 0px 0px 0px;
+  }
+
+  .threeContainer a {
+    display: flex;
+    text-decoration: none;
+    color: #100d0f;
+    font-size: 11px;
+  }
+  .selected {
+    width: auto;
+  }
+  .contactInfoUpdates h2 {
+    font-size: 16px;
+  }
+  .contactInfoUpdates h3 {
+    display: inline-block;
+    font-size: 14px;
+  }
+  .navigationLink a {
+    font-size: 16px;
+  }
+  .nameAndPhoto h2 {
+    font-size: 16px;
+  }
+  .nameAndPhoto form input {
+    height: 15px;
+  }
+  .buttonsForName button {
+    width: 4rem;
+  }
+  .emailForm label {
+    font-size: 16px;
+  }
+  .currentPassword label {
+    font-size: 16px;
+    margin-top: -5rem;
+  }
+  .newPassword label,
+  .confirmPassword label {
+    font-size: 16px;
+  }
+  .resetBtn {
+    width: 9rem;
+    font-size: 14px;
+  }
+  .confirmationPassword {
+    display: flex;
+    flex-direction: column;
+  }
+  .newPassword input,
+  .confirmPassword input,
+  .currentPassword input {
+    height: 16px;
+  }
+  .confirmPassword label {
+    margin-top: 1rem;
+  }
+  .nameAndPhoto form label {
+    font-size: 16px;
+  }
+  .password h2 {
+    font-size: 16px;
+  }
+  .password h3 {
+    font-size: 14px;
+    line-height: 1.2rem;
+    padding-right: 3rem;
+  }
+  .buttonsForName button {
+    font-size: 14px;
+  }
 }
