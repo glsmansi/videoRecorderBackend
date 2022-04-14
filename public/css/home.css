@@ -17,18 +17,18 @@ body {
   display: flex;
   justify-content: space-between;
   background: #f8f6f0;
-  height: 5.5rem;
+  height: 4rem;
 }
 
 .loomLogo {
-  width: 11rem;
+  width: 9rem;
   margin: -1.5rem 2rem;
 }
 .btn {
-  margin: 2rem;
+  margin: 1rem;
   /* display: flex; */
   /* justify-content: center; */
-  width: 8rem;
+  width: 7rem;
   height: 2.2rem;
   text-align: center;
   border-radius: 19px;
@@ -37,6 +37,7 @@ body {
 }
 
 .btn a {
+  font-size: 16px;
   color: #f8f6f0;
   letter-spacing: 2px;
   font-weight: 600;

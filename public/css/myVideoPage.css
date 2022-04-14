@@ -15,17 +15,15 @@ body {
 .nav {
   display: flex;
   position: sticky;
-  top: 0;
-  left: 0px;
   justify-content: space-between;
   background: #f8f6f0;
-  height: 91px;
+  height: 4rem;
   width: auto;
   z-index: 9999;
 }
 
 .loomLogo {
-  width: 11rem;
+  width: 9rem;
   margin: -1rem 2rem;
   position: absolute;
   z-index: 1;
@@ -49,6 +47,9 @@ body {
   background-color: #f8f6f0;
   overflow-x: hidden;
   padding-top: 20px;
+}
+.firstFullContainer a {
+  font-size: 14px;
 }
 .firstContainer {
   position: relative;
@@ -94,14 +95,37 @@ section {
   font-weight: 600;
   cursor: pointer;
 }
-.logOutBtn {
-  width: 74px;
-  height: 31px;
+/* .logOutBtn {
+  margin: -1rem;
+  width: 5rem;
+  height: 2rem;
   border: none;
   background-color: #525aa4;
   border-radius: 5px;
   color: #f8f6f0;
   font-weight: 600;
+  margin: 0 2rem;
+} */
+
+.btn {
+  margin: -1rem 1rem;
+  /* display: flex; */
+  /* justify-content: center; */
+  width: 6rem;
+  height: 2rem;
+  text-align: center;
+  border-radius: 19px;
+  border: transparent;
+  background-color: #4b42ad;
+  /* padding: 1rem; */
+}
+
+.btn a {
+  font-size: 16px;
+  color: #f8f6f0;
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-decoration: none;
 }
 .heading {
   padding: 15px 0px;
@@ -114,14 +138,14 @@ section {
 .heading h1 {
   color: #212121;
   font-weight: 900;
-  font-size: 48px;
+  font-size: 2.5rem;
   position: relative;
   left: -4px;
 }
 .personalNavLinksAndButtons {
   display: flex;
   justify-content: space-between;
-  padding: 31px 0px;
+  padding: 2rem 0;
 }
 .personalNavLinks a {
   text-decoration: none;
@@ -151,7 +175,7 @@ section {
 .nameVideo a {
   text-decoration: none;
   color: #212121;
-  font-size: 17px;
+  font-size: 14px;
 }
 .c-video {
   display: grid;
@@ -159,7 +183,7 @@ section {
   grid-row-gap: 46px;
 }
 .singleVideo {
-  max-width: 380px;
+  max-width: 350px;
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -169,10 +193,10 @@ section {
 .share {
   position: absolute;
   top: 0px;
-  left: 340px;
+  left: 19rem;
   background-color: #e6e6ea;
   width: 30px;
-  height: 35px;
+  height: 34px;
   text-align: center;
   border-bottom-left-radius: 6px;
   border-bottom-right-radius: 6px;
@@ -180,8 +204,12 @@ section {
   cursor: pointer;
 }
 .share i {
-  font-size: 23px;
+  /* font-size: 23px; */
   color: #212121;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  font-size: 20px;
 }
 .video {
   width: 100%;
@@ -284,7 +312,7 @@ span {
   left: 0px;
   background-color: #e2e2e6;
   opacity: 0.86;
-  width: 15rem;
+  width: 12rem;
   padding: 4px;
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
@@ -319,19 +347,25 @@ span {
 .lockUnlock {
   position: absolute;
   top: -3px;
-  left: 300px;
+  left: 16.3rem;
   background-color: #e5e5e9;
   opacity: 0.8;
   /* height: 31px; */
   padding: 2px;
-  width: 30px;
-  height: 35px;
+  width: 24px;
+  height: 34px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 9px;
   font-size: 25px;
   width: 30px;
   text-align: center;
   color: #222222;
+}
+.lockUnlock i {
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  font-size: 20px;
 }
 .lock {
   position: relative;
@@ -355,4 +389,137 @@ span {
   left: 40%;
   top: 20%;
   font-size: bolder;
+}
+
+@media (max-width: 1069px) {
+  .heading h1 {
+    font-size: 35px;
+  }
+  .c-video {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 45%;
+  }
+  .singleVideo {
+    max-width: 320px;
+  }
+  .nameVideo a {
+    font-size: 12px;
+  }
+  .headingAndDetails .nameVideo {
+    width: 10rem;
+  }
+  .lockUnlock {
+    left: 14rem;
+    width: 30px;
+    height: 30px;
+  }
+  .lockUnlock i {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    font-size: 20px;
+  }
+  .personalNavLinksAndButtons a {
+    font-size: 1.1rem;
+  }
+  .addBtn {
+    widows: 100px;
+    font-size: 12px;
+  }
+  .firstFullContainer {
+    padding: 10px 10px;
+  }
+  .firstFullContainer a {
+    padding: 12px 14px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .share {
+    position: absolute;
+    top: 0px;
+    left: 17rem;
+    width: 30px;
+    height: 30px;
+  }
+  .share i {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    font-size: 20px;
+  }
+}
+@media (max-width: 620px) {
+  .heading {
+    padding: 15px 0px;
+  }
+  .personalContainer {
+    position: absolute;
+    /* top: 10rem; */
+    left: 10%;
+    z-index: 3;
+  }
+  .heading h1 {
+    font-size: 35px;
+    position: absolute;
+    top: 6rem;
+    left: 8rem;
+  }
+
+  .personalNavLinks a {
+    font-size: 15px;
+  }
+
+  .c-video {
+    /* display: none; */
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 30rem;
+    left: 20%;
+  }
+  /* .firstFullContainer {
+    display: none;
+  } */
+  .personalNavLinksAndButtons {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 13rem;
+    padding: 2rem 0rem;
+  }
+  .personalNavLinksAndButtons a {
+    margin-right: 12rem;
+  }
+
+  .firstFullContainer {
+    position: absolute;
+    top: 4rem;
+    display: flex;
+    height: 3rem;
+    width: 100%;
+    z-index: 9;
+  }
+
+  .firstContainer h3 {
+    display: none;
+  }
+  .firstContainer {
+    display: flex;
+    position: absolute;
+    top: 0;
+  }
+  .threeContainer {
+    display: flex;
+    padding: 2px 0;
+    margin: 9px 0px 0px 0px;
+  }
+
+  .threeContainer a {
+    display: flex;
+    text-decoration: none;
+    color: #100d0f;
+    font-size: 12px;
+  }
 }

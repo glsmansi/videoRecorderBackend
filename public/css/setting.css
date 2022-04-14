@@ -81,14 +81,25 @@ section {
   padding: 0px 10px;
   overflow-x: hidden;
 }
-.logOutBtn {
-  width: 74px;
-  height: 31px;
-  border: none;
-  background-color: #525aa4;
-  border-radius: 5px;
+.btn {
+  margin: -1rem 1rem;
+  /* display: flex; */
+  /* justify-content: center; */
+  width: 6rem;
+  height: 2rem;
+  text-align: center;
+  border-radius: 19px;
+  border: transparent;
+  background-color: #4b42ad;
+  /* padding: 1rem; */
+}
+
+.btn a {
+  font-size: 16px;
   color: #f8f6f0;
+  letter-spacing: 2px;
   font-weight: 600;
+  text-decoration: none;
 }
 .setting {
   padding: 25px 13px;

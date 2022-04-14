@@ -17,12 +17,12 @@ body {
   display: flex;
   justify-content: space-between;
   background: #f8f6f0;
-  height: 91px;
+  height: 4rem;
 }
 
 .loomLogo {
-  width: 11rem;
-  margin: -1rem 2rem;
+  width: 9rem;
+  margin: -1.5rem 2rem;
 }
 
 section {
@@ -50,7 +50,7 @@ form {
   flex-direction: column;
 }
 .form label {
-  font-size: 20px;
+  font-size: 18px;
 }
 /* #my-signin2 {
   margin: 18px;
@@ -64,26 +64,7 @@ form {
   font-weight: 600;
   font-size: 18px;
 } */
-.signUpGoogle img {
-  width: 32px;
-  margin: 7px;
-}
-.signUpSlack {
-  width: 307px;
-  height: 61px;
-  text-align: center;
-  /* border-radius: 8px; */
-  background-color: transparent;
-  border: 2px solid hsla(240, 8%, 46%, 0.2);
-  color: #212121;
-  font-weight: 600;
-  font-size: 18px;
-  margin: 18px;
-}
-.signUpSlack img {
-  width: 32px;
-  margin: 7px;
-}
+
 .option {
   position: relative;
   margin: 1.2rem;
@@ -123,9 +104,9 @@ form {
   font-weight: 600;
 }
 .signUpBtn {
-  width: 110px;
+  width: 95px;
   text-align: center;
-  height: 42px;
+  height: 35px;
   position: relative;
   left: 106px;
   top: 6px;
@@ -137,10 +118,10 @@ form {
   font-size: 17px;
 }
 .btn {
-  margin: 2rem;
+  margin: 1rem;
   /* display: flex; */
   /* justify-content: center; */
-  width: 8rem;
+  width: 7rem;
   height: 2.2rem;
   text-align: center;
   border-radius: 19px;
@@ -149,8 +130,99 @@ form {
 }
 
 .btn a {
+  font-size: 16px;
   color: #f8f6f0;
   letter-spacing: 2px;
   font-weight: 600;
   text-decoration: none;
+}
+
+@media (max-width: 900px) {
+  .heading h1 {
+    font-size: 2.2rem;
+  }
+  .form label {
+    font-size: 17px;
+  }
+  .signUpBtn {
+    width: 92px;
+    height: 38px;
+    font-size: 16px;
+  }
+  .form input {
+    height: 36px;
+  }
+
+  .btn {
+    width: 6rem;
+    height: 2rem;
+  }
+
+  .btn a {
+    font-size: 14px;
+    color: #f8f6f0;
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 692px) {
+  .heading h1 {
+    font-size: 2rem;
+  }
+  .form label {
+    font-size: 16px;
+  }
+  .signUpBtn {
+    width: 90px;
+    height: 38px;
+    font-size: 16px;
+  }
+  .form input {
+    height: 35px;
+  }
+
+  .btn {
+    width: 6rem;
+    height: 2rem;
+  }
+
+  .btn a {
+    font-size: 14px;
+    color: #f8f6f0;
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .heading h1 {
+    font-size: 2rem;
+  }
+  .form label {
+    font-size: 14px;
+  }
+  .signUpBtn {
+    width: 90px;
+    height: 35px;
+    font-size: 14px;
+  }
+  .form input {
+    height: 35px;
+  }
+
+  .btn {
+    width: 6rem;
+    height: 2rem;
+  }
+
+  .btn a {
+    font-size: 14px;
+    color: #f8f6f0;
+    letter-spacing: 2px;
+    font-weight: 600;
+    text-decoration: none;
+  }
 }
