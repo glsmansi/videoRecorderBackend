@@ -57,10 +57,10 @@
             </ul>
            <%}%>
             <p style="margin-top: 5rem">
-              <span style="font-weight: 900; color: #525aa4"
+              <span style="font-weight: 900;  color: #525aa4"
                 >Meeting Notes:</span
               >
-              <%=video.meetingNotes%>
+              <%-video.meetingNotes%>
             </p>
             <p style="margin-top: 5rem">
               <span style="font-weight: 900; color: #525aa4">Status:</span>
@@ -159,7 +159,9 @@
         </div>
       </section>
     </div>
-    <script src="ckeditor/ckeditor.js"></script>
-    <script>CKEDITOR.replace('meetingNotes')</script>
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script>CKEDITOR.replace('meetingNotes',{
+      width:['550px']
+   })</script>
   </body>
 </html>
