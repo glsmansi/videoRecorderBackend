@@ -10,7 +10,7 @@ const sequelize = require("sequelize");
 // var ncp = require("copy-paste");
 const nodemailer = require("nodemailer");
 const fs = require("fs");
-
+const { Op } = require("sequelize");
 // const alert = require("alert");
 
 // Video.belongsTo(User, {
@@ -208,6 +208,7 @@ module.exports.postLogin = async (req, res, next) => {
       console.log("user");
 
       if (match) {
+        req.session.isAuth = true;
         const token = jwt.sign(
           { user_id: user.id, email },
           process.env.TOKEN_KEY
@@ -318,15 +319,15 @@ module.exports.sharedWithMe = async (req, res) => {
     arr.push(uservideos[i].videoId);
   }
   console.log(arr);
-  for (let i = 0; i < arr.length; i++) {
-    const videos = await Video.findOne({
-      where: {
-        id: arr[i],
-      },
-    });
-    sharedvideos.push(videos);
-    console.log("shared", sharedvideos);
-  }
+  // for (let i = 0; i < arr.length; i++) {
+  const videos = await Video.findOne({
+    where: {
+      id: { [Op.in]: arr },
+    },
+  });
+  sharedvideos.push(videos);
+  console.log("shared", sharedvideos);
+  // }
 
   res.render("user/me", { sharedvideos });
 };
@@ -334,14 +335,28 @@ module.exports.sharedWithOthers = async (req, res) => {
   // const userEmail = req.user.email;
   const user = await User.findOne({ where: { id: req.user.user_id } });
   // console.log(user);
-  const userVideos = await UserVideo.findAll({
-    where: { userEmail: user.email },
-  });
+  const uservideos = await Video.findAll({ where: { userId: user.id } });
+  let arr = [];
+  for (let i = 0; i < uservideos.length; i++) {
+    console.log(uservideos[i].id);
+    const userVideos = await UserVideo.findAll({
+      where: {
+        userEmail: user.email,
+        videoId: uservideos[i].id,
+        teamMembers: { [Op.ne]: null },
+      },
+    });
+    if (userVideos.length) {
+      arr.push(userVideos[i].videoId);
+    }
+  }
+  console.log(arr);
 
   const videos = await Video.findAll({
-    where: { userId: req.user.user_id },
+    where: { id: { [Op.in]: arr } },
   });
-
+  // videos;
+  console.log(videos);
   res.render("user/team", { videos, user });
 };
 

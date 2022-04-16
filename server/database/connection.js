@@ -1,4 +1,6 @@
 const Sequelize = require("sequelize");
+const session = require("express-session");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
 
 const sequelize = new Sequelize(
   process.env.DB,
@@ -7,6 +9,7 @@ const sequelize = new Sequelize(
   {
     host: process.env.HOST,
     dialect: "mysql",
+    storage: "./session.mysql",
   }
 );
 
