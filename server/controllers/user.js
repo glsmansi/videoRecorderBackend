@@ -65,15 +65,15 @@ module.exports.uploadVideo = async (req, res) => {
       const videoLink = await Video.create({
         fileName: fileName,
         url: data.Location,
-        userId: req.user.user_id,
+        userId: req.session.userId,
       });
       await videoLink.save();
 
       const userVideo = await UserVideo.create({
-        userEmail: req.user.email,
+        userEmail: req.session.email,
         videoId: videoLink.id,
       });
-      console.log(req.user.email);
+      // console.log(req.user.email);
       const details = {
         watchableLink: `videorecorderbackend.herokuapp.com/${videoLink.id}/watch`,
         downloadableLink: data.Location,
@@ -103,7 +103,6 @@ module.exports.getRegister = async (req, res) => {
 module.exports.postRegister = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
-    const isVerified = false;
     const oldUser = await User.findOne({ where: { email: email } });
     console.log(oldUser);
     if (oldUser) {
@@ -208,21 +207,24 @@ module.exports.postLogin = async (req, res, next) => {
       console.log("user");
 
       if (match) {
+        req.session.userId = user.id;
+        req.session.email = user.email;
         req.session.isAuth = true;
-        const token = jwt.sign(
-          { user_id: user.id, email },
-          process.env.TOKEN_KEY
-        );
-        // save user token
-        user.token = token;
+        // const token = jwt.sign(
+        //   { user_id: user.id, email },
+        //   process.env.TOKEN_KEY
+        // );
+        // // save user token
+        // user.token = token;
 
-        await user.save();
-        console.log(token, "token");
-        res.cookie("loginkey", token, {
-          httpOnly: false,
-          secure: true,
-          maxAge: 3600 * 60 * 60 * 24,
-        });
+        // await user.save();
+        // console.log(token, "token");
+        // res.cookie("loginkey", token, {
+        //   httpOnly: false,
+        //   secure: true,
+        //   maxAge: 3600 * 60 * 60 * 24,
+        // });
+
         res.redirect("/home");
       } else {
         //return next(new ExpressError("Invalid Password"));
@@ -282,7 +284,7 @@ module.exports.googleLogin = async (req, res) => {
 
 module.exports.settings = async (req, res) => {
   // var photo = false;
-  const user = await User.findOne({ where: { email: req.user.email } });
+  const user = await User.findOne({ where: { email: req.session.email } });
   // var path = `public/profilepic/${user.username}.jpg`;
   // if (fs.existsSync(path)) {
   // path exists
@@ -294,6 +296,7 @@ module.exports.settings = async (req, res) => {
     passErr: false,
     noMatch: false,
     success: false,
+    passwordValidationErr: false,
   });
 };
 
@@ -303,8 +306,8 @@ module.exports.loginSuccess = async (req, res) => {
 };
 
 module.exports.sharedWithMe = async (req, res) => {
-  const userEmail = req.user.email;
-  const user = await User.findOne({ where: { id: req.user.user_id } });
+  const userEmail = req.session.email;
+  const user = await User.findOne({ where: { id: req.session.userId } });
   const uservideos = await UserVideo.findAll({
     where: { teamMembers: userEmail },
   });
@@ -333,7 +336,7 @@ module.exports.sharedWithMe = async (req, res) => {
 };
 module.exports.sharedWithOthers = async (req, res) => {
   // const userEmail = req.user.email;
-  const user = await User.findOne({ where: { id: req.user.user_id } });
+  const user = await User.findOne({ where: { id: req.session.userId } });
   // console.log(user);
   const uservideos = await Video.findAll({ where: { userId: user.id } });
   let arr = [];
@@ -361,9 +364,9 @@ module.exports.sharedWithOthers = async (req, res) => {
 };
 
 module.exports.personal = async (req, res) => {
-  console.log("user token", req.user.token);
-  const userEmail = req.user.email;
-  const user = await User.findOne({ where: { id: req.user.user_id } });
+  console.log("user deatils", req.session);
+  const userEmail = req.session.email;
+  const user = await User.findOne({ where: { id: req.session.userId } });
   const uservideos = await Video.findAll({
     where: { userId: user.id },
   });
@@ -382,10 +385,10 @@ module.exports.userVideoLink = async (req, res) => {
   var userData;
 
   if (video.status == "public") {
-    if (req.cookies.loginkey) {
-      const token = req.cookies.loginkey;
-      const data = await jwt.verify(token, process.env.TOKEN_KEY);
-      userData = data;
+    if (req.session) {
+      // const token = req.cookies.loginkey;
+      // const data = await jwt.verify(token, process.env.TOKEN_KEY);
+      userData = req.session;
       console.log(userData);
       return res.render("user/publicVideoPage", {
         video,
@@ -398,10 +401,10 @@ module.exports.userVideoLink = async (req, res) => {
       res.render("user/publicVideoPage", { video, uservideo });
     }
   } else if (video.status == "private") {
-    if (req.cookies.loginkey) {
-      const token = req.cookies.loginkey;
-      const data = await jwt.verify(token, process.env.TOKEN_KEY);
-      const userData = data;
+    if (req.session) {
+      // const token = req.cookies.loginkey;
+      // const data = await jwt.verify(token, process.env.TOKEN_KEY);
+      const userData = req.session;
       console.log(userData);
 
       res.render("user/video", { video, user, uservideo, userData });
@@ -414,7 +417,7 @@ module.exports.userVideoLink = async (req, res) => {
 module.exports.downloadVideo = async (req, res) => {
   // const email = req.user.email;
   const videoLink = await Video.findOne({
-    where: { userId: req.user.user_id },
+    where: { userId: req.session.userId },
     order: [["id", "DESC"]],
   });
   console.log(videoLink);
@@ -423,7 +426,7 @@ module.exports.downloadVideo = async (req, res) => {
 
 module.exports.userDetails = async (req, res) => {
   // const user = req.user;
-  res.json(req.user);
+  res.json(req.session);
 };
 
 module.exports.publicOrPrivate = async (req, res) => {
@@ -447,7 +450,7 @@ module.exports.AddteamMembers = async (req, res) => {
   const { teamMembers } = req.body;
   console.log(teamMembers);
   const uservideo = await UserVideo.create({
-    userEmail: req.user.email,
+    userEmail: req.session.email,
     videoId: id,
     teamMembers: teamMembers,
   });
@@ -488,7 +491,7 @@ module.exports.changeFileName = async (req, res) => {
 
 module.exports.changeUserName = async (req, res) => {
   const { username } = req.body;
-  const user = await User.findOne({ where: { id: req.user.user_id } });
+  const user = await User.findOne({ where: { id: req.session.userId } });
   user.username = username;
   await user.save();
   res.redirect("/settings");
@@ -496,9 +499,24 @@ module.exports.changeUserName = async (req, res) => {
 
 module.exports.changePassword = async (req, res) => {
   const { password, newPassword, confirmPassword } = req.body;
-  const user = await User.findOne({ where: { id: req.user.user_id } });
+  const user = await User.findOne({ where: { id: req.session.userId } });
   const match = await bcrypt.compare(password, user.password);
   if (match) {
+    if (
+      newPassword < 8 ||
+      newPassword.search(/[0-9]/) == -1 ||
+      newPassword.search(/[a-z]/) == -1 ||
+      newPassword.search(/[A-Z]/) == -1 ||
+      newPassword.search(/[!/@/#/$/%/^/&/(/)/_/+/./,/:/;/*/]/) == -1
+    ) {
+      return res.render("user/setting", {
+        user,
+        noMatch: false,
+        passErr: false,
+        success: false,
+        passwordValidationErr: true,
+      });
+    }
     if (newPassword == confirmPassword) {
       newEncryptedPassword = await bcrypt.hash(newPassword, 10);
       console.log(newEncryptedPassword);
@@ -509,6 +527,7 @@ module.exports.changePassword = async (req, res) => {
         noMatch: false,
         passErr: false,
         success: true,
+        passwordValidationErr: false,
       });
     } else {
       res.render("user/setting", {
@@ -516,6 +535,7 @@ module.exports.changePassword = async (req, res) => {
         noMatch: true,
         passErr: false,
         success: false,
+        passwordValidationErr: false,
       });
       console.log("no MATCH");
     }
@@ -525,6 +545,7 @@ module.exports.changePassword = async (req, res) => {
       passErr: true,
       noMatch: false,
       success: false,
+      passwordValidationErr: false,
     });
     console.log("Wrong password");
   }
@@ -551,7 +572,7 @@ module.exports.uploadPhoto = async (req, res) => {
         res.status(500).json(error);
       }
       // console.log(params[Key]);
-      const user = await User.findOne({ where: { id: req.user.user_id } });
+      const user = await User.findOne({ where: { id: req.session.userId } });
       user.profilePicture = data.Location;
       await user.save();
       console.log(data.Location);
@@ -563,14 +584,16 @@ module.exports.uploadPhoto = async (req, res) => {
 };
 
 module.exports.removeProfilePic = async (req, res) => {
-  const user = await User.findOne({ where: { id: req.user.user_id } });
+  const user = await User.findOne({ where: { id: req.session.userId } });
   user.profilePicture = null;
   await user.save();
   res.redirect("/settings");
 };
 
 module.exports.logout = (req, res) => {
-  res.clearCookie("loginkey");
-  // res.clearCookie("cookietokenkey");
-  res.redirect("/");
+  // res.clearCookie("loginkey");
+  req.session.destroy((err) => {
+    if (err) throw err;
+    res.redirect("/");
+  });
 };

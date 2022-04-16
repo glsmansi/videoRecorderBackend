@@ -135,6 +135,15 @@
             New password and confirm password must match
           </div>
        <% }%>
+         <% if(passwordValidationErr){ %>
+          <div class="alert alert-danger text-center" role="alert">
+            <p> password should contain minimum 8 characters,at least one lowercase,
+              at least one uppercase,
+              at least one numeric value,
+              at least one special character,
+              </p>
+          </div>
+       <% }%>
           <% if(passErr){ %>
             <div class="alert alert-danger text-center" role="alert">
               Current password doesn't match
@@ -151,7 +160,7 @@
         </div>
         <div class="currentPassword">
           <label for="currentPassword">Current Password</label>
-          <input type="password" name="password" placeholder="password" />
+          <input type="password" name="password" placeholder="password" required/>
         </div>
         <div class="confirmationPassword">
           <div class="newPassword">
@@ -159,7 +168,7 @@
             <input
               type="password"
               name="newPassword"
-              placeholder="password"
+              placeholder="password"required
             />
           </div>
           <div class="confirmPassword">
@@ -167,7 +176,7 @@
             <input
               type="password"
               name="confirmPassword"
-              placeholder="password"
+              placeholder="password"required
             />
           </div>
         </div>

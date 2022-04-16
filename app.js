@@ -11,6 +11,7 @@ const methodOverride = require("method-override");
 const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 var SequelizeStore = require("connect-session-sequelize")(session.Store);
+const isAuth = require("./server/middleware/auth");
 
 // const fileUpload = require("express-fileupload");
 //const expressLayouts=require('express-ejs-layouts')
@@ -36,21 +37,12 @@ app.use(
     secret: process.env.TOKEN_KEY,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true, maxAge: 3600 * 60 * 60 * 24 },
+    // cookie: { secure: true, maxAge: 3600 * 60 * 60 * 24 },
+    store: myStore,
   })
 );
 
 myStore.sync();
-
-const isAuth = async (req, res, next) => {
-  if (req.session.isAuth) {
-    console.log("wertyy");
-    next();
-  } else {
-    console.log("dfdgdfgdfg");
-    res.redirect("/login");
-  }
-};
 
 app.use((req, res, next) => {
   let names = "loginkey";
@@ -64,7 +56,7 @@ app.use((req, res, next) => {
 
   // console.log(cookieValue);
   // console.log(req);
-  res.locals.currentUser = cookieValue;
+  res.locals.currentUser = req.session.userId;
 
   // console.log("user", req);
   next();
@@ -87,10 +79,6 @@ app.route("/").get(catchAsync(user.home));
 // app.all("*", (req, res, next) => {
 //   next(new ExpressError("Page Not Found", 404));
 // });
-
-app.get("/dashboard", isAuth, (req, res) => {
-  res.send("SESSIONS, AUTHENTICATED");
-});
 
 app.use((err, req, res, next) => {
   const { statusCode = 400 } = err;

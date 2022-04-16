@@ -12,7 +12,7 @@
     <%let arr=[]; for(let i=0;i<uservideo.length;i++){%>
       <%arr.push(uservideo[i].teamMembers)%>
     <%}%>
-  <% console.log("teammembers",arr);console.log("owner",userData.email);if((arr.includes(userData.email)) || (userData.user_id==user.id)){ %> 
+  <% console.log("teammembers",arr);console.log("owner",userData.email);if((arr.includes(userData.email)) || (userData.userId==user.id)){ %> 
       <section>
         <div class="setting">
           <div class="heading">
@@ -68,7 +68,7 @@
             </p>
           </div>
           <hr style="margin: 5rem 0" />
-          <%if(userData.user_id==video.userId){%>
+          <%if(userData.userId==video.userId){%>
           <div class="nameAndPhoto">
             <form action="/<%=video.id%>/watch/changeFileName" method="POST">
               <label for="name">Change File Name: </label>

@@ -114,7 +114,7 @@
       </div>
       <%if(currentUser){%>
       <hr style="margin: 5rem 0" />
-      <%if(userData.user_id==video.userId){%>
+      <%if(userData.userId==video.userId){%>
       <div class="nameAndPhoto">
         <form action="/<%=video.id%>/watch/changeFileName" method="POST">
           <label for="name">Change File Name: </label>
