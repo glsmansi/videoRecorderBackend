@@ -253,10 +253,7 @@ module.exports.googleLogin = async (req, res) => {
     const userid = payload["sub"];
     console.log(payload);
     const user = await User.findOne({ where: { email: payload.email } });
-    const token = jwt.sign(
-      { user_id: user.id, email: payload.email },
-      process.env.TOKEN_KEY
-    );
+
     if (!user) {
       const newUser = await User.create({
         email: payload.email,
@@ -265,16 +262,13 @@ module.exports.googleLogin = async (req, res) => {
       });
       await newUser.save();
     }
+    console.log(req.session);
+    req.session.userId = user.id;
+    req.session.email = payload.email;
+    req.session.isAuth = true;
   }
   verify()
     .then(() => {
-      res.cookie("loginkey", token, {
-        httpOnly: true,
-        secure: true,
-        // maxAge: 1,
-        maxAge: 3600 * 60 * 60 * 24,
-      });
-
       res.send("success");
     })
 

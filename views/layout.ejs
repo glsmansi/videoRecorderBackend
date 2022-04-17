@@ -10,6 +10,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="stylesheet" href="./css/preloader" />
     <script
       src="https://kit.fontawesome.com/afb23c7fce.js"
       crossorigin="anonymous"
@@ -20,6 +21,7 @@
     <!-- <title>Login</title> -->
   </head>
   <body>
+    <div id="preloader"></div>
     <%if(currentUser){%>
     <%-include('./partials/sidebar')%><%-include('./partials/userNavbar')%>
     <%}%><%- body %>
@@ -28,5 +30,11 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
+    <script>
+      var loader = document.getElementById("preloader");
+      window.addEventListener("load", () => {
+        loader.style.display = "none";
+      });
+    </script>
   </body>
 </html>
