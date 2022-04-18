@@ -33,7 +33,7 @@ const CLIENT_ID =
 const client = new OAuth2Client(CLIENT_ID);
 
 module.exports.home = async (req, res) => {
-  if (req.cookies["loginkey"]) {
+  if (req.session.userId) {
     res.redirect("/home");
   } else {
     res.render("home");
