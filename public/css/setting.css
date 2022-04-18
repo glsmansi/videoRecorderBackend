@@ -501,7 +501,7 @@ input:checked + .slider:before {
   font-weight: 600;
   text-decoration: none;
 }
-@media (max-width: 1069px) {
+/* @media (max-width: 1069px) {
   body {
     overflow-x: hidden;
   }
@@ -735,4 +735,4 @@ input:checked + .slider:before {
   .buttonsForName button {
     font-size: 14px;
   }
-}
+} */
