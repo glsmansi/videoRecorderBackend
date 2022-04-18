@@ -35,17 +35,17 @@
   </div>
   <%}%>
   <script>
-    if (location.href == "https://videorecorderbackend.herokuapp.com/home") {
+    if (location.href.includes("/home")) {
       document.getElementById("personal").classList.add("selected");
     }
-    if (location.href == "https://videorecorderbackend.herokuapp.com/me") {
+    if (location.href.includes("/me")) {
       document.getElementById("me").classList.add("selected");
     }
-    if (location.href == "https://videorecorderbackend.herokuapp.com/team") {
+    if (location.href.includes("/team")) {
       document.getElementById("team").classList.add("selected");
     }
     if (
-      location.href == "https://videorecorderbackend.herokuapp.com/settings"
+      location.href.includes("/settings")
     ) {
       console.log("hai");
       document.getElementById("setting").classList.add("selected");

@@ -201,7 +201,7 @@ module.exports.postLogin = async (req, res, next) => {
   try {
     console.log("req.body");
     const { email, password } = req.body;
-    const user = await User.findOne({ where: { email: email } });
+    const user = await User.findOne({ raw: true, where: { email: email } });
     if (user) {
       const match = await bcrypt.compare(password, user.password);
       console.log("user");
@@ -210,26 +210,14 @@ module.exports.postLogin = async (req, res, next) => {
         req.session.userId = user.id;
         req.session.email = user.email;
         req.session.isAuth = true;
-        // const token = jwt.sign(
-        //   { user_id: user.id, email },
-        //   process.env.TOKEN_KEY
-        // );
-        // // save user token
-        // user.token = token;
 
-        // await user.save();
-        // console.log(token, "token");
-        // res.cookie("loginkey", token, {
-        //   httpOnly: false,
-        //   secure: true,
-        //   maxAge: 3600 * 60 * 60 * 24,
-        // });
+        console.log("user", user);
 
         res.redirect("/home");
       } else {
         //return next(new ExpressError("Invalid Password"));
-        var loginErr = true;
-        res.render("user/login", { loginErr, userErr: false });
+
+        res.render("user/login", { loginErr: true, userErr: false });
       }
     } else {
       // return next(new ExpressError("User doesnot exist "));
@@ -372,6 +360,7 @@ module.exports.userVideoLink = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findOne({ where: { id: id } });
   const user = await User.findOne({ where: { id: video.userId } });
+
   const uservideo = await UserVideo.findAll({
     where: { userEmail: user.email, videoId: video.id },
   });

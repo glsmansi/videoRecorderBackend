@@ -3,13 +3,31 @@
     <a href="/">
       <img src="../../img/loom.png" class="loomLogo" />
     </a>
-    <div class="iconNavi">
+    <div class="iconNavi" id="selectButton">
       <!-- <i class="fas fa-search"></i>
       <i class="far fa-bell"></i> -->
-
-      <a href="/login">
-        <button class="logOutBtn">Sign In</button>
-      </a>
+      <%if(currentUser){%>
+      <button class="btn"><a href="/logout">Logout</a></button>
+      <%}else{%>
+      <div id="signUp">
+        <button class="btn" style="width: auto">
+          <a href="/register">Create Account</a>
+        </button>
+      </div>
+      <div id="signIn">
+        <button class="btn"><a href="/login">Sign In</a></button>
+      </div>
+      <%}%>
     </div>
   </div>
 </navbar>
+<script>
+  if (location.href.includes("/") || location.href.includes("/register")) {
+    document.getElementById("signIn").style.display = "";
+    document.getElementById("signUp").style.display = "none";
+  }
+  if (location.href.includes("/login")) {
+    document.getElementById("signUp").style.display = "";
+    document.getElementById("signIn").style.display = "none";
+  }
+</script>

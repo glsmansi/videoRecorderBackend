@@ -11,7 +11,7 @@ const methodOverride = require("method-override");
 const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 var SequelizeStore = require("connect-session-sequelize")(session.Store);
-const isAuth = require("./server/middleware/auth");
+// const isAuth = require("./server/middleware/auth");
 
 // const fileUpload = require("express-fileupload");
 //const expressLayouts=require('express-ejs-layouts')
@@ -32,36 +32,6 @@ var myStore = new SequelizeStore({
   db: sequelize,
 });
 
-app.use(
-  session({
-    secret: process.env.TOKEN_KEY,
-    resave: false,
-    saveUninitialized: true,
-    // cookie: { secure: true, maxAge: 3600 * 60 * 60 * 24 },
-    store: myStore,
-  })
-);
-
-myStore.sync();
-
-app.use((req, res, next) => {
-  let names = "loginkey";
-  function getCookie(name) {
-    const value = `; ${req.headers.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(";").shift();
-  }
-  let cookieValue = getCookie(names);
-  // console.log(req.cookie);
-
-  // console.log(cookieValue);
-  // console.log(req);
-  res.locals.currentUser = req.session.userId;
-
-  // console.log("user", req);
-  next();
-});
-
 app.set("view engine", "ejs");
 app.use(expressLayouts);
 
@@ -71,6 +41,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "./public")));
+
+app.use(
+  session({
+    secret: process.env.TOKEN_KEY,
+    resave: false,
+    saveUninitialized: false,
+    // cookie: { secure: true, maxAge: 3600 * 60 * 60 * 24 },
+    store: myStore,
+  })
+);
+
+myStore.sync();
+
+app.use((req, res, next) => {
+  res.locals.currentUser = req.session.userId;
+  next();
+});
 
 app.use("/", userRouter);
 
