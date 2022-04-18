@@ -92,12 +92,15 @@ module.exports.getRegister = async (req, res) => {
   // if (req.cookies["loginkey"]) {
   //   res.redirect("/home");
   // } else {
-  res.render("user/register", {
-    loginErr: false,
-    passErr: false,
-    notVerified: false,
-  });
-  // }
+  if (!req.session.userId) {
+    res.render("user/register", {
+      loginErr: false,
+      passErr: false,
+      notVerified: false,
+    });
+  } else {
+    res.redirect("/");
+  }
 };
 
 module.exports.postRegister = async (req, res, next) => {
@@ -191,10 +194,14 @@ module.exports.emailVerification = async (req, res) => {
 };
 
 module.exports.getLogin = async (req, res) => {
-  res.render("user/login", {
-    loginErr: false,
-    userErr: false,
-  });
+  if (!req.session.userId) {
+    res.render("user/login", {
+      loginErr: false,
+      userErr: false,
+    });
+  } else {
+    res.redirect("/");
+  }
 };
 
 module.exports.postLogin = async (req, res, next) => {
