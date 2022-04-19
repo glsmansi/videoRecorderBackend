@@ -34,7 +34,7 @@ module.exports.home = async (req, res) => {
   if (req.session.userId) {
     res.redirect("/home");
   } else {
-    res.render("home");
+    res.render("home", { title: "Home" });
   }
 };
 
@@ -94,6 +94,7 @@ module.exports.getRegister = async (req, res) => {
     res.render("user/register", {
       err: false,
       success: false,
+      title: "Register",
     });
   } else {
     res.redirect("/");
@@ -110,6 +111,7 @@ module.exports.postRegister = async (req, res, next) => {
       return res.render("user/register", {
         err: "User Already Exists",
         success: false,
+        title: "Register",
       });
     }
 
@@ -128,6 +130,7 @@ module.exports.postRegister = async (req, res, next) => {
         err:
           " password should contain at least one lowercase character, at least one uppercase character, at least one numeric value,  at least one special character,  minimum 8 characters",
         success: false,
+        title: "Register",
       });
     }
 
@@ -167,6 +170,7 @@ module.exports.postRegister = async (req, res, next) => {
         res.render("user/register", {
           err: false,
           success: `email has been sent to ${email}`,
+          title: "Register",
         });
       }
     });
@@ -181,6 +185,7 @@ module.exports.getEmailToken = async (req, res) => {
   res.render("user/emailToken", {
     err: false,
     token,
+    title: "Email Verification",
   });
 };
 
@@ -201,6 +206,7 @@ module.exports.postEmailToken = async (req, res) => {
         res.render("user/emailToken", {
           err: "Password doesn't match",
           token,
+          title: "Email Verification",
         });
       }
     } else {
@@ -214,12 +220,14 @@ module.exports.postEmailToken = async (req, res) => {
       res.render("user/register", {
         success: false,
         err,
+        title: "Register",
       });
     }
   } else {
     res.render("user/emailToken", {
       err: "Email Doesn't Match",
       token,
+      title: "Email Verification",
     });
   }
 };
@@ -228,6 +236,7 @@ module.exports.getLogin = async (req, res) => {
   if (!req.session.userId) {
     res.render("user/login", {
       err: false,
+      title: "Login",
     });
   } else {
     res.redirect("/");
@@ -254,7 +263,7 @@ module.exports.postLogin = async (req, res, next) => {
       } else {
         //return next(new ExpressError("Invalid Password"));
         err = "Invalid Password";
-        res.render("user/login", { err });
+        res.render("user/login", { err, title: "Login" });
       }
     } else {
       // return next(new ExpressError("User doesnot exist "));
@@ -263,7 +272,7 @@ module.exports.postLogin = async (req, res, next) => {
       } else {
         err = "User Doesn't Exist";
       }
-      res.render("user/login", { err });
+      res.render("user/login", { err, title: "Login" });
     }
   } catch (e) {
     console.log(e);
@@ -321,12 +330,13 @@ module.exports.settings = async (req, res) => {
     noMatch: false,
     success: false,
     passwordValidationErr: false,
+    title: "Settings",
   });
 };
 
 module.exports.loginSuccess = async (req, res) => {
   // if (req.cookies["loginkey"]) {
-  res.render("user/myVideo");
+  res.render("user/myVideo", { title: "HOME PAGE" });
 };
 
 module.exports.sharedWithMe = async (req, res) => {
@@ -353,10 +363,10 @@ module.exports.sharedWithMe = async (req, res) => {
     },
   });
   sharedvideos.push(videos);
-  console.log("shared", sharedvideos);
+  console.log(sharedvideos.length);
   // }
 
-  res.render("user/me", { sharedvideos });
+  res.render("user/me", { sharedvideos, title: "Shared Videos" });
 };
 module.exports.sharedWithOthers = async (req, res) => {
   // const userEmail = req.user.email;
@@ -384,7 +394,7 @@ module.exports.sharedWithOthers = async (req, res) => {
   });
   // videos;
   console.log(videos);
-  res.render("user/team", { videos, user });
+  res.render("user/team", { videos, user, title: "Shared with Team" });
 };
 
 module.exports.personal = async (req, res) => {
@@ -395,7 +405,12 @@ module.exports.personal = async (req, res) => {
     where: { userId: user.id },
   });
   console.log("uservideos");
-  res.render("user/myVideo", { uservideos, user, userEmail });
+  res.render("user/myVideo", {
+    uservideos,
+    user,
+    userEmail,
+    title: "HOME PAGE",
+  });
 };
 
 module.exports.userVideoLink = async (req, res) => {
@@ -420,6 +435,7 @@ module.exports.userVideoLink = async (req, res) => {
         user,
         uservideo,
         userData,
+        title: "Public Video",
       });
     } else {
       console.log(uservideo);
@@ -432,7 +448,13 @@ module.exports.userVideoLink = async (req, res) => {
       const userData = req.session;
       console.log(userData);
 
-      res.render("user/video", { video, user, uservideo, userData });
+      res.render("user/video", {
+        video,
+        user,
+        uservideo,
+        userData,
+        title: "Privated Video",
+      });
     } else {
       res.redirect("/login");
     }
@@ -540,6 +562,7 @@ module.exports.changePassword = async (req, res) => {
         passErr: false,
         success: false,
         passwordValidationErr: true,
+        title: "Settings",
       });
     }
     if (newPassword == confirmPassword) {
@@ -553,6 +576,7 @@ module.exports.changePassword = async (req, res) => {
         passErr: false,
         success: true,
         passwordValidationErr: false,
+        title: "Settings",
       });
     } else {
       res.render("user/setting", {
@@ -561,6 +585,7 @@ module.exports.changePassword = async (req, res) => {
         passErr: false,
         success: false,
         passwordValidationErr: false,
+        title: "Settings",
       });
       console.log("no MATCH");
     }
@@ -571,6 +596,7 @@ module.exports.changePassword = async (req, res) => {
       noMatch: false,
       success: false,
       passwordValidationErr: false,
+      title: "Settings",
     });
     console.log("Wrong password");
   }

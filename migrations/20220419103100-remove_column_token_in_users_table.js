@@ -5,5 +5,9 @@ module.exports = {
     return queryInterface.removeColumn("Users", "token");
   },
 
-  down(queryInterface, Sequelize) {},
+  down(queryInterface, Sequelize) {
+    return queryInterface.addColumn("Users", "token", {
+      type: Sequelize.STRING,
+    });
+  },
 };

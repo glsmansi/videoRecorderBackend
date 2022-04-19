@@ -11,8 +11,8 @@ module.exports = {
   },
 
   down(queryInterface, Sequelize) {
-    return queryInterface.removeColumn("Videos", "userId", {
-      type: Sequelize.STRING,
+    return queryInterface.changeColumn("Videos", "userId", {
+      type: Sequelize.INTEGER,
     });
   },
 };
