@@ -34,7 +34,7 @@ module.exports.home = async (req, res) => {
   if (req.session.userId) {
     res.redirect("/home");
   } else {
-    res.render("home", { title: "Home" });
+    res.render("home", { title: "ATG MEET" });
   }
 };
 
@@ -84,6 +84,10 @@ module.exports.uploadVideo = async (req, res) => {
   } catch (e) {
     return new ExpressError(e);
   }
+};
+
+module.exports.addVideo = async (req, res) => {
+  res.render("user/addVideo", { title: "Add Video" });
 };
 
 module.exports.getRegister = async (req, res) => {
@@ -295,9 +299,10 @@ module.exports.googleLogin = async (req, res) => {
 
     if (!user) {
       const newUser = await User.create({
+        username: payload.name,
         email: payload.email,
-
         loginType: "googleLogin",
+        isVerified: true,
       });
       await newUser.save();
     }
@@ -326,17 +331,15 @@ module.exports.settings = async (req, res) => {
   // }
   res.render("user/setting", {
     user,
-    passErr: false,
-    noMatch: false,
+    err: false,
     success: false,
-    passwordValidationErr: false,
     title: "Settings",
   });
 };
 
 module.exports.loginSuccess = async (req, res) => {
   // if (req.cookies["loginkey"]) {
-  res.render("user/myVideo", { title: "HOME PAGE" });
+  res.render("user/myVideo", { title: "ATG MEET" });
 };
 
 module.exports.sharedWithMe = async (req, res) => {
@@ -409,7 +412,7 @@ module.exports.personal = async (req, res) => {
     uservideos,
     user,
     userEmail,
-    title: "HOME PAGE",
+    title: "ATG MEET",
   });
 };
 
@@ -547,8 +550,7 @@ module.exports.changeUserName = async (req, res) => {
 module.exports.changePassword = async (req, res) => {
   const { password, newPassword, confirmPassword } = req.body;
   const user = await User.findOne({ where: { id: req.session.userId } });
-  const match = await bcrypt.compare(password, user.password);
-  if (match) {
+  if (user.loginType == "googleLogin") {
     if (
       newPassword < 8 ||
       newPassword.search(/[0-9]/) == -1 ||
@@ -558,10 +560,9 @@ module.exports.changePassword = async (req, res) => {
     ) {
       return res.render("user/setting", {
         user,
-        noMatch: false,
-        passErr: false,
         success: false,
-        passwordValidationErr: true,
+        err:
+          "password should contain minimum 8 characters, at least one lowercase,at least one uppercase, at least one numeric value, at least one special character",
         title: "Settings",
       });
     }
@@ -572,33 +573,67 @@ module.exports.changePassword = async (req, res) => {
       await user.save();
       res.render("user/setting", {
         user,
-        noMatch: false,
-        passErr: false,
-        success: true,
-        passwordValidationErr: false,
+        err: false,
+        success: "Password Changed",
         title: "Settings",
       });
     } else {
       res.render("user/setting", {
         user,
-        noMatch: true,
-        passErr: false,
         success: false,
-        passwordValidationErr: false,
+        err: "New password and confirm password must match",
         title: "Settings",
       });
       console.log("no MATCH");
     }
   } else {
-    res.render("user/setting", {
-      user,
-      passErr: true,
-      noMatch: false,
-      success: false,
-      passwordValidationErr: false,
-      title: "Settings",
-    });
-    console.log("Wrong password");
+    const match = await bcrypt.compare(password, user.password);
+
+    if (match) {
+      if (
+        newPassword < 8 ||
+        newPassword.search(/[0-9]/) == -1 ||
+        newPassword.search(/[a-z]/) == -1 ||
+        newPassword.search(/[A-Z]/) == -1 ||
+        newPassword.search(/[!/@/#/$/%/^/&/(/)/_/+/./,/:/;/*/]/) == -1
+      ) {
+        return res.render("user/setting", {
+          user,
+          success: false,
+          err:
+            "password should contain minimum 8 characters, at least one lowercase,at least one uppercase, at least one numeric value, at least one special character",
+          title: "Settings",
+        });
+      }
+      if (newPassword == confirmPassword) {
+        newEncryptedPassword = await bcrypt.hash(newPassword, 10);
+        console.log(newEncryptedPassword);
+        user.password = newEncryptedPassword;
+        await user.save();
+        res.render("user/setting", {
+          user,
+          err: false,
+          success: "Password Changed",
+          title: "Settings",
+        });
+      } else {
+        res.render("user/setting", {
+          user,
+          success: false,
+          err: "New password and confirm password must match",
+          title: "Settings",
+        });
+        console.log("no MATCH");
+      }
+    } else {
+      res.render("user/setting", {
+        user,
+        success: false,
+        err: "Current password doesn't match",
+        title: "Settings",
+      });
+      console.log("Wrong password");
+    }
   }
 };
 

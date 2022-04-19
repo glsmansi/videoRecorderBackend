@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  font-family: "Montserrat", sans-serif;
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; */
+}
+
+.nav {
+  display: flex;
+  position: sticky;
+  justify-content: space-between;
+  background: #f8f6f0;
+  height: 4rem;
+  width: auto;
+  z-index: 9999;
+}
+
+.loomLogo {
+  width: 9rem;
+  margin: -1rem 2rem;
+  position: absolute;
+  z-index: 1;
+}
+.iconNavi {
+  margin: 35px;
+  padding: -3px;
+}
+.iconNavi i {
+  padding: 1px 12px;
+}
+
+.firstFullContainer {
+  padding: 19px 19px;
+  height: 100%;
+  width: 254px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #f8f6f0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.firstFullContainer a {
+  font-size: 14px;
+}
+.firstContainer {
+  position: relative;
+  top: 109px;
+}
+.threeContainer {
+  display: flex;
+  padding: 14px 11px;
+  margin: 9px 0px 0px 0px;
+}
+.selected {
+  border: none;
+  background-color: #e2e2e6;
+  border-radius: 7px;
+  width: 15em;
+  height: 26px;
+}
+.threeContainer i {
+  padding: 6px 11px;
+}
+.threeContainer a {
+  display: flex;
+  text-decoration: none;
+  color: #100d0f;
+}
+.btn {
+  margin: -1rem 1rem;
+  /* display: flex; */
+  /* justify-content: center; */
+  width: 6rem;
+  height: 2rem;
+  text-align: center;
+  border-radius: 19px;
+  border: transparent;
+  background-color: #4b42ad;
+  /* padding: 1rem; */
+}
+
+.btn a {
+  font-size: 16px;
+  color: #f8f6f0;
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-decoration: none;
+}

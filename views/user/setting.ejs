@@ -127,41 +127,28 @@
         <div class="" style="width: 800px; height: 50px; color: red;">
         <% if(success){ %>
             <div class="alert alert-danger text-center" style="color:rgb(7, 218, 0)" role="alert">
-              Password Changed
+              <%=success%>
             </div>
          <% }%>
-         <% if(noMatch){ %>
+        
+         <% if(err){ %>
           <div class="alert alert-danger text-center" role="alert">
-            New password and confirm password must match
-          </div>
-       <% }%>
-         <% if(passwordValidationErr){ %>
-          <div class="alert alert-danger text-center" role="alert">
-            <p> password should contain minimum 8 characters,at least one lowercase,
-              at least one uppercase,
-              at least one numeric value,
-              at least one special character,
+            <p><%=err%>
               </p>
           </div>
        <% }%>
-          <% if(passErr){ %>
-            <div class="alert alert-danger text-center" role="alert">
-              Current password doesn't match
-            </div>
-         <% }%>
+         
          
         </div>
         <div class="" style="width: 800px; height: 50px; color: red;">
-        <% if(false){ %>
-          <div class="alert alert-danger text-center" role="alert">
-            New password and Confirm Password must match
-          </div>
-       <% }%>
+       
         </div>
+        <% if(user.loginType=="login"){ %> 
         <div class="currentPassword">
           <label for="currentPassword">Current Password</label>
           <input type="password" name="password" placeholder="password" required/>
         </div>
+        <%}%>
         <div class="confirmationPassword">
           <div class="newPassword">
             <label for="newPassword">New Password</label>

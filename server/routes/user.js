@@ -92,6 +92,8 @@ router
   .route("/uploadPhoto")
   .post(isAuth, profilePicUpload.single("mypic"), user.uploadPhoto);
 
+router.route("/addVideo").get(isAuth, user.addVideo);
+
 router.route("/removeProfilePic").get(isAuth, user.removeProfilePic);
 
 router.route("/logout").get(user.logout);
