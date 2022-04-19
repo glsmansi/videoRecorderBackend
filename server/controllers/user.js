@@ -18,9 +18,7 @@ const { Op } = require("sequelize");
 //   foreignKey: "userEmail",
 // });
 
-function getRandom(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
+var err = "";
 
 const s3 = new AWS.S3({
   accessKeyId: process.env.AWS_ID,
@@ -193,10 +191,11 @@ module.exports.postEmailToken = async (req, res) => {
   if (email == tokenData.email) {
     const user = await User.findOne({ where: { email: tokenData.email } });
     console.log(user.isVerified);
-    if (user && user.isVerified == false) {
+    if (user && user.isVerified === false) {
       const match = await bcrypt.compare(password, user.password);
       if (match) {
         user.isVerified = true;
+        await user.save();
         res.redirect("/login");
       } else {
         res.render("user/emailToken", {
@@ -205,9 +204,16 @@ module.exports.postEmailToken = async (req, res) => {
         });
       }
     } else {
+      if (!user) {
+        err = "User Doesn't Exist";
+        console.log(err);
+      } else if (user.isVerified == true) {
+        err = `Email Already Verified Please Login from ${process.env.EMAILHOSTLINK}/login`;
+        console.log(err);
+      }
       res.render("user/register", {
         success: false,
-        err: "Your Email is not verified",
+        err,
       });
     }
   } else {
@@ -221,8 +227,7 @@ module.exports.postEmailToken = async (req, res) => {
 module.exports.getLogin = async (req, res) => {
   if (!req.session.userId) {
     res.render("user/login", {
-      loginErr: false,
-      userErr: false,
+      err: false,
     });
   } else {
     res.redirect("/");
@@ -234,7 +239,7 @@ module.exports.postLogin = async (req, res, next) => {
     console.log("req.body");
     const { email, password } = req.body;
     const user = await User.findOne({ raw: true, where: { email: email } });
-    if (user) {
+    if (user && user.isVerified) {
       const match = await bcrypt.compare(password, user.password);
       console.log("user");
 
@@ -248,12 +253,17 @@ module.exports.postLogin = async (req, res, next) => {
         res.redirect("/home");
       } else {
         //return next(new ExpressError("Invalid Password"));
-
-        res.render("user/login", { loginErr: true, userErr: false });
+        err = "Invalid Password";
+        res.render("user/login", { err });
       }
     } else {
       // return next(new ExpressError("User doesnot exist "));
-      res.render("user/login", { loginErr: false, userErr: true });
+      if (user.isVerified == false) {
+        err = `Email Not Verified. Please Check your mail with name: ${process.env.GMAIL_ID}`;
+      } else {
+        err = "User Doesn't Exist";
+      }
+      res.render("user/login", { err });
     }
   } catch (e) {
     console.log(e);
