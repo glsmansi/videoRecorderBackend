@@ -22,7 +22,7 @@
   <div class="videoContainer">
     <div class="videos">
       <div class="c-video">
-        <%if(sharedvideos.length>1){%> 
+        <%if(sharedvideos.length){%> 
           <%var arr = []; for (let i = 0; i <sharedvideos.length; i++) {%> <%arr.push(sharedvideos[i]);}%>
         <%for(video of arr){%>
         <div class="singleVideo">
