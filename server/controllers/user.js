@@ -94,9 +94,8 @@ module.exports.getRegister = async (req, res) => {
   // } else {
   if (!req.session.userId) {
     res.render("user/register", {
-      loginErr: false,
-      passErr: false,
-      notVerified: false,
+      err: false,
+      success: false,
     });
   } else {
     res.redirect("/");
@@ -111,9 +110,8 @@ module.exports.postRegister = async (req, res, next) => {
     if (oldUser) {
       //return next(new ExpressError("User Already Exist", 409));
       return res.render("user/register", {
-        loginErr: true,
-        passErr: false,
-        notVerified: false,
+        err: "User Already Exists",
+        success: false,
       });
     }
 
@@ -129,66 +127,93 @@ module.exports.postRegister = async (req, res, next) => {
       password.search(/[!/@/#/$/%/^/&/(/)/_/+/./,/:/;/*/]/) == -1
     ) {
       return res.render("user/register", {
-        loginErr: false,
-        passErr: true,
-        notVerified: false,
+        err:
+          " password should contain at least one lowercase character, at least one uppercase character, at least one numeric value,  at least one special character,  minimum 8 characters",
+        success: false,
       });
     }
+
     const encryptedPassword = await bcrypt.hash(password, 10);
     console.log(encryptedPassword);
-
-    // otp = getRandom(1000, 9999);
-    // let transporter = nodemailer.createTransport({
-    //   service: "gmail",
-    //   // secure: true, // true for 465, false for other ports
-    //   auth: {
-    //     user: process.env.GMAIL_ID, // generated ethereal user
-    //     pass: process.env.GMAIL_PASSWORD, // generated ethereal password
-    //   },
-    // });
-    // let mailOptions = {
-    //   from: "gl.sai.mansi8@gmail.com", // sender address
-    //   to: email, // list of receivers
-    //   subject: "ATG-MEET email verification", // Subject line
-    //   text: `${otp} is your OTP foe email verification`, // plain text
-    // };
-
-    // transporter.sendMail(mailOptions, (error, info) => {
-    //   if (error) {
-    //     return console.log(error);
-    //   } else {
-    //     console.log(info);
-    //     res.render("user/emailVerification.ejs");
-    //   }
-    // });
     const user = await User.create({
+      raw: true,
       username,
       email,
       password: encryptedPassword,
       loginType: "login",
     });
+    // console.log("user verify", user);
+    const token = jwt.sign({ userId: user._id, email }, process.env.TOKEN_KEY);
+    const url = `${process.env.EMAILHOSTLINK}/emailToken/${token}`;
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      // secure: true, // true for 465, false for other ports
+      auth: {
+        user: process.env.GMAIL_ID, // generated ethereal user
+        pass: process.env.GMAIL_PASSWORD, // generated ethereal password
+      },
+    });
+    let mailOptions = {
+      from: "gl.sai.mansi8@gmail.com", // sender address
+      to: email, // list of receivers
+      subject: "ATG-MEET email verification", // Subject line
+      // text: `To verify you email please click the following url: ${url} `, // plain text
+      html: `Please click this email to confirm your email: <a href="${url}">${url}</a>`,
+    };
 
-    res.redirect("/login");
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        return console.log(error);
+      } else {
+        console.log(info);
+        res.render("user/register", {
+          err: false,
+          success: `email has been sent to ${email}`,
+        });
+      }
+    });
   } catch (e) {
     console.log(e);
     return next(new ExpressError(e));
   }
 };
 
-module.exports.emailVerification = async (req, res) => {
-  const enteredOTP1 = req.body.otp;
-  enteredOTP = enteredOTP1.map(Number).join("");
-  console.log(req.body);
-  console.log(otp);
-  console.log(enteredOTP);
-  if (enteredOTP == otp) {
-    console.log("SUCCESS");
-    res.redirect("/login");
+module.exports.getEmailToken = async (req, res) => {
+  const { token } = req.params;
+  res.render("user/emailToken", {
+    err: false,
+    token,
+  });
+};
+
+module.exports.postEmailToken = async (req, res) => {
+  const { token } = req.params;
+  const { email, password } = req.body;
+  var tokenData = jwt.verify(token, process.env.TOKEN_KEY);
+  if (email == tokenData.email) {
+    const user = await User.findOne({ where: { email: tokenData.email } });
+    console.log(user.isVerified);
+    if (user && user.isVerified == false) {
+      const match = await bcrypt.compare(password, user.password);
+      if (match) {
+        user.isVerified = true;
+        res.redirect("/login");
+      } else {
+        res.render("user/emailToken", {
+          err: "Password doesn't match",
+          token,
+        });
+      }
+    } else {
+      res.render("user/register", {
+        success: false,
+        err: "Your Email is not verified",
+      });
+    }
   } else {
-    res.render("user/register", {
-      loginErr: false,
-      passErr: false,
-      notVerified: true,
+    res.render("user/emailToken", {
+      err: "Email Doesn't Match",
+      token,
     });
   }
 };

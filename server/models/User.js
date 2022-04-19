@@ -22,12 +22,13 @@ module.exports = sequelize.define(
     loginType: {
       type: Sequelize.STRING,
     },
-    token: {
-      type: Sequelize.STRING(1000),
-    },
+
     profilePicture: {
       type: Sequelize.STRING(1000),
       allowNull: true,
+    },
+    isVerified: {
+      type: Sequelize.BOOLEAN,
     },
   },
   {
