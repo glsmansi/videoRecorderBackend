@@ -391,6 +391,40 @@ span {
   font-size: bolder;
 }
 
+.custom-file-input {
+  color: transparent;
+}
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: "+ Video";
+  display: inline-block;
+  background: -webkit-linear-gradient(top, #ff623e, #ff623e);
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  padding: 0.5rem 2rem;
+  margin-left: 5rem;
+  text-align: center;
+  font-size: 14px;
+  word-spacing: 3px;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 600;
+}
+.custom-file-input:hover::before {
+  border-color: black;
+}
+.custom-file-input:active {
+  outline: 0;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
 @media (max-width: 1069px) {
   .heading h1 {
     font-size: 35px;

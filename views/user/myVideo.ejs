@@ -12,11 +12,12 @@
           </div>
           <div class="buttonsForAdd">
             <!-- <button class="folderBtn" hidden>New Folder</button> -->
-            <form action="/addVideo" method="GET">
-            <button class="addBtn">
-              <i class="fas fa-plus"></i>
-              Add Video
-            </button>
+            <form action="/uploadVideo" method="POST" enctype="multipart/form-data" onChange="uploadFile()">
+            <!-- <button class="addBtn"> -->
+              <!-- <i class="fas fa-plus"></i> -->
+              <input type="file" name="video" class="custom-file-input" id="file">
+            
+            <!-- </button> -->
           </form>
           </div>
         </div>
@@ -122,5 +123,27 @@ function copyToClipboard(elementId) {
   alert("Link Copied To Clipboard");
 
 }
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  // let video=document.getElementById("addVideoInput")
+  // video.addEventListener("input",()=>{
+  //   console.log(video.value)
+  // if(video.value){
+  //   document.getElementsByTagName('form')[0].submit()
+  // }
+  // })
+  async function uploadFile() {
+  console.log("skdfhjidhfi")
+  var video = new FormData();
+  var imagefile = document.querySelector('#file');
+  video.append("video", imagefile.files[0]);
+  console.log(imagefile.files)
+  await axios.post('uploadVideo', video, {
+      headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+})
+  }
 </script>
 </html>

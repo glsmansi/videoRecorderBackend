@@ -36,10 +36,8 @@ router
   .post(catchAsync(user.postRegister));
 
 // router.route("/validate").post(catchAsync(user.emailVerification));
-router
-  .route("/emailToken/:token")
-  .get(user.getEmailToken)
-  .post(user.postEmailToken);
+router.route("/emailToken/:token").get(user.getEmailToken);
+// .post(user.postEmailToken);
 
 router
   .route("/login")

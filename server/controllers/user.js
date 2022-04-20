@@ -147,8 +147,8 @@ module.exports.postRegister = async (req, res, next) => {
       password: encryptedPassword,
       loginType: "login",
     });
-    // console.log("user verify", user);
-    const token = jwt.sign({ userId: user._id, email }, process.env.TOKEN_KEY);
+    console.log("user verify", user);
+    const token = jwt.sign({ userId: user.id, email }, process.env.TOKEN_KEY);
     const url = `${process.env.EMAILHOSTLINK}/emailToken/${token}`;
     let transporter = nodemailer.createTransport({
       service: "gmail",
@@ -186,52 +186,29 @@ module.exports.postRegister = async (req, res, next) => {
 
 module.exports.getEmailToken = async (req, res) => {
   const { token } = req.params;
-  res.render("user/emailToken", {
-    err: false,
-    token,
-    title: "Email Verification",
-  });
-};
-
-module.exports.postEmailToken = async (req, res) => {
-  const { token } = req.params;
-  const { email, password } = req.body;
   var tokenData = jwt.verify(token, process.env.TOKEN_KEY);
-  if (email == tokenData.email) {
-    const user = await User.findOne({ where: { email: tokenData.email } });
-    console.log(user.isVerified);
-    if (user && user.isVerified === false) {
-      const match = await bcrypt.compare(password, user.password);
-      if (match) {
-        user.isVerified = true;
-        await user.save();
-        res.redirect("/login");
-      } else {
-        res.render("user/emailToken", {
-          err: "Password doesn't match",
-          token,
-          title: "Email Verification",
-        });
-      }
-    } else {
-      if (!user) {
-        err = "User Doesn't Exist";
-        console.log(err);
-      } else if (user.isVerified == true) {
-        err = `Email Already Verified Please Login from ${process.env.EMAILHOSTLINK}/login`;
-        console.log(err);
-      }
-      res.render("user/register", {
-        success: false,
-        err,
-        title: "Register",
-      });
-    }
+  console.log(tokenData);
+  const user = await User.findOne({ where: { email: tokenData.email } });
+
+  if (user && user.isVerified === false) {
+    user.isVerified = true;
+    await user.save();
+    req.session.userId = user.id;
+    req.session.email = user.email;
+    req.session.isAuth = true;
+    res.redirect("/home");
   } else {
-    res.render("user/emailToken", {
-      err: "Email Doesn't Match",
-      token,
-      title: "Email Verification",
+    if (!user) {
+      err = "User Doesn't Exist";
+      console.log(err);
+    } else if (user.isVerified == true) {
+      err = `Email Already Verified Please Login from ${process.env.EMAILHOSTLINK}/login`;
+      console.log(err);
+    }
+    res.render("user/register", {
+      success: false,
+      err,
+      title: "Register",
     });
   }
 };
@@ -404,6 +381,7 @@ module.exports.personal = async (req, res) => {
   console.log("user deatils", req.session);
   const userEmail = req.session.email;
   const user = await User.findOne({ where: { id: req.session.userId } });
+  console.log(user);
   const uservideos = await Video.findAll({
     where: { userId: user.id },
   });
