@@ -114,3 +114,22 @@ section {
   top: 20%;
   font-size: bolder;
 }
+.btn {
+  margin: 1rem;
+  /* display: flex; */
+  /* justify-content: center; */
+  width: 7rem;
+  height: 2.2rem;
+  text-align: center;
+  border-radius: 19px;
+  border: transparent;
+  background-color: #4b42ad;
+}
+
+.btn a {
+  font-size: 16px;
+  color: #f8f6f0;
+  letter-spacing: 2px;
+  font-weight: 600;
+  text-decoration: none;
+}
