@@ -342,7 +342,10 @@ module.exports.sharedWithMe = async (req, res) => {
       id: { [Op.in]: arr },
     },
   });
-  sharedvideos.push(videos);
+
+  if (videos) {
+    sharedvideos.push(videos);
+  }
   console.log(sharedvideos.length);
   // }
 
