@@ -23,7 +23,7 @@ module.exports = sequelize.define(
     },
 
     meetingNotes: {
-      type: Sequelize.STRING,
+      type: Sequelize.TEXT,
     },
   },
   {
