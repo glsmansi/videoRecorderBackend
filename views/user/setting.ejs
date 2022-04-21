@@ -32,7 +32,7 @@
         </div>
       </form>
       <form action="/changeUsername" method="POST">
-        <label for="firstName">Username: </label>
+        <label for="firstName">Name: </label>
         <input type="text" id="firstName" name="username" value="<%=user.username %>" />
         <!-- <label for="lastName">Last name: </label>
         <input type="text" name="lastName" value="Joshi" /> -->
@@ -125,18 +125,7 @@
       </h3>
       <form action="/changePassword" method="POST">
         <div class="" style="width: 800px; height: 50px; color: red;">
-        <% if(success){ %>
-            <div class="alert alert-danger text-center" style="color:rgb(7, 218, 0)" role="alert">
-              <%=success%>
-            </div>
-         <% }%>
-        
-         <% if(err){ %>
-          <div class="alert alert-danger text-center" role="alert">
-            <p><%=err%>
-              </p>
-          </div>
-       <% }%>
+       
          
          
         </div>

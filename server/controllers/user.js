@@ -18,8 +18,6 @@ const { Op } = require("sequelize");
 //   foreignKey: "userEmail",
 // });
 
-var err = "";
-
 const s3 = new AWS.S3({
   accessKeyId: process.env.AWS_ID,
   secretAccessKey: process.env.AWS_SECRET,
@@ -32,8 +30,10 @@ const client = new OAuth2Client(CLIENT_ID);
 
 module.exports.home = async (req, res) => {
   if (req.session.userId) {
+    req.flash("success", `Already LoggedIn As ${req.session.email}`);
     res.redirect("/home");
   } else {
+    // req.flash("success", "Welcome To ATG-MEET");
     res.render("home", { title: "ATG MEET" });
   }
 };
@@ -53,7 +53,7 @@ module.exports.uploadVideo = async (req, res) => {
       Body: req.file.buffer,
     };
     console.log(myFile);
-
+    req.flash("success", "Uploading!!!");
     s3.upload(params, async (error, data) => {
       if (error) {
         res.status(500).json(error);
@@ -79,15 +79,12 @@ module.exports.uploadVideo = async (req, res) => {
       };
       console.log(userVideo);
       console.log(videoLink);
+      req.flash("success", "Uploaded, Refresh to see changes");
       res.status(200).json(details);
     });
   } catch (e) {
     return new ExpressError(e);
   }
-};
-
-module.exports.addVideo = async (req, res) => {
-  res.render("user/addVideo", { title: "Add Video" });
 };
 
 module.exports.getRegister = async (req, res) => {
@@ -96,12 +93,13 @@ module.exports.getRegister = async (req, res) => {
   // } else {
   if (!req.session.userId) {
     res.render("user/register", {
-      err: false,
-      success: false,
+      // err: false,
+      // success: false,
       title: "Register",
     });
   } else {
-    res.redirect("/");
+    req.flash("success", `Already LoggedIn As ${req.session.email}`);
+    res.redirect("/home");
   }
 };
 
@@ -112,9 +110,11 @@ module.exports.postRegister = async (req, res, next) => {
     console.log(oldUser);
     if (oldUser) {
       //return next(new ExpressError("User Already Exist", 409));
+      req.flash("error", "User Already Exist");
+
       return res.render("user/register", {
-        err: "User Already Exists",
-        success: false,
+        // err: "User Already Exists",
+        // success: false,
         title: "Register",
       });
     }
@@ -130,10 +130,14 @@ module.exports.postRegister = async (req, res, next) => {
       password.search(/[A-Z]/) == -1 ||
       password.search(/[!/@/#/$/%/^/&/(/)/_/+/./,/:/;/*/]/) == -1
     ) {
+      req.flash(
+        "error",
+        "password should contain at least one lowercase character, at least one uppercase character, at least one numeric value,  at least one special character,  minimum 8 characters"
+      );
       return res.render("user/register", {
-        err:
-          " password should contain at least one lowercase character, at least one uppercase character, at least one numeric value,  at least one special character,  minimum 8 characters",
-        success: false,
+        // err:
+        //   " ",
+        // success: false,
         title: "Register",
       });
     }
@@ -171,9 +175,10 @@ module.exports.postRegister = async (req, res, next) => {
         return console.log(error);
       } else {
         console.log(info);
+        req.flash("success", "Email has been sent to ${email}");
         res.render("user/register", {
-          err: false,
-          success: `email has been sent to ${email}`,
+          // err: false,
+          // success: `email has been sent to ${email}`,
           title: "Register",
         });
       }
@@ -196,6 +201,7 @@ module.exports.getEmailToken = async (req, res) => {
     req.session.userId = user.id;
     req.session.email = user.email;
     req.session.isAuth = true;
+    req.flash("success", "Your email is verified successfully");
     res.redirect("/home");
   } else {
     if (!user) {
@@ -205,9 +211,10 @@ module.exports.getEmailToken = async (req, res) => {
       err = `Email Already Verified Please Login from ${process.env.EMAILHOSTLINK}/login`;
       console.log(err);
     }
+    req.flash("error", err);
     res.render("user/register", {
-      success: false,
-      err,
+      // success: false,
+      // err,
       title: "Register",
     });
   }
@@ -220,7 +227,8 @@ module.exports.getLogin = async (req, res) => {
       title: "Login",
     });
   } else {
-    res.redirect("/");
+    req.flash("success", `Already LoggedIn As ${req.session.email}`);
+    res.redirect("/home");
   }
 };
 
@@ -243,17 +251,20 @@ module.exports.postLogin = async (req, res, next) => {
         res.redirect("/home");
       } else {
         //return next(new ExpressError("Invalid Password"));
+
         err = "Invalid Password";
-        res.render("user/login", { err, title: "Login" });
+        req.flash("error", err);
+        res.render("user/login", { title: "Login" });
       }
     } else {
       // return next(new ExpressError("User doesnot exist "));
-      if (user.isVerified == false) {
-        err = `Email Not Verified. Please Check your mail with name: ${process.env.GMAIL_ID}`;
-      } else {
+      if (!user) {
         err = "User Doesn't Exist";
+      } else {
+        err = `Email Not Verified. Please Check your mail with name: ${process.env.GMAIL_ID}`;
       }
-      res.render("user/login", { err, title: "Login" });
+      req.flash("error", err);
+      res.render("user/login", { title: "Login" });
     }
   } catch (e) {
     console.log(e);
@@ -298,26 +309,17 @@ module.exports.googleLogin = async (req, res) => {
 };
 
 module.exports.settings = async (req, res) => {
-  // var photo = false;
   const user = await User.findOne({ where: { email: req.session.email } });
-  // var path = `public/profilepic/${user.username}.jpg`;
-  // if (fs.existsSync(path)) {
-  // path exists
-  // photo = true;
-  // console.log("exists:", path);
-  // }
   res.render("user/setting", {
     user,
-    err: false,
-    success: false,
     title: "Settings",
   });
 };
 
-module.exports.loginSuccess = async (req, res) => {
-  // if (req.cookies["loginkey"]) {
-  res.render("user/myVideo", { title: "ATG MEET" });
-};
+// module.exports.loginSuccess = async (req, res) => {
+//   // if (req.cookies["loginkey"]) {
+//   res.render("user/myVideo", { title: "ATG MEET" });
+// };
 
 module.exports.sharedWithMe = async (req, res) => {
   const userEmail = req.session.email;
@@ -469,9 +471,11 @@ module.exports.publicOrPrivate = async (req, res) => {
   if (status != video.status) {
     video.status = status;
     await video.save();
+    req.flash("success", `Status of video changed to ${status}`);
     res.redirect(`/${id}/watch`);
   } else {
     console.log("no change");
+    req.flash("success", `Status of video is already in ${status}`);
     res.redirect(`/${id}/watch`);
   }
 };
@@ -486,7 +490,7 @@ module.exports.AddteamMembers = async (req, res) => {
     teamMembers: teamMembers,
   });
   await uservideo.save();
-
+  req.flash("success", `Team member ${teamMembers} added successfully`);
   res.redirect(`/${id}/watch`);
 };
 
@@ -508,6 +512,7 @@ module.exports.meetingNotes = async (req, res) => {
   console.log(meetingNotes);
   video.meetingNotes = meetingNotes;
   await video.save();
+  req.flash("success", "Meeting notes added successfully");
   res.redirect(`/${id}/watch`);
 };
 
@@ -517,6 +522,7 @@ module.exports.changeFileName = async (req, res) => {
   const video = await Video.findOne({ where: { id: id } });
   video.fileName = name;
   await video.save();
+  req.flash("success", `File name changed successfully to ${name}`);
   res.redirect(`/${id}/watch`);
 };
 
@@ -525,6 +531,7 @@ module.exports.changeUserName = async (req, res) => {
   const user = await User.findOne({ where: { id: req.session.userId } });
   user.username = username;
   await user.save();
+  req.flash("success", `Name changed successfully to ${username}`);
   res.redirect("/settings");
 };
 
@@ -539,11 +546,15 @@ module.exports.changePassword = async (req, res) => {
       newPassword.search(/[A-Z]/) == -1 ||
       newPassword.search(/[!/@/#/$/%/^/&/(/)/_/+/./,/:/;/*/]/) == -1
     ) {
+      req.flash(
+        "error",
+        "password should contain minimum 8 characters, at least one lowercase,at least one uppercase, at least one numeric value, at least one special character"
+      );
       return res.render("user/setting", {
         user,
-        success: false,
-        err:
-          "password should contain minimum 8 characters, at least one lowercase,at least one uppercase, at least one numeric value, at least one special character",
+        // success: false,
+        // err:
+        //   "",
         title: "Settings",
       });
     }
@@ -552,21 +563,21 @@ module.exports.changePassword = async (req, res) => {
       console.log(newEncryptedPassword);
       user.password = newEncryptedPassword;
       await user.save();
+      req.flash("success", "Password Changed");
       res.render("user/setting", {
         user,
-        err: false,
-        success: "Password Changed",
+        // err: false,
+        // success: "Password Changed",
         title: "Settings",
       });
-    } else {
-      res.render("user/setting", {
-        user,
-        success: false,
-        err: "New password and confirm password must match",
-        title: "Settings",
-      });
-      console.log("no MATCH");
-    }
+    } else req.flash("error", "New password and confirm password must match");
+    res.render("user/setting", {
+      user,
+      // success: false,
+      // err: "",
+      title: "Settings",
+    });
+    console.log("no MATCH");
   } else {
     const match = await bcrypt.compare(password, user.password);
 
@@ -578,11 +589,15 @@ module.exports.changePassword = async (req, res) => {
         newPassword.search(/[A-Z]/) == -1 ||
         newPassword.search(/[!/@/#/$/%/^/&/(/)/_/+/./,/:/;/*/]/) == -1
       ) {
+        req.flash(
+          "error",
+          "password should contain minimum 8 characters, at least one lowercase,at least one uppercase, at least one numeric value, at least one special character"
+        );
         return res.render("user/setting", {
           user,
-          success: false,
-          err:
-            "password should contain minimum 8 characters, at least one lowercase,at least one uppercase, at least one numeric value, at least one special character",
+          // success: false,
+          // err:
+          //   "",
           title: "Settings",
         });
       }
@@ -591,26 +606,29 @@ module.exports.changePassword = async (req, res) => {
         console.log(newEncryptedPassword);
         user.password = newEncryptedPassword;
         await user.save();
+        req.flash("success", "Password Changed");
         res.render("user/setting", {
           user,
-          err: false,
-          success: "Password Changed",
+          // err: false,
+          // success: "",
           title: "Settings",
         });
       } else {
+        req.flash("error", "New password and confirm password must match");
         res.render("user/setting", {
           user,
-          success: false,
-          err: "New password and confirm password must match",
+          // success: false,
+          // err: "",
           title: "Settings",
         });
         console.log("no MATCH");
       }
     } else {
+      req.flash("error", "Current password doesn't match");
       res.render("user/setting", {
         user,
-        success: false,
-        err: "Current password doesn't match",
+        // success: false,
+        // err: "Current password doesn't match",
         title: "Settings",
       });
       console.log("Wrong password");
@@ -643,6 +661,7 @@ module.exports.uploadPhoto = async (req, res) => {
       user.profilePicture = data.Location;
       await user.save();
       console.log(data.Location);
+      req.flash("success", "Uploaded profile picture successfully");
       res.status(200).redirect("/settings");
     });
   } catch (e) {
@@ -654,11 +673,13 @@ module.exports.removeProfilePic = async (req, res) => {
   const user = await User.findOne({ where: { id: req.session.userId } });
   user.profilePicture = null;
   await user.save();
+  req.flash("success", "Profile picture removed successfully");
   res.redirect("/settings");
 };
 
 module.exports.logout = (req, res) => {
   // res.clearCookie("loginkey");
+  req.flash("success", "Logged out successfully");
   req.session.destroy((err) => {
     if (err) throw err;
     res.redirect("/");

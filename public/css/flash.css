@@ -1,0 +1,70 @@
+.flashBtn {
+  outline: none;
+  border: none;
+  background: #ccc;
+  padding: 1.2rem 3rem;
+  margin: 1rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+#snackbar-container {
+  position: fixed;
+  top: 5%;
+  right: 2%;
+  width: 300px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  animation: fade-out 2s ease 4s forwards;
+  z-index: 9;
+}
+
+.snackbar {
+  padding: 1.5rem 1rem;
+  margin: 0.5rem;
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  color: white;
+  animation: fade-in 3s ease;
+}
+
+.snackbar span {
+  float: right;
+  cursor: pointer;
+}
+.error {
+  color: #842029;
+  background-color: #f8d7da;
+  border-color: #f5c2c7;
+}
+
+.success {
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+}
+
+.fadeout {
+  animation: fade-out 1s ease 2s forwards;
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

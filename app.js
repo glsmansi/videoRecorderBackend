@@ -10,6 +10,7 @@ const user = require("./server/controllers/user");
 const methodOverride = require("method-override");
 const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
+const flash = require("connect-flash");
 var SequelizeStore = require("connect-session-sequelize")(session.Store);
 // const isAuth = require("./server/middleware/auth");
 
@@ -38,6 +39,7 @@ app.use(expressLayouts);
 app.set("views", path.join(__dirname, "views"));
 app.use(cookieParser());
 app.use(express.json());
+app.use(flash());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "./public")));
@@ -56,6 +58,8 @@ myStore.sync();
 
 app.use((req, res, next) => {
   res.locals.currentUser = req.session.userId;
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
   next();
 });
 

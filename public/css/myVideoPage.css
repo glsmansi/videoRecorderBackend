@@ -15,6 +15,8 @@ body {
 .nav {
   display: flex;
   position: sticky;
+  top: 0;
+  left: 0px;
   justify-content: space-between;
   background: #f8f6f0;
   height: 4rem;
@@ -24,17 +26,16 @@ body {
 
 .loomLogo {
   width: 9rem;
-  margin: -1rem 2rem;
-  position: absolute;
-  z-index: 1;
+  margin: -1.5rem 2rem;
 }
-.iconNavi {
+
+/* .iconNavi {
   margin: 35px;
   padding: -3px;
 }
 .iconNavi i {
   padding: 1px 12px;
-}
+} */
 
 .firstFullContainer {
   padding: 19px 19px;
@@ -108,7 +109,7 @@ section {
 } */
 
 .btn {
-  margin: -1rem 1rem;
+  margin: 1rem;
   /* display: flex; */
   /* justify-content: center; */
   width: 6rem;
@@ -387,7 +388,7 @@ span {
   /* text-align: center; */
   position: relative;
   left: 40%;
-  top: 20%;
+  top: 10%;
   font-size: bolder;
 }
 
@@ -398,7 +399,7 @@ span {
   visibility: hidden;
 }
 .custom-file-input::before {
-  content: "+ Video";
+  content: "Add Video";
   display: inline-block;
   background: -webkit-linear-gradient(top, #ff623e, #ff623e);
   outline: none;
