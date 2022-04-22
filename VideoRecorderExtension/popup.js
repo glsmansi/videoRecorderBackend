@@ -224,7 +224,7 @@ window.addEventListener('load', () => {
 				}
 				if(request.cookieValue){
 					console.log(request);
-					var email = request.user.email;
+					var email = request.user;
 					var name = email.substring(0, email. lastIndexOf("@"));
 					document.getElementById('user').innerHTML="Hey "+name
 					document.getElementById('user').hidden=false

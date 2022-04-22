@@ -43,8 +43,9 @@ let stream = null,
 					}
 				  }
 				  if(request.greeting=="cookieValue"){
-					cookieValue=request.cookieValue
-					user=request.data
+					  cookieValue=request.cookieValue
+					  user=request.data.email
+					  console.log(cookieValue);
 				  }
 				  if(request.greeting=="logout"){
 					  console.log("logout");

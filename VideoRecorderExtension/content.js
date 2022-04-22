@@ -1,21 +1,13 @@
 var tabid=null;
-let names="cookietokenkey";
-function getCookie(name) {
-	const value = `; ${document.cookie}`;	
-	const parts = value.split(`; ${name}=`);
-	if (parts.length === 2) return parts.pop().split(';').shift();
-  }
-  let cookieValue=getCookie(names);
-
-console.log(cookieValue);
-if(cookieValue){
+let cookieValue=true
+if(true){
 	async function postData(url = '',data={}) {
 		// Default options are marked with *
 		console.log("get data");
 		const response = await fetch(url, {
 		  method: 'GET', // *GET, POST, PUT, DELETE, etc.
 		  headers: {
-			  'auth':cookieValue
+		//	  'auth':cookieValue
 		  },
 		  redirect: 'follow', // manual, *follow, error
 		  referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
@@ -27,9 +19,11 @@ if(cookieValue){
 	  postData('https://videorecorderbackend.herokuapp.com/userDetails')
 		.then((data) => {
 		  console.log(data); // JSON data parsed by `data.json()` call
-		  chrome.runtime.sendMessage({greeting: "cookieValue",cookieValue,data}, function(response) {
-			  console.log(response);
-			})
+		  if(data){
+			  chrome.runtime.sendMessage({greeting: "cookieValue",cookieValue,data}, function(response) {
+				  console.log(response);
+				})
+		  }
 		});
 }
 chrome.runtime.onMessage.addListener(
