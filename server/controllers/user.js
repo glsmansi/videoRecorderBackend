@@ -111,12 +111,12 @@ module.exports.postRegister = async (req, res, next) => {
     if (oldUser) {
       //return next(new ExpressError("User Already Exist", 409));
       req.flash("error", "User Already Exist");
-
-      return res.render("user/register", {
-        // err: "User Already Exists",
-        // success: false,
-        title: "Register",
-      });
+      res.redirect("/register");
+      // return res.render("user/register", {
+      //   // err: "User Already Exists",
+      //   // success: false,
+      //   title: "Register",
+      // });
     }
 
     // if (password.search(/(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}/) == -1) {
@@ -134,12 +134,7 @@ module.exports.postRegister = async (req, res, next) => {
         "error",
         "password should contain at least one lowercase character, at least one uppercase character, at least one numeric value,  at least one special character,  minimum 8 characters"
       );
-      return res.render("user/register", {
-        // err:
-        //   " ",
-        // success: false,
-        title: "Register",
-      });
+      res.redirect("/register");
     }
 
     const encryptedPassword = await bcrypt.hash(password, 10);
@@ -176,11 +171,6 @@ module.exports.postRegister = async (req, res, next) => {
       } else {
         console.log(info);
         req.flash("success", "Email has been sent to ${email}");
-        res.render("user/register", {
-          // err: false,
-          // success: `email has been sent to ${email}`,
-          title: "Register",
-        });
       }
     });
   } catch (e) {
@@ -254,7 +244,8 @@ module.exports.postLogin = async (req, res, next) => {
 
         err = "Invalid Password";
         req.flash("error", err);
-        res.render("user/login", { title: "Login" });
+        res.redirect("/login");
+        // res.render("user/login", { title: "Login" });
       }
     } else {
       // return next(new ExpressError("User doesnot exist "));
@@ -264,7 +255,8 @@ module.exports.postLogin = async (req, res, next) => {
         err = `Email Not Verified. Please Check your mail with name: ${process.env.GMAIL_ID}`;
       }
       req.flash("error", err);
-      res.render("user/login", { title: "Login" });
+      // res.render("user/login", { title: "Login" });
+      res.redirect("/login");
     }
   } catch (e) {
     console.log(e);
@@ -550,13 +542,13 @@ module.exports.changePassword = async (req, res) => {
         "error",
         "password should contain minimum 8 characters, at least one lowercase,at least one uppercase, at least one numeric value, at least one special character"
       );
-      return res.render("user/setting", {
-        user,
-        // success: false,
-        // err:
-        //   "",
-        title: "Settings",
-      });
+      // return res.render("user/setting", {
+      //   user,
+      //   // success: false,
+      //   // err:
+      //   //   "",
+      //   title: "Settings",
+      // });
     }
     if (newPassword == confirmPassword) {
       newEncryptedPassword = await bcrypt.hash(newPassword, 10);
@@ -564,19 +556,23 @@ module.exports.changePassword = async (req, res) => {
       user.password = newEncryptedPassword;
       await user.save();
       req.flash("success", "Password Changed");
-      res.render("user/setting", {
-        user,
-        // err: false,
-        // success: "Password Changed",
-        title: "Settings",
-      });
+      res.redirect("/settings");
+
+      // res.render("user/setting", {
+      //   user,
+      //   // err: false,
+      //   // success: "Password Changed",
+      //   title: "Settings",
+      // });
     } else req.flash("error", "New password and confirm password must match");
-    res.render("user/setting", {
-      user,
-      // success: false,
-      // err: "",
-      title: "Settings",
-    });
+    res.redirect("/settings");
+
+    // res.render("user/setting", {
+    //   user,
+    //   // success: false,
+    //   // err: "",
+    //   title: "Settings",
+    // });
     console.log("no MATCH");
   } else {
     const match = await bcrypt.compare(password, user.password);
@@ -593,13 +589,14 @@ module.exports.changePassword = async (req, res) => {
           "error",
           "password should contain minimum 8 characters, at least one lowercase,at least one uppercase, at least one numeric value, at least one special character"
         );
-        return res.render("user/setting", {
-          user,
-          // success: false,
-          // err:
-          //   "",
-          title: "Settings",
-        });
+        res.redirect("/settings");
+        // return res.render("user/setting", {
+        //   user,
+        //   // success: false,
+        //   // err:
+        //   //   "",
+        //   title: "Settings",
+        // });
       }
       if (newPassword == confirmPassword) {
         newEncryptedPassword = await bcrypt.hash(newPassword, 10);
@@ -607,30 +604,36 @@ module.exports.changePassword = async (req, res) => {
         user.password = newEncryptedPassword;
         await user.save();
         req.flash("success", "Password Changed");
-        res.render("user/setting", {
-          user,
-          // err: false,
-          // success: "",
-          title: "Settings",
-        });
+        res.redirect("/settings");
+
+        // res.render("user/setting", {
+        //   user,
+        //   // err: false,
+        //   // success: "",
+        //   title: "Settings",
+        // });
       } else {
         req.flash("error", "New password and confirm password must match");
-        res.render("user/setting", {
-          user,
-          // success: false,
-          // err: "",
-          title: "Settings",
-        });
+        res.redirect("/settings");
+
+        // res.render("user/setting", {
+        //   user,
+        //   // success: false,
+        //   // err: "",
+        //   title: "Settings",
+        // });
         console.log("no MATCH");
       }
     } else {
       req.flash("error", "Current password doesn't match");
-      res.render("user/setting", {
-        user,
-        // success: false,
-        // err: "Current password doesn't match",
-        title: "Settings",
-      });
+      res.redirect("/settings");
+
+      // res.render("user/setting", {
+      //   user,
+      //   // success: false,
+      //   // err: "Current password doesn't match",
+      //   title: "Settings",
+      // });
       console.log("Wrong password");
     }
   }
