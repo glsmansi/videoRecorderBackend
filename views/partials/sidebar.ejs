@@ -38,13 +38,13 @@
     if (location.href.includes("/home")) {
       document.getElementById("personal").classList.add("selected");
     }
-    else if (location.href.includes("/me")) {
+    if (location.href.includes("/me")) {
       document.getElementById("me").classList.add("selected");
     }
-    else if (location.href.includes("/team")) {
+    if (location.href.includes("/team")) {
       document.getElementById("team").classList.add("selected");
     }
-    else if (
+    if (
       location.href.includes("/settings")
     ) {
       console.log("hai");
