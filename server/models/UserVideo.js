@@ -9,13 +9,13 @@ module.exports = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    userEmail: {
+    user_email: {
       type: Sequelize.STRING,
     },
-    videoId: {
+    video_id: {
       type: Sequelize.INTEGER,
     },
-    teamMembers: {
+    team_members: {
       type: Sequelize.STRING(1000),
     },
   },

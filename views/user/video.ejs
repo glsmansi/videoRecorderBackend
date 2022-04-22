@@ -10,7 +10,7 @@
 
   <body>
     <%let arr=[]; for(let i=0;i<uservideo.length;i++){%>
-      <%arr.push(uservideo[i].teamMembers)%>
+      <%arr.push(uservideo[i].team_members)%>
     <%}%>
   <% console.log("teammembers",arr);console.log("owner",userData.email);if((arr.includes(userData.email)) || (userData.userId==user.id)){ %> 
       <section>
@@ -35,13 +35,13 @@
             <!-- <video src= type="video/mp4"></video> -->
             <div style="text-align: center">
               <video width="1020" height="640" controls>
-                <source src="<%=video.url%>" type="video/mp4" />
+                <source src="<%=awsLink%><%=video.url%>" type="video/mp4" />
               </video>
             </div>
 
             <p style="margin-top: 5rem">
               <span style="font-weight: 900; color: #525aa4">File Name:</span>
-              <%=video.fileName%>
+              <%=video.title%>
             </p>
             <p style="margin-top: 5rem">
               <span style="font-weight: 900; color: #525aa4"
@@ -60,7 +60,7 @@
               <span style="font-weight: 900;  color: #525aa4"
                 >Meeting Notes:</span
               >
-              <%-video.meetingNotes%>
+              <%-video.notes%>
             </p>
             <p style="margin-top: 5rem">
               <span style="font-weight: 900; color: #525aa4">Status:</span>
@@ -68,7 +68,7 @@
             </p>
           </div>
           <hr style="margin: 5rem 0" />
-          <%if(userData.userId==video.userId){%>
+          <%if(userData.user_id==video.user_id){%>
           <div class="nameAndPhoto">
             <form action="/<%=video.id%>/watch/changeFileName" method="POST">
               <label for="name">Change File Name: </label>

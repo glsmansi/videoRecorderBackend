@@ -9,21 +9,21 @@ module.exports = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    fileName: {
-      type: Sequelize.STRING(20),
+    title: {
+      type: Sequelize.STRING(255),
     },
     url: {
       type: Sequelize.STRING,
     },
-    userId: {
-      type: Sequelize.STRING(20),
+    user_id: {
+      type: Sequelize.INTEGER(11),
     },
     status: {
       type: Sequelize.STRING,
     },
 
-    meetingNotes: {
-      type: Sequelize.TEXT,
+    notes: {
+      type: Sequelize.TEXT("long"),
     },
   },
   {

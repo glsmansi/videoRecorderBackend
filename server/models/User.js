@@ -9,7 +9,7 @@ module.exports = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    username: {
+    name: {
       type: Sequelize.STRING(100),
     },
     email: {
@@ -19,16 +19,19 @@ module.exports = sequelize.define(
     password: {
       type: Sequelize.STRING(100),
     },
-    loginType: {
+    login_type: {
       type: Sequelize.STRING,
     },
 
-    profilePicture: {
+    profile_picture: {
       type: Sequelize.STRING(1000),
       allowNull: true,
     },
-    isVerified: {
+    is_verified: {
       type: Sequelize.BOOLEAN,
+    },
+    token: {
+      type: Sequelize.STRING(255),
     },
   },
   {

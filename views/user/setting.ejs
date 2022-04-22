@@ -13,9 +13,9 @@
     </div>
     <div class="nameAndPhoto">
       <h2>Name and photos</h2>
-      <% if(user.profilePicture){ %>
+      <% if(user.profile_picture){ %>
         <div class="circleBox" style="overflow: hidden; padding: 0; position: relative; z-index: 2;">
-        <img src="<%=user.profilePicture%>" style=" height: 130px; width: 150px; z-index: 1; border-radius: 5px;" alt="hello">
+        <img src="<%=awsLink%><%=user.profile_picture%>" style=" height: 130px; width: 150px; z-index: 1; border-radius: 5px;" alt="hello">
       </div>
       <% } else{ %>  
         <div class="circleBox">
@@ -24,7 +24,7 @@
      <% } %>
       <form action="/uploadPhoto" method="post" enctype="multipart/form-data">
         <input  type="file" id="myFile" name="mypic">
-        <input type="text" id="firstName" name="username" value="<%=user.username %>" hidden/>
+        <input type="text" id="firstName" name="username" value="<%=user.name %>" hidden/>
         <div style="display: flex;">
           <button class="saveBtn" style="margin-left:10px ; margin-bottom: 20px; width: 130px;height: 30px; border-radius: 5px; position:relative" type="submit">Upload</button>
           &nbsp;
@@ -132,7 +132,7 @@
         <div class="" style="width: 800px; height: 50px; color: red;">
        
         </div>
-        <% if(user.loginType=="login"){ %> 
+        <% if(user.login_type=="login"){ %> 
         <div class="currentPassword">
           <label for="currentPassword">Current Password</label>
           <input type="password" name="password" placeholder="password" required/>

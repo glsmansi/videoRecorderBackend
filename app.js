@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, "./public")));
 
 app.use(
   session({
-    secret: process.env.TOKEN_KEY,
+    secret: process.env.SESSION_TOKEN_KEY,
     resave: false,
     saveUninitialized: false,
     // cookie: { secure: true, maxAge: 3600 * 60 * 60 * 24 },
