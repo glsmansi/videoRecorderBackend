@@ -141,7 +141,7 @@ module.exports.postRegister = async (req, res, next) => {
     console.log(encryptedPassword);
     const user = await User.create({
       raw: true,
-      username,
+      name: username,
       email,
       password: encryptedPassword,
       login_type: "login",
@@ -283,7 +283,7 @@ module.exports.googleLogin = async (req, res) => {
 
     if (!user) {
       const newUser = await User.create({
-        username: payload.name,
+        name: payload.name,
         email: payload.email,
         login_type: "googleLogin",
         is_verified: true,
@@ -538,7 +538,7 @@ module.exports.changeFileName = async (req, res) => {
 module.exports.changeUserName = async (req, res) => {
   const { username } = req.body;
   const user = await User.findOne({ where: { id: req.session.userId } });
-  user.username = username;
+  user.name = username;
   await user.save();
   req.flash("success", `Name changed successfully to ${username}`);
   res.redirect("/settings");
@@ -663,7 +663,7 @@ module.exports.uploadPhoto = async (req, res) => {
     myFile = req.file.originalname.split(".");
     fileType = myFile[myFile.length - 1];
     // console.log(myFile);
-    const profilePicName = `${req.body.username}.${fileType}`;
+    const profilePicName = `${req.body.name}.${fileType}`;
     const params = {
       Bucket: `${process.env.AWS_BUCKET_NAME}/user`,
       ACL: "public-read",
