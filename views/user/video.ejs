@@ -40,12 +40,12 @@
             </div>
 
             <p style="margin-top: 5rem">
-              <span style="font-weight: 900; color: #525aa4">File Name:</span>
+              <span style="font-weight: 900; color: #525aa4">Title:</span>
               <%=video.title%>
             </p>
             <p style="margin-top: 5rem">
               <span style="font-weight: 900; color: #525aa4"
-                >Team Members:</span
+                >Team Members Emails:</span
               >
             </p>
          <% if(arr){ %> 
@@ -71,7 +71,7 @@
           <%if(userData.userId==video.user_id){%>
           <div class="nameAndPhoto">
             <form action="/<%=video.id%>/watch/changeFileName" method="POST">
-              <label for="name">Change File Name: </label>
+              <label for="name">Change Title: </label>
               <input
                 type="text"
                 name="name"
