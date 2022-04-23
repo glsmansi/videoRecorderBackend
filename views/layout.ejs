@@ -210,8 +210,9 @@
     <div class="loader_bg">
       <div class="loader"></div>
     </div>
-    <%if(currentUser){%> <%-include('./partials/sidebar')%> <%}%>
-    <%-include('./partials/navbar')%>
+    <%-include('./partials/navbar')%> <%if(currentUser){%>
+    <%-include('./partials/sidebar')%> <%}%>
+
     <main class="mainContainer">
       <div id="snackbar-container"><%- include('./partials/flash')%></div>
       <%-body%>

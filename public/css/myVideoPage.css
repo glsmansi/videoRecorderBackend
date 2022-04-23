@@ -389,6 +389,7 @@ span {
   position: relative;
   left: 40%;
   top: 10%;
+  position: none;
   font-size: bolder;
 }
 
@@ -463,6 +464,7 @@ span {
     widows: 100px;
     font-size: 12px;
   }
+
   .firstFullContainer {
     padding: 10px 10px;
   }
@@ -483,6 +485,9 @@ span {
     top: 20%;
     left: 20%;
     font-size: 20px;
+  }
+  .text-center {
+    position: static;
   }
 }
 @media (max-width: 620px) {
@@ -567,5 +572,8 @@ span {
   }
   .selected {
     width: auto;
+  }
+  .text-center {
+    position: static;
   }
 }
