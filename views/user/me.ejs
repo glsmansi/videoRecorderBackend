@@ -28,7 +28,7 @@
           <%var arr = []; for (let i = 0; i <sharedvideos.length; i++) {%> <%arr.push(sharedvideos[i]);}%>
         <%for(video of arr){%>
         <div class="singleVideo">
-          <video class="video" src="<%=video.url%>"></video>
+          <video class="video" src="<%=awsLink%><%=video.url%>"></video>
           <form action="/<%=video.id%>/watch" method="GET">
             <button class="addBtn">View Video Details</button>
           </form>

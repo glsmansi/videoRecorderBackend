@@ -30,7 +30,7 @@
         <div class="c-video">
           <%if(uservideos.length){%> <%for(video of uservideos){%>
           <div class="singleVideo">
-            <video class="video" src="<%=video.url%>"></video>
+            <video class="video" src="<%=awsLink%><%=video.url%>"></video>
             <form action="/<%=video.id%>/watch" method="GET">
               <button class="addBtn">View Video Details</button>
             </form>
@@ -128,13 +128,6 @@ function copyToClipboard(elementId) {
 </script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-  // let video=document.getElementById("addVideoInput")
-  // video.addEventListener("input",()=>{
-  //   console.log(video.value)
-  // if(video.value){
-  //   document.getElementsByTagName('form')[0].submit()
-  // }
-  // })
   async function uploadFile() {
   console.log("skdfhjidhfi")
   var video = new FormData();
@@ -148,4 +141,5 @@ function copyToClipboard(elementId) {
 })
   }
 </script>
+
 </html>

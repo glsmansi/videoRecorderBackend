@@ -348,7 +348,11 @@ module.exports.sharedWithMe = async (req, res) => {
   console.log(sharedvideos.length);
   // }
 
-  res.render("user/me", { sharedvideos, title: "Shared Videos" });
+  res.render("user/me", {
+    sharedvideos,
+    title: "Shared Videos",
+    awsLink: process.env.AWS_STATIC_LINK,
+  });
 };
 module.exports.sharedWithOthers = async (req, res) => {
   // const userEmail = req.user.email;
@@ -376,7 +380,12 @@ module.exports.sharedWithOthers = async (req, res) => {
   });
   // videos;
   console.log(videos);
-  res.render("user/team", { videos, user, title: "Shared with Team" });
+  res.render("user/team", {
+    videos,
+    user,
+    title: "Shared with Team",
+    awsLink: process.env.AWS_STATIC_LINK,
+  });
 };
 
 module.exports.personal = async (req, res) => {
@@ -393,6 +402,7 @@ module.exports.personal = async (req, res) => {
     user,
     user_email: userEmail,
     title: "ATG MEET",
+    awsLink: process.env.AWS_STATIC_LINK,
   });
 };
 
