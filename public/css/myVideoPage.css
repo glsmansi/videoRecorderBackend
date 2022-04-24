@@ -180,8 +180,8 @@ section {
 }
 .c-video {
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-row-gap: 46px;
+  grid-template-columns: 33.3% 33.3% 33.3%;
+  grid-row-gap: 35px;
 }
 .singleVideo {
   max-width: 350px;
@@ -425,6 +425,13 @@ span {
 }
 .custom-file-input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+@media (max-width: 1424px) {
+  .c-video {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
 }
 
 @media (max-width: 1069px) {
