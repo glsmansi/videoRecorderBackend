@@ -172,10 +172,11 @@ section {
   font-size: 16px;
   font-weight: 600;
   color: #5e5c5c;
+  margin-top: 3rem;
 }
-.nameAndPhoto form input {
+.nameAndPhoto .input {
   width: 302px;
-  margin: 4px 0px 15px;
+  margin: 10px 0px 15px;
   border-radius: 6px;
   height: 19px;
   padding: 10px;
@@ -481,6 +482,7 @@ input:checked + .slider:before {
   color: white;
   font-weight: bold;
   line-height: 25px;
+  z-index: 99;
 }
 
 .btn {
@@ -511,6 +513,46 @@ input:checked + .slider:before {
   height: 100%;
   width: 60vw;
 }
+
+.custom-file-input {
+  color: transparent;
+  font-family: inherit;
+  font-weight: bold;
+  padding: 0;
+}
+
+.custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom-file-input::before {
+  content: "Upload";
+  display: inline-block;
+  /* background-color: #4b42ad; */
+  color: #f8f6f0;
+  background: -webkit-linear-gradient(top, #4b42ad, #4b42ad);
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  width: 130px;
+  height: 28px;
+  margin-left: 1.5rem;
+  text-align: center;
+  font-size: 14px;
+  word-spacing: 3px;
+  border: none;
+  border-radius: 6px;
+}
+.custom-file-input:hover::before {
+  border-color: black;
+}
+.custom-file-input:active {
+  outline: 0;
+}
+.custom-file-input:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
 @media (max-width: 1069px) {
   body {
     overflow-x: hidden;

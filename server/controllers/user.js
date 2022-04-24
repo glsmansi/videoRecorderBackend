@@ -681,7 +681,7 @@ module.exports.uploadPhoto = async (req, res) => {
       user.profile_picture = `user/${profilePicName}`;
       await user.save();
       console.log(data.Location);
-      req.flash("success", "Uploaded profile picture successfully");
+      req.flash("success", "Uploaded profile picture");
       res.status(200).redirect("/settings");
     });
   } catch (e) {
@@ -693,7 +693,7 @@ module.exports.removeProfilePic = async (req, res) => {
   const user = await User.findOne({ where: { id: req.session.userId } });
   user.profile_picture = null;
   await user.save();
-  req.flash("success", "Profile picture removed successfully");
+  req.flash("success", "Profile pic removed");
   res.redirect("/settings");
 };
 
