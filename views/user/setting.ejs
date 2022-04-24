@@ -22,18 +22,18 @@
           <i class="fas fa-camera"></i>
         </div>
      <% } %>
-      <form action="/uploadPhoto" method="post" enctype="multipart/form-data">
-        <input  type="file" id="myFile" name="mypic">
+      <form action="/uploadPhoto" method="post" enctype="multipart/form-data" onChange="uploadFile()">
+        <!-- <input  type="file" id="myFile" name="mypic input"> -->
         <input type="text" id="firstName" name="username" value="<%=user.name %>" hidden/>
-        <div style="display: flex;">
-          <button class="saveBtn" style="margin-left:10px ; margin-bottom: 20px; width: 130px;height: 30px; border-radius: 5px; position:relative" type="submit">Upload</button>
+        <div style="display: flex; margin-top: 1rem;">
+          <input type="file" style=""class="custom-file-input" name="mypic" id="file"  />
           &nbsp;
           <a class="removeBtn" href="/removeProfilePic?_method=DELETE" style="font-size: small; text-decoration: none;"> Remove</a>
         </div>
       </form>
       <form action="/changeUsername" method="POST">
         <label for="firstName">Name: </label>
-        <input type="text" id="firstName" name="username" value="<%=user.name %>" />
+        <input type="text" id="firstName" name="username" class="input" classvalue="<%=user.name %>" />
         <!-- <label for="lastName">Last name: </label>
         <input type="text" name="lastName" value="Joshi" /> -->
         <div class="buttonsForName">
@@ -177,4 +177,21 @@
       </form>
     </div> -->
   </div>
+
 </section>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  async function uploadFile() {
+  console.log("skdfhjidhfi")
+  var mypic = new FormData();
+  var imagefile = document.querySelector('#file');
+  mypic.append("mypic", imagefile.files[0]);
+  console.log(imagefile.files)
+  await axios.post('uploadPhoto', mypic, {
+      headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+})
+  }
+</script>
