@@ -663,7 +663,7 @@ module.exports.uploadPhoto = async (req, res) => {
     myFile = req.file.originalname.split(".");
     fileType = myFile[myFile.length - 1];
     // console.log(myFile);
-    const profilePicName = `${req.body.name}.${fileType}`;
+    const profilePicName = `${req.body.username}.${fileType}`;
     const params = {
       Bucket: `${process.env.AWS_BUCKET_NAME}/user`,
       ACL: "public-read",
