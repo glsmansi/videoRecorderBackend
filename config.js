@@ -8,7 +8,7 @@ environments.development = {
   envName: "development",
 };
 environments.production = {
-  port: 8000,
+  port: process.env.PORT || 8000,
   envName: "production",
 };
 console.log(process.env.NODE_ENV);
