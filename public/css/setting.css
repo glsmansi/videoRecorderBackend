@@ -519,6 +519,7 @@ input:checked + .slider:before {
   font-family: inherit;
   font-weight: bold;
   padding: 0;
+  width: 9vw;
 }
 
 .custom-file-input::-webkit-file-upload-button {
@@ -527,6 +528,7 @@ input:checked + .slider:before {
 .custom-file-input::before {
   content: "Upload";
   display: inline-block;
+  line-height: 25px;
   /* background-color: #4b42ad; */
   color: #f8f6f0;
   background: -webkit-linear-gradient(top, #4b42ad, #4b42ad);
@@ -536,7 +538,7 @@ input:checked + .slider:before {
   cursor: pointer;
   width: 130px;
   height: 28px;
-  margin-left: 1.5rem;
+  margin-left: 0.5rem;
   text-align: center;
   font-size: 14px;
   word-spacing: 3px;
