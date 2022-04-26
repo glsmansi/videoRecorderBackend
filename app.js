@@ -78,7 +78,7 @@ app.use((err, req, res, next) => {
   if (err.message == "") err.message = "Something went wrong";
   //   res.status(statusCode).send(err);
   if (statusCode == 404) {
-    return res.render("error", { title: "ERROR!" });
+    return res.render("error", { title: "Page Not Found" });
   }
   console.log(err);
   res.status(statusCode).send(err);

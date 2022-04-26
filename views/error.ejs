@@ -6,6 +6,17 @@
     width: 40vw;
     height: 50vh;
   }
+  .alert {
+    margin-bottom: 3rem;
+    font-size: 2rem;
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+    padding: 1rem 1rem;
+    border-radius: 5px;
+    width: 38vw;
+    text-align: center;
+  }
 </style>
 
 <%if(currentUser){%>
@@ -18,10 +29,13 @@
   class="err"
   style="
     display: flex;
+    flex-direction: column;
     justify-content: center;
     height: 80vh;
     align-items: center;
   "
 >
+  <div class="alert alert-danger" role="alert">PAGE NOT FOUND!!!</div>
+
   <img src="./img/404.jpeg" alt="" />
 </div>
